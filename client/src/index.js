@@ -2,7 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import MovieCard from './components/MoviCard.js'
+import MovieCard from './components/MovieCard.js'
+import MovieInfo from './components/MovieInfo.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(<MovieCard />, document.getElementById('root'));
+ReactDOM.render(<MovieInfo />, document.getElementById('root'));
