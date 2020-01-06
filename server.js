@@ -7,7 +7,7 @@ const movieTra   = require('movie-trailer')
 const axios      = require('axios') 
 
 //lib for  returing  ID of movie trailer 
- movieTra('x-men', {id: true}).then( response => console.log( response ) ).catch( err => console.log(err) )
+//  movieTra('x-men', {id: true}).then( response => console.log( response ) ).catch( err => console.log(err) )
 
 
 app.use(bodyParser.json())
