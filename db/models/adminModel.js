@@ -30,7 +30,7 @@ const insertAdmin = (adminObject, callback = (err, result) => {}) => {
 
 const findAdmin = (objectCriteria = {}, callback) => {
     Admin.find(objectCriteria)
-        .then(admin => callback(null, admin))
+        .then(admin => admin.length === 1 ? callback(null, admin[0]) : callback(null, admin))
         .catch(err => callback(err, null))
 }
 
