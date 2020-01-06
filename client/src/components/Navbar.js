@@ -8,12 +8,8 @@ import {
   NavItem,
   NavLink,
   Input,
-  InputGroup,
-  InputGroupAddon,
   NavbarText
 } from 'reactstrap';
-import { faHome } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const search = {
     borderRadius: '1.6rem 0 0 1.6rem',
