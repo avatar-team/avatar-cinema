@@ -21,8 +21,11 @@ const generateHash = password => {
 //e.g..//              from the above examples
 //@(param) password = 123123 ,hashedPassword = $2b$08$n84teUcpD7AMY2lrL2yMKOQ/Q/OGUKTMAuNAX1MbaZBsNzTlWBOqC
 //@(return) = true;
-//@(param) password = qweasd , @(param) hashedPassword = $2b$08$n84teUcpD7AMY2lrL2yMKOQ/Q/OGUKTMAuNAX1MbaZBsNzTlWBOqC
+//@(param) password = 123123 , @(param) hashedPassword = $2b$08$n84teUcpD7AMY2lrL2yMKOQ/Q/OGUKTMAuNAX1MbaZBsNzTlWBOqC
 //@(return) = false;
 const validPassword = (password, hashedPassword) => {
     return bcrypt.compareSync(password, hashedPassword);
 }
+
+module.exports.generateHash = generateHash;
+module.exports.validPassword = validPassword;

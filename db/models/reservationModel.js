@@ -24,7 +24,6 @@ const reservationSchema = new Schema({
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
 
-
 //this function is used to add a reservation to the database 
 //it accepts one reservation Object According to the schema OR array of Objects as well 
 const insertReservation = (reservation, callback = (err, result) => {}) => {
