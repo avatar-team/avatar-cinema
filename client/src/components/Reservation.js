@@ -13,7 +13,6 @@ class Reservation extends React.Component {
                     }
     }
     
-    
     render(){
 
         return(
