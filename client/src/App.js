@@ -3,7 +3,7 @@ import './App.css';
 import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
 import movies from './components/dummyData';
-import NavBar from './components/NavBar'
+import NavBar from './components/Navbar'
 
 class App extends React.Component{
   constructor() {
