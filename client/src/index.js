@@ -7,6 +7,4 @@ import Navbar from './components/Navbar.js'
 import Slideshow from './components/Slideshow.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-
- ReactDOM.render(<App />, document.getElementById('root'));
-
+ReactDOM.render(<App />, document.getElementById('root'));

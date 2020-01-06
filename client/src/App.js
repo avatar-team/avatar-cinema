@@ -1,5 +1,23 @@
 import React from 'react';
 import './App.css';
+<<<<<<< HEAD
+import {BrowserRouter, Link, Switch, Route} from 'react-router-dom'
+
+
+function App() {
+  return (
+    <BrowserRouter>
+      <div className="App">
+        <header className="App-header">
+          <p>
+            good luck guys.
+          </p>
+            Learn React
+        </header>
+      </div>
+    </BrowserRouter>
+  );
+=======
 import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
 import movies from './components/dummyData';
@@ -73,6 +91,7 @@ class App extends React.Component{
       </BrowserRouter>
     );
   }
+>>>>>>> 0cad24e9f93be6001c6ef9f118e0bb3f925f7178
 }
 
 export default App;
