@@ -21,7 +21,7 @@ const properties = {
 
 const d = {
     width: '100%',
-    height: '100%'
+    height: '100%',
 }
   
 
