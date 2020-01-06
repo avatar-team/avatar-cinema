@@ -8,11 +8,17 @@ class App extends React.Component{
     super()
     this.state = {
       movies: [],
+      currentReservation: {}
     }
   }
 
   handleReservation(reservationData) {
-    
+    axios.post("/api/reserveFilm", reservationData)
+    .then((res)=> {
+      this.setState({
+        currentReservation: res.data
+      })
+    })
   }
 
   getMovies() {
