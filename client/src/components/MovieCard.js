@@ -10,15 +10,9 @@ const div = {
     width: '590px',
 }
 
-handleClick = () => {
-    return <Redirect to="/movieinfo" />
-}
-
 const MovieCard = () => {
     return (
-        <Router>
-            <Link to='/movieinfo'>
-                <div style={div}>
+            <div style={div}>
                 <Row>
                   <Col>
                     <Card>
@@ -32,16 +26,14 @@ const MovieCard = () => {
                                 <CardSubtitle className="mt-2">{data.Plot}</CardSubtitle>
                                 <CardSubtitle className="mt-2">Price: 16$</CardSubtitle>
                                 <CardSubtitle className="mt-2">Time: 12:00AM</CardSubtitle>
-                                <Button onClick={this.handleClick} className="mt-4">Reserve Now!</Button>
+                                <Button className="mt-4">Reserve Now!</Button>
                                 </CardBody>
                             </Col>
                         </Row>
                     </Card>
                   </Col>
                 </Row>
-                </div>
-            </Link>
-        </Router>
+            </div>
     )
 }
 
