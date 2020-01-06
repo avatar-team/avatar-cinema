@@ -15,7 +15,7 @@ class App extends React.Component{
     this.currentReservation = {sofian: 5}
   }
 
-
+  
   getMovies() {
     axios.get('/api/movies')
     .then((res)=> {
