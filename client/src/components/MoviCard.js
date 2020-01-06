@@ -1,43 +1,20 @@
 import React from 'react'
-import { BrowserRouter as Router, Link, Route} from 'react-router-dom';
+import { BrowserRouter as Router, Link, Route, Redirect} from 'react-router-dom';
 import data from './dummyData.js';
 import {
-    Card, CardImg, CardText, CardBody,
-    CardTitle, CardSubtitle, Button
+    Card, CardImg, CardBody,
+    CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap';
-
-import { Row, Col, CardDeck, CardGroup, Container } from "reactstrap";
   
-
-// const div = {
-//     width: '40%',
-//     height: '250px',
-//     backgroundColor: 'grey',
-//     textDicoration: 'none',
-//     padding: '12px'
-// }
-
-// const image = {
-//     height: '250px',
-//     width: '200px',
-//     float: 'right'
-// }
-
-// const bottomDiv = {
-//     marginTop: '20px',
-// }
-
-// const span = {
-//     marginBottom: '20px'
-// }
-
 const div = {
-    width: '560px',
+    width: '590px',
 }
 
+handleClick = () => {
+    return <Redirect to="/movieinfo" />
+}
 
-
-function MovieCard() {
+const MovieCard = () => {
     return (
         <Router>
             <Link to='/movieinfo'>
@@ -55,7 +32,7 @@ function MovieCard() {
                                 <CardSubtitle className="mt-2">{data.Plot}</CardSubtitle>
                                 <CardSubtitle className="mt-2">Price: 16$</CardSubtitle>
                                 <CardSubtitle className="mt-2">Time: 12:00AM</CardSubtitle>
-                                <Button className="mt-4">Reserve Now!</Button>
+                                <Button onClick={this.handleClick} className="mt-4">Reserve Now!</Button>
                                 </CardBody>
                             </Col>
                         </Row>
