@@ -8,6 +8,8 @@ class Reservation extends React.Component {
         var username =  document.getElementById("username").value
         var email =  document.getElementById("email").value
         console.log(username + "###" + email)
+
+        
     }
     
     
