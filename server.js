@@ -1,20 +1,28 @@
 const express    = require('express');
-const app        = express()
+const app        = express();
 const bodyParser = require('body-parser');
-var path         = require("path")
+const path       = require("path");
+const mongoose   = require("mongoose");
+
+console.log(mongoose)
 
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended :true }))
-app.use(express.static(__dirname  + "/client"))
+// app.use(express.static(__dirname  + "/client"))
+// app.get("*",(req,res)=>{
+// 	res.sendFile(path.join(__dirname  + "/public/app/index.html"))
+// })
 
-
-app.get('/api/', (req, res)=> {
-  res.send('hi')
-})
 
 app.get("/api/movies", (req, res)=>{
-  res.send("movies")
+
+  // After reciving  the get respone need to get the data fron the database 
+  // and send back the client side 
+
+     var movie = {movieName:""}
+
+  res.json(movie)
 })
 
 app.post("/api/reserveFilm", (req, res)=>{
@@ -29,6 +37,6 @@ app.post("/api/movies/update/:id", (req, res)=>{
   res.send("delete")
 })
 
-app.post("/api/movies/addMovie")
+app.post("/api/movies/addMovie" , )
 
 app.listen(8000)
