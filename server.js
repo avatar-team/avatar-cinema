@@ -4,8 +4,6 @@ const bodyParser = require('body-parser');
 const path       = require("path");
 const mongoose   = require("mongoose");
 
-console.log(mongoose)
-
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended :true }))
