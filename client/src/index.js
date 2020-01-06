@@ -5,4 +5,6 @@ import MovieCard from './components/MovieCard.js'
 import MovieInfo from './components/MovieInfo.js'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+
+ ReactDOM.render(<App />, document.getElementById('root'));
+
