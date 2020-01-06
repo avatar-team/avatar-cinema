@@ -4,9 +4,10 @@ const bodyParser = require('body-parser');
 const path       = require("path");
 const mongoose   = require("mongoose");
 const movieTra   = require('movie-trailer')
+const axios      = require('axios') 
 
-//lib for  returing an array IDs of movie trailer 
-// movieTra('x-men', {id: true, multi: true}).then( response => console.log( response ) ).catch( err => console.log(err) )
+//lib for  returing  ID of movie trailer 
+//  movieTra('x-men', {id: true}).then( response => console.log( response ) ).catch( err => console.log(err) )
 
 
 app.use(bodyParser.json())
