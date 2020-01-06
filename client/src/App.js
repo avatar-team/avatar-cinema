@@ -3,14 +3,17 @@ import './App.css';
 import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
 import movies from './components/dummyData';
-import NavBar from './components/Navbar'
+import MainPage from './components/MainPage';
+import NavBar from './components/Navbar';
+import MovieInfo from './components/MovieInfo'
+
+
 
 class App extends React.Component{
   constructor() {
     super()
     this.state = {
       movies: [],
-      currentMovie: {}
     }
     this.currentReservation = {sofian: 5}
   }
@@ -48,12 +51,6 @@ class App extends React.Component{
     })
   }
 
-  handleCardClick(i) {
-    this.setState({
-      currentMovie: this.state.movies[i]
-    })
-  }
-
 
   componentDidMount() {
     this.getMovies();
@@ -62,14 +59,16 @@ class App extends React.Component{
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
-          <header className="App-header">
-            <p>
-              good luck guys.
-            </p>
-              Learn React
-          </header>
-        </div>
+        <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
+        <Switch>
+          <Route path="/" exact component={()=> {
+            return <MainPage handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+          }}/>
+          <Route path="/movieInfo/:id" component={()=> {
+            return <MovieInfo movies={this.state.movies}/>
+          }}/>
+        </Switch>
+
       </BrowserRouter>
     );
   }
