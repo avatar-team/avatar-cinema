@@ -6,7 +6,6 @@ import MovieInfo from './components/MovieInfo.js'
 import Navbar from './components/Navbar.js'
 import Slideshow from './components/Slideshow.js';
 import Tabs from './components/Tabs.js';
-import MovieControlller from './components/MovieController.js';
 import Movietrailer from './components/Movietrailer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 

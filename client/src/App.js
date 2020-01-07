@@ -7,6 +7,7 @@ import MainPage from './components/MainPage';
 import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
 import Test from './components/test'
+import Dashboard from './components/Admin/Dashboard'
 
 
 class App extends React.Component{
@@ -19,6 +20,7 @@ class App extends React.Component{
   }
 
   
+  //client handle functions
   getMovies() {
     axios.get('/api/movies')
     .then((res)=> {
@@ -55,6 +57,49 @@ class App extends React.Component{
   }
 
 
+  //Admin handle functions
+  handleAdd(movieData) {
+    axios.post('/api/movies', movieData)
+    .then(res => {
+      this.setState((prevState)=> {
+        return ({
+          movies: [...prevState.movies, res.data]
+        })
+      })
+    })
+  }
+
+  handleUpdate(movieId, newData) {
+    axios.patch(`/api/movies/${movieId}`, newData)
+    .then(res => {
+      this.setState(prevState => {
+        var newMovies = prevState.movies.map((movie, i)=> {
+          if(movie._id == movieId) return res.data;
+          return movie;
+        })
+        return({
+          movies: [...newMovies]
+        })
+      })
+    })
+  }
+
+  handleDelete(movieId) {
+    axios.delete(`/api/movies/${movieId}`)
+    .then(res => {
+      this.setState(prevState => {
+        var index;
+        prevState.movies.forEach((movie, i)=> {
+          if(movie._id == movieId) index = i;
+        })
+        prevState.movies.splice(index, 1)
+        return({
+          movies: [...prevState.movies]
+        })
+      })
+    })
+  }
+
   componentDidMount() {
     this.getMovies();
   }
@@ -70,6 +115,7 @@ class App extends React.Component{
           <Route path="/movieInfo/:index" component={()=> {
             return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
+          <Route path="/admin/Dashboard" component={Dashboard}/>
         </Switch>
 
       </BrowserRouter>
