@@ -2,45 +2,45 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //*******************************************//
-//all the functions exported from this module is in Error-First-Style// 
+// all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
-//mongoose library is REQUIRED//
+// mongoose library is REQUIRED//
 //*******************************************//
 
 
 const movieSchema = new Schema({
     Title: {
         type: String,
-        required: true,
+        required: [true, 'Title of The Movie is Required']
     },
     Year: {
         type: Number,
-        required: true
+        required: [true, 'Year of The Movie is Required']
     },
     Rated: {
         type: String,
         default: 'unknown',
-        required: true
+        required: [true, 'Rate of The Movie is Required']
     },
     Genre: {
         type: String,
-        required: true
+        required: [true, 'Genre of The Movie is Required']
     },
     Runtime: {
         type: Number,
-        required: true
+        required: [true, 'Movie Run Time is Required']
     },
     Plot: {
         type: String,
-        required: true
+        required: [true, 'Movie Plot Time is Required']
     },
     Poster: {
         type: String,
-        required: true
+        required: [true, 'Movie Poster Time is Required']
     },
     imdbRating: {
         type: String,
-        required: true,
+        required: [true, 'imdbRating Time is Required'],
         default: 'unknown'
     },
     availability: { //added by the admin
@@ -49,19 +49,20 @@ const movieSchema = new Schema({
     },
     date: { //added by the admin
         type: Date,
-        required: true
+        required: [true, 'Date of Play is Required']
     },
     price: { //added by the admin
         type: Number,
-        default: 0,
+        required: [true, 'Movie Price is Required'],
+        default: 0
     },
     availableChairs: { //added by the admin
         type: Number,
-        required: true
+        required: [true, 'Available Chairs is Required']
     },
     playTime: { //added by the admin
         type: Date,
-        required: true
+        required: [true, 'Moive Play time  is Required']
     },
     movieTrailer: { //>?
         type: String,
@@ -94,6 +95,9 @@ const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) =
         .catch(err => callback(err, null))
 };
 
+updateMovie("asdaw213rd3ed", { Title: "qweasd", price: 123, availableChairs: 12 }, (error, result) => {
+
+})
 
 //this method well set The availability state of the movie to false, (making it deleted or Not available)
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
@@ -125,9 +129,10 @@ const getAllAvailableMovies = callback => {
 //this function well search the database for movies according to the Criteria given in the firstParam
 //and well pass the result to the second param to the callback function as followrd by the rules of Err-First Style
 //if the param is not given , it well return all the movies in the database 
+{ Title: "Spider-Man" }
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
-        .then(movies => callback(null, movies))
+        .then(movies => movies.length === 1 ? callback(null, movies[0]) : callback(null, movies))
         .catch(err => callback(err, null))
 }
 
@@ -138,3 +143,4 @@ module.exports.deleteMovie = deleteMovie;
 module.exports.updateMovie = updateMovie;
 module.exports.insertMovie = insertMovie;
 module.exports.findMovies = findMovies;
+module.exports._movieSchema = movieSchema;
