@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
-const _movieFind = require('./movieModel').findMovies;
+const _findMovies = require('./movieModel').findMovies;
 //*******************************************//
-//all the functions exported from this module is in Error-First-Style// 
+// all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
-//mongoose library is REQUIRED//
+// mongoose library is REQUIRED//
 //*******************************************//
 
 const userSchema = new Schema({
@@ -79,7 +79,7 @@ const deleteUser = (userObjectId, callback = (err, result) => {}) => {
 }
 
 const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
-    findMovies(movieObjectId, (error, movie) => {
+    _findMovies(movieObjectId, (error, movie) => {
             if (error) {
                 callback(error, null)
             }
@@ -89,7 +89,7 @@ const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
 }
 
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
-    findMovies(movieObjectId, (error, movie) => {
+    _findMovies(movieObjectId, (error, movie) => {
             if (error) {
                 callback(error, null)
             }
@@ -102,3 +102,5 @@ module.exports.insertUser = insertUser;
 module.exports.updateUser = updateUser;
 module.exports.findUser = findUser;
 module.exports.deleteUser = deleteUser;
+module.exports.pushMoviesBought = pushMoviesBought;
+module.exports.pushFavoriteMovies = pushFavoriteMovies;

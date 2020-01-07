@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //*******************************************//
-//all the functions exported from this module is in Error-First-Style// 
+// all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
-//mongoose library is REQUIRED//
+// mongoose library is REQUIRED//
 //*******************************************//
 
 
@@ -95,6 +95,9 @@ const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) =
         .catch(err => callback(err, null))
 };
 
+updateMovie("asdaw213rd3ed", { Title: "qweasd", price: 123, availableChairs: 12 }, (error, result) => {
+
+})
 
 //this method well set The availability state of the movie to false, (making it deleted or Not available)
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
@@ -126,6 +129,7 @@ const getAllAvailableMovies = callback => {
 //this function well search the database for movies according to the Criteria given in the firstParam
 //and well pass the result to the second param to the callback function as followrd by the rules of Err-First Style
 //if the param is not given , it well return all the movies in the database 
+{ Title: "Spider-Man" }
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
         .then(movies => movies.length === 1 ? callback(null, movies[0]) : callback(null, movies))

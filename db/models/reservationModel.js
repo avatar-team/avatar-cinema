@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //*******************************************//
-//all the functions exported from this module is in Error-First-Style// 
+// all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
-//mongoose library is REQUIRED//
+// mongoose library is REQUIRED//
 //*******************************************//
 
 const reservationSchema = new Schema({
