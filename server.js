@@ -21,6 +21,13 @@ mongoose.connect('mongodb://localhost/Avatar',(err)=>{
 	}
 });
 
+
+// app.use(express.static(__dirname  + "/client"))
+// app.get("*",(req,res)=>{
+// 	res.sendFile(path.join(__dirname  + "/public/app/index.html"))
+// })
+
+
 ////////////////////////////////////////
 /////////////// ROUTES/////////////////
 //////////////////////////////////////
