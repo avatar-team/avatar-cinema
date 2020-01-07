@@ -13,7 +13,6 @@ const MainPage = (props)=> {
         {props.movies.map((movie, i)=> {
           return <MovieCard key={i} movie={movie} index={i}/>
         })}
-      </Row>
       <Row>
         <Movietrailer />
       </Row>
