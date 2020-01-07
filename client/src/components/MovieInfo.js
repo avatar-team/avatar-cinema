@@ -15,8 +15,9 @@ const s = {
 }
 
 const MovieInfo = (props) => {
-  let {id} = useParams()
-  console.log(id)
+  let { index } = useParams()
+  const movies = props.movies[index];
+  console.log(movies)
 
   return(
     <div style={div}>
