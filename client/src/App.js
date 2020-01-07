@@ -6,7 +6,7 @@ import movies from './components/dummyData';
 import MainPage from './components/MainPage';
 import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
-
+import Test from './components/test'
 
 
 class App extends React.Component{
@@ -14,8 +14,8 @@ class App extends React.Component{
     super()
     this.state = {
       movies: [],
+      currentReservation: {}
     }
-    this.currentReservation = {sofian: 5}
   }
 
   
@@ -33,9 +33,12 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    axios.post("/api/reserveFilm", reservationData)
-    .then((res)=> {
-      this.currentReservation =  res.data
+    // axios.post("/api/reserveFilm", reservationData)
+    // .then((res)=> {
+    //   this.currentReservation =  res.data
+    // })
+    this.setState({
+      currentReservation: reservationData
     })
   }
 
@@ -62,10 +65,10 @@ class App extends React.Component{
         <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
         <Switch>
           <Route path="/" exact component={()=> {
-            return <MainPage handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+            return <MainPage movies={this.state.movies}/>
           }}/>
-          <Route path="/movieInfo/:id" component={()=> {
-            return <MovieInfo movies={this.state.movies}/>
+          <Route path="/movieInfo/:index" component={()=> {
+            return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
         </Switch>
 
