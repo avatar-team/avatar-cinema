@@ -32,6 +32,7 @@ const MovieControll = (props) => {
           <th className="text-center"><Button color="light"><FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
         </tr>
       </thead>
+
       <tbody>
       {data.map(movie => {
         return (
@@ -39,6 +40,7 @@ const MovieControll = (props) => {
               <th>{movie.Title}</th>
               <td>12:00AM</td>
               <td>5/Jan</td>
+
               <td>16$</td>  
               <td>12/10</td>
               <td className="text-right"><button style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>

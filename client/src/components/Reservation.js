@@ -1,15 +1,25 @@
 import React from 'react';
 
+
+
+
 class Reservation extends React.Component {
 
+    constructor(props) {
+        super(props)
+      
+      };
+      
     handleSubmit = event =>{
        
         event.preventDefault()
         var clientName =  document.getElementById("clientName").value
-        var email =  document.getElementById("email").value
+        var clientEmail =  document.getElementById("email").value
     
         var data = { "clientName" : clientName,
-                    "email" : email
+                    "clientEmail" : clientEmail,
+                    "movieTitle"  : "movieTitle" // movieTitle will be passed from the props 
+
                     }
     }
     

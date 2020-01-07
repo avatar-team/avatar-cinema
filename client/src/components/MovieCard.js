@@ -13,6 +13,7 @@ const div = {
 }
 
 const MovieCard = ({movie, index}) => (
+
   <div className="m-3" style={div}>
         <Col>
           <Card>
@@ -32,7 +33,6 @@ const MovieCard = ({movie, index}) => (
             </Row>
           </Card>
         </Col>
-
   </div>
 )
 
