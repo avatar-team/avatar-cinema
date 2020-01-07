@@ -2,7 +2,8 @@ import React from 'react';
 import { Table } from 'reactstrap';
 import data from './dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCoffee, faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { Button } from 'reactstrap'
 
 const transparent = {
   backgroundColor: 'transparent',
@@ -10,16 +11,17 @@ const transparent = {
 }
 
 const table = {
-  borderCollapse: 'collapse'
+  borderCollapse: 'collapse',
+  padding: '10px'
 }
 
 const td = {
-  padding: '0'
+  padding: '12px'
 }
 
-const Admin = (props) => {
+const MovieControll = (props) => {
   return (
-    <Table style={table} dark className="w-75 text-left m-auto">
+    <Table style={table} dark className="w-75 text-center m-auto">
       <thead>
         <tr>
           <th>Movie Title</th>
@@ -27,6 +29,7 @@ const Admin = (props) => {
           <th>Date</th>
           <th>Price</th>
           <th>Chairs</th>
+          <th className="text-center"><Button color="light"><FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
         </tr>
       </thead>
       {data.map(movie => {
@@ -38,7 +41,7 @@ const Admin = (props) => {
               <td>5/Jan</td>
               <td>16$</td>
               <td>12/10</td>
-              <td><button style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
+              <td className="text-right"><button style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
               <td><button style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
             </tr>
         </tbody>
@@ -48,4 +51,4 @@ const Admin = (props) => {
   );
 }
 
-export default Admin;
+export default MovieControll;
