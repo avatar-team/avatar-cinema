@@ -14,20 +14,19 @@ const div = {
 
 const MovieCard = ({movie, index}) => (
   <div style={div}>
-    <Col>
       <Row>
         <Col>
           <Card>
             <Row className="no-gutters">
               <Col md="4">
-                <CardImg src={data.Poster}/>
+                <CardImg src={movie.Poster}/>
               </Col>
               <Col  md="6">
                 <CardBody>
-                <CardTitle>{data.Title}</CardTitle>imdbRating: <span>{data.imdbRating}</span>
-                <CardSubtitle className="mt-2">{data.Plot}</CardSubtitle>
-                <CardSubtitle className="mt-2">Price: 16$</CardSubtitle>
-                <CardSubtitle className="mt-2">Time: 12:00AM</CardSubtitle>
+                <CardTitle>{movie.Title}</CardTitle>imdbRating: {movie.imdbRating} <span>{data.imdbRating}</span>
+                <CardSubtitle className="mt-2">{movie.Plot}</CardSubtitle>
+                <CardSubtitle className="mt-2">Price: {movie.price}$</CardSubtitle>
+                <CardSubtitle className="mt-2">Time: {movie.playDate.toLocaleTimeString()} </CardSubtitle>
                 <Link to={`/movieInfo/${index}`}><Button className="mt-4">Movie Info</Button></Link>
                 </CardBody>
               </Col>
@@ -35,7 +34,6 @@ const MovieCard = ({movie, index}) => (
           </Card>
         </Col>
       </Row>
-    </Col>
   </div>
 )
 
