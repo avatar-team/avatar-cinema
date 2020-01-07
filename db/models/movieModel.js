@@ -27,7 +27,7 @@ const movieSchema = new Schema({
         required: [true, 'Genre of The Movie is Required']
     },
     Runtime: {
-        type: Number,
+        type: String,
         required: [true, 'Movie Run Time is Required']
     },
     Plot: {
@@ -64,6 +64,10 @@ const movieSchema = new Schema({
         type: String,
         default: "",
         required: false
+    },
+    chairs: {
+        type: Number,
+        required: true
     }
 });
 

@@ -15,14 +15,15 @@ class App extends React.Component{
     super()
     this.state = {
       movies: [],
-      currentReservation: {}
+      currentReservation: {},
+      currentMovie: {}
     }
   }
 
   
   //client handle functions
   getMovies() {
-    axios.get('/api/movies')
+    axios.get('/API/movies')
     .then((res)=> {
       console.log(res.data)
       this.setState({
@@ -35,7 +36,7 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    // axios.post("/api/reserveFilm", reservationData)
+    // axios.post("//api/reserveFilm", reservationData)
     // .then((res)=> {
     //   this.currentReservation =  res.data
     // })
@@ -47,7 +48,7 @@ class App extends React.Component{
 
   handleSearch(videoTitle) {
     this.state.movies.map((movie)=> {
-      if(movie.Title == videoTitle) {
+      if(movie.Title === videoTitle) {
         this.setState({
           currentMovie: movie
         })
@@ -59,13 +60,13 @@ class App extends React.Component{
 
   //Admin handle functions
   handleAdd(movieData) {
-    axios.post('/api/movies', movieData)
+    axios.post('/api/movies/addMovie', movieData)
     .then(res => {
       this.setState((prevState)=> {
         return ({
           movies: [...prevState.movies, res.data]
         })
-      })
+      }, ()=> console.log(this.state.movies))
     })
   }
 
@@ -115,7 +116,11 @@ class App extends React.Component{
           <Route path="/movieInfo/:index" component={()=> {
             return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
-          <Route path="/admin/Dashboard" component={Dashboard}/>
+          <Route path="/admin/Dashboard" component={()=> {
+            return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie)=> this.handleUpdate(updatedMovie)}
+            handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
+            handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
+          }}/>
         </Switch>
 
       </BrowserRouter>

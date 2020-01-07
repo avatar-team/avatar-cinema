@@ -75,31 +75,31 @@ app.patch("/api/movies/:id", (req, res)=>{
 
 // post request to addmovie to database end send the result back to frontend
 app.post("/api/movies/addMovie", (req,res)=>{
-
-      const title =  req.body.Title
-      var data  = {...req.body}
-      
-       movieTra(title, {id: true}).then(response1 =>{
-
-      const movieTra = `https://www.youtube.com/embed/${response1}`;
-      data.movieTrailer = movieTra
-
-      axios.get(`http://www.omdbapi.com/?t=${title}&apikey=a83a53d3`)
-       .then(response => {
-         const movieInfo = response.data;
+  const title =  req.body.Title
+  var data  = {...req.body}
+  
+  movieTra(title, {id: true}).then(response1 =>{
     
-         var data = {...data ,...movieInfo}
-
-         movieDb.insertMovie(data,(err,result) => {
-           if(result){
-             console.log("data saved")
-             res.json(result)
-             }else{
-             console.log("error saveing the data" )
-             }
-            })  
-        })  
-      }).catch(err => console.log(err))
+    const movieTra = `https://www.youtube.com/embed/${response1}`;
+    data.movieTrailer = movieTra
+    
+    axios.get(`http://www.omdbapi.com/?t=${title}&apikey=a83a53d3`)
+    .then(response => {
+      let movieInfo = response.data;
+      var movieData = {...data ,...movieInfo}
+      
+      console.log(movieData)
+        movieDb.insertMovie(movieData,(err,result) => {
+          if(result){
+            console.log("data saved")
+            res.json(result)
+            }else{
+            console.log("error saveing the data" )
+            res.send(err)
+            }
+          })  
+      })  
+    }).catch(err => console.log(err))
 } )
 
 
