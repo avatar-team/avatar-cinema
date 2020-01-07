@@ -10,4 +10,4 @@ import MovieControlller from './components/MovieController.js';
 import Movietrailer from './components/Movietrailer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<MovieControlller />, document.getElementById('root'));
