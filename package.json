@@ -20,8 +20,18 @@
   },
   "homepage": "https://github.com/avatar-team/avatar-cinema#readme",
   "dependencies": {
+    "axios": "^0.19.0",
     "body-parser": "^1.19.0",
+    "bootstrap": "^4.4.1",
     "express": "^4.17.1",
-    "mongoose": "^5.8.4"
+    "framework7": "^5.3.0",
+    "mongoose": "^5.8.4",
+    "movie-trailer": "^2.0.5",
+    "react-slideshow-image": "^1.3.3",
+    "reactstrap": "^8.2.0"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "prettier": "^1.19.1"
   }
 }

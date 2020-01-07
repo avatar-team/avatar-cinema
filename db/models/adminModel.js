@@ -2,9 +2,9 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 //*******************************************//
-//all the functions exported from this module is in Error-First-Style// 
+// all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
-//mongoose library is REQUIRED//
+// mongoose library is REQUIRED//
 //*******************************************//
 
 const adminSchema = new Schema({
@@ -30,7 +30,7 @@ const insertAdmin = (adminObject, callback = (err, result) => {}) => {
 
 const findAdmin = (objectCriteria = {}, callback) => {
     Admin.find(objectCriteria)
-        .then(admin => callback(null, admin))
+        .then(admin => admin.length === 1 ? callback(null, admin[0]) : callback(null, admin))
         .catch(err => callback(err, null))
 }
 
