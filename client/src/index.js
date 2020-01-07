@@ -6,6 +6,7 @@ import MovieInfo from './components/MovieInfo.js'
 import Navbar from './components/Navbar.js'
 import Slideshow from './components/Slideshow.js';
 import Tabs from './components/Tabs.js';
+import Admin from './components/Admin.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-ReactDOM.render(<Tabs />, document.getElementById('root'));
+ReactDOM.render(<Admin />, document.getElementById('root'));
