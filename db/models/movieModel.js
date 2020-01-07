@@ -47,10 +47,6 @@ const movieSchema = new Schema({
         type: Boolean,
         default: false
     },
-    date: { //added by the admin
-        type: Date,
-        required: [true, 'Date of Play is Required']
-    },
     price: { //added by the admin
         type: Number,
         required: [true, 'Movie Price is Required'],
@@ -60,7 +56,7 @@ const movieSchema = new Schema({
         type: Number,
         required: [true, 'Available Chairs is Required']
     },
-    playTime: { //added by the admin
+    playDate: { //added by the admin
         type: Date,
         required: [true, 'Moive Play time  is Required']
     },
