@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import data from '../dummyData.js';
+import data from './dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'reactstrap'
@@ -19,7 +19,7 @@ const td = {
   padding: '12px'
 }
 
-const MovieController = (props) => {
+const MovieControll = (props) => {
   return (
     <Table style={table} dark className="w-75 text-center m-auto">
       <thead>
@@ -32,6 +32,7 @@ const MovieController = (props) => {
           <th className="text-center"><Button color="light"><FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
         </tr>
       </thead>
+
       <tbody>
       {data.map(movie => {
         return (
@@ -39,7 +40,8 @@ const MovieController = (props) => {
               <th>{movie.Title}</th>
               <td>12:00AM</td>
               <td>5/Jan</td>
-              <td>16$</td>
+
+              <td>16$</td>  
               <td>12/10</td>
               <td className="text-right"><button style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
               <td><button style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
@@ -51,4 +53,4 @@ const MovieController = (props) => {
   );
 }
 
-export default MovieController;
+export default MovieControll;
