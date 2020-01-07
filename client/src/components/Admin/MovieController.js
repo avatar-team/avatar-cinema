@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table } from 'reactstrap';
-import data from './dummyData.js';
+import data from '../dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button } from 'reactstrap'

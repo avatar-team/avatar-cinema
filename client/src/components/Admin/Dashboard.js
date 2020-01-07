@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import MovieController from '../MovieController'
+import MovieController from './MovieController'
 
 class Dashboard extends Component {
   
