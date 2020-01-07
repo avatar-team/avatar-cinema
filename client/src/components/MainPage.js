@@ -3,6 +3,7 @@ import SlideShow from './Slideshow';
 import MovieCard from './MovieCard';
 import '../App.css';
 import { Row} from 'reactstrap';
+import Movietrailer from './Movietrailer.js'
 
 
 const MainPage = (props)=> {
@@ -12,6 +13,10 @@ const MainPage = (props)=> {
         {props.movies.map((movie, i)=> {
           return <MovieCard key={i} movie={movie} index={i}/>
         })}
+      </Row>
+      <Row>
+        <Movietrailer />
+      </Row>
     </div>
   )
 }
