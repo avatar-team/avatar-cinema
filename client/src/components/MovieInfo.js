@@ -14,35 +14,39 @@ const s = {
     textAlign: 'right'
 }
 
-const MovieInfo = (props) => {
+const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
   let { index } = useParams()
-  const movies = props.movies[index];
-  console.log(movies)
+  let movie = movies[index];
+  console.log(index, handleReservation)
 
   return(
     <div style={div}>
+    {movie?
       <Row>
         <Col>
           <Card>
             <Row className="no-gutters">
               <Col md="8">
                 <CardBody>
-                    <CardTitle>{data.Title}</CardTitle>
-                    <CardSubtitle className="mt-3">{data.Plot}</CardSubtitle>
-                    <CardSubtitle className="mt-3">imdbRating: {data.imdbRating}</CardSubtitle>
-                    <CardSubtitle className="mt-3">Price: 16$</CardSubtitle>
-                    <CardSubtitle className="mt-3">Runtime: 120min</CardSubtitle>
-                    <CardSubtitle className="mt-3">Time: 12:00AM</CardSubtitle>
+                    <CardTitle>{movie.Title}</CardTitle>
+                    <CardSubtitle className="mt-3">{movie.Plot}</CardSubtitle>
+                    <CardSubtitle className="mt-3">imdbRating: {movie.imdbRating}</CardSubtitle>
+                    <CardSubtitle className="mt-3">Price: {movie.price}$</CardSubtitle>
+                    <CardSubtitle className="mt-3">Runtime: {movie.RunTime} </CardSubtitle>
+                    <CardSubtitle className="mt-3">Time: {movie.playDate.toLocaleTimeString()} </CardSubtitle>
                     <Button className="mt-4">Reserve Now!</Button>
                 </CardBody>
               </Col>
               <Col md="4">
-                <CardImg style={s}src={data.Poster} />
+                <CardImg style={s}src={movie.Poster} />
               </Col>
             </Row>
           </Card>
         </Col>
       </Row>
+      :
+      <div>this video is not available</div>
+    }
     </div>
   )
 }
