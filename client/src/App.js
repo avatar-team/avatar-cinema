@@ -45,7 +45,7 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    // axios.post("//api/reserveFilm", reservationData)
+    // axios.post("/api/reserveFilm", reservationData)
     // .then((res)=> {
     //   this.currentReservation =  res.data
     // })
@@ -121,12 +121,13 @@ class App extends React.Component{
     return (
       <BrowserRouter>
         <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
-        {this.state.movies.length?
         <Switch>
+        {this.state.movies.length?
           <Route path="/" exact component={()=> {
             console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
             return <MainPage movies={this.state.movies}/>
           }}/>
+          :''}
           <Route path="/movieInfo/:index" component={()=> {
             return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
@@ -136,7 +137,6 @@ class App extends React.Component{
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
         </Switch>
-        :''}
 
       </BrowserRouter>
     );
