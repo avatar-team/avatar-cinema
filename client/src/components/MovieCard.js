@@ -8,32 +8,31 @@ import {Link} from 'react-router-dom';
 
   
 const div = {
-    width: '590px',
+    width: '900px',
     marginTop: '20px'
 }
 
 const MovieCard = ({movie, index}) => (
-  <div style={div}>
-      <Row>
+
+  <div className="m-3" style={div}>
         <Col>
           <Card>
             <Row className="no-gutters">
               <Col md="4">
                 <CardImg src={movie.Poster}/>
               </Col>
-              <Col  md="6">
+              <Col  md="8">
                 <CardBody>
                 <CardTitle>{movie.Title}</CardTitle>imdbRating: {movie.imdbRating} <span>{data.imdbRating}</span>
                 <CardSubtitle className="mt-2">{movie.Plot}</CardSubtitle>
                 <CardSubtitle className="mt-2">Price: {movie.price}$</CardSubtitle>
-                <CardSubtitle className="mt-2">Time: {movie.playDate.toLocaleTimeString()} </CardSubtitle>
+                <CardSubtitle className="mt-2">Time: {console.log(movie)} </CardSubtitle>
                 <Link to={`/movieInfo/${index}`}><Button className="mt-4">Movie Info</Button></Link>
                 </CardBody>
               </Col>
             </Row>
           </Card>
         </Col>
-      </Row>
   </div>
 )
 

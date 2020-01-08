@@ -1,15 +1,20 @@
 import React from 'react'
 
-const Movietrailer = () => (
-  <div className="text-right">
+
+const temp2 = {
+  margin: '32px'
+}
+
+const Movietrailer = (props) => (
+  <div className="text-left" style={temp2}>
   
     <iframe 
-    width="480" 
+    width="580" 
     height="260" 
-    src="https://www.youtube.com/embed/rBxcF-r9Ibs" 
-    frameborder="0" 
+    src={props.movie.movieTrailer}
+    frameBorder="0" 
     allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" 
-    allowfullscreen>
+    allowFullScreen>
     </iframe>      
   
   </div>

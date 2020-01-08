@@ -14,7 +14,7 @@ const movieSchema = new Schema({
         required: [true, 'Title of The Movie is Required']
     },
     Year: {
-        type: Number,
+        type: String,
         required: [true, 'Year of The Movie is Required']
     },
     Rated: {
@@ -27,7 +27,7 @@ const movieSchema = new Schema({
         required: [true, 'Genre of The Movie is Required']
     },
     Runtime: {
-        type: Number,
+        type: String,
         required: [true, 'Movie Run Time is Required']
     },
     Plot: {
@@ -47,10 +47,6 @@ const movieSchema = new Schema({
         type: Boolean,
         default: false
     },
-    date: { //added by the admin
-        type: Date,
-        required: [true, 'Date of Play is Required']
-    },
     price: { //added by the admin
         type: Number,
         required: [true, 'Movie Price is Required'],
@@ -60,7 +56,7 @@ const movieSchema = new Schema({
         type: Number,
         required: [true, 'Available Chairs is Required']
     },
-    playTime: { //added by the admin
+    playDate: { //added by the admin 
         type: Date,
         required: [true, 'Moive Play time  is Required']
     },
@@ -68,6 +64,10 @@ const movieSchema = new Schema({
         type: String,
         default: "",
         required: false
+    },
+    chairs: {
+        type: Number,
+        required: [true, 'Chairs Count is Required']
     }
 });
 
@@ -95,10 +95,6 @@ const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) =
         .catch(err => callback(err, null))
 };
 
-updateMovie("asdaw213rd3ed", { Title: "qweasd", price: 123, availableChairs: 12 }, (error, result) => {
-
-})
-
 //this method well set The availability state of the movie to false, (making it deleted or Not available)
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, { availability: false })
@@ -112,7 +108,7 @@ const deleteMovie = (objectId, callback = (err, result) => {}) => {
 const getMovies4Days = callback => {
     let currentDate = new Date();
     let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 4);
-    findMovies({ "date": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
+    findMovies({ "playDate": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
 
     // Movie.find( { "date": { "$gte": currentDate, "$lt": endDate }, availability: true } )
     //     .then(movies => callback(null, movies))
@@ -129,7 +125,6 @@ const getAllAvailableMovies = callback => {
 //this function well search the database for movies according to the Criteria given in the firstParam
 //and well pass the result to the second param to the callback function as followrd by the rules of Err-First Style
 //if the param is not given , it well return all the movies in the database 
-{ Title: "Spider-Man" }
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
         .then(movies => movies.length === 1 ? callback(null, movies[0]) : callback(null, movies))
