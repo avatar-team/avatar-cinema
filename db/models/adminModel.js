@@ -11,11 +11,13 @@ const adminSchema = new Schema({
     username: {
         type: String,
         required: true,
-        unique: true
+        unique: true,
+        trim: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     }
 });
 const Admin = new mongoose.model("Admin", adminSchema);
