@@ -11,37 +11,46 @@ const Schema = mongoose.Schema;
 const movieSchema = new Schema({
     Title: {
         type: String,
-        required: [true, 'Title of The Movie is Required']
+        required: [true, 'Title of The Movie is Required'],
+        unique: [true, 'Title can not be duplicated'],
+        trim: true
     },
     Year: {
-        type: Number,
-        required: [true, 'Year of The Movie is Required']
+        type: String,
+        required: [true, 'Year of The Movie is Required'],
+        trim: true
     },
     Rated: {
         type: String,
         default: 'unknown',
-        required: [true, 'Rate of The Movie is Required']
+        required: [true, 'Rate of The Movie is Required'],
+        trim: true
     },
     Genre: {
         type: String,
-        required: [true, 'Genre of The Movie is Required']
+        required: [true, 'Genre of The Movie is Required'],
+        trim: true
     },
     Runtime: {
         type: String,
-        required: [true, 'Movie Run Time is Required']
+        required: [true, 'Movie Run Time is Required'],
+        trim: true
     },
     Plot: {
         type: String,
-        required: [true, 'Movie Plot Time is Required']
+        required: [true, 'Movie Plot Time is Required'],
+        trim: true
     },
     Poster: {
         type: String,
-        required: [true, 'Movie Poster Time is Required']
+        required: [true, 'Movie Poster Time is Required'],
+        trim: true
     },
     imdbRating: {
         type: String,
         required: [true, 'imdbRating Time is Required'],
-        default: 'unknown'
+        default: 'unknown',
+        trim: true
     },
     availability: { //added by the admin
         type: Boolean,
@@ -63,7 +72,8 @@ const movieSchema = new Schema({
     movieTrailer: { //>?
         type: String,
         default: "",
-        required: false
+        required: false,
+        trim: true
     },
     chairs: {
         type: Number,
@@ -108,7 +118,7 @@ const deleteMovie = (objectId, callback = (err, result) => {}) => {
 const getMovies4Days = callback => {
     let currentDate = new Date();
     let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 4);
-    findMovies({ "date": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
+    findMovies({ "playDate": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
 
     // Movie.find( { "date": { "$gte": currentDate, "$lt": endDate }, availability: true } )
     //     .then(movies => callback(null, movies))

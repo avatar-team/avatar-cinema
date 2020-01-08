@@ -10,4 +10,8 @@ import Movietrailer from './components/Movietrailer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import MovieControlller from './components/MovieController.js'
 
+
+import  User from "./components/User.js"
+
+
 ReactDOM.render(<App />, document.getElementById('root'));
