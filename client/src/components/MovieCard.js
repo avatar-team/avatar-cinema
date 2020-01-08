@@ -8,7 +8,8 @@ import {Link} from 'react-router-dom';
 
   
 const div = {
-    width: '900px',
+    width: '1200px',
+    height: '600px',
     marginTop: '20px'
 }
 
