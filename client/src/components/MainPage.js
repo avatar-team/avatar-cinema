@@ -15,13 +15,14 @@ const MainPage = (props)=> {
         <Col md="8">
           <Daysbar />
           {props.movies.map((movie, i)=> {
+            console.log(movie)
             return <MovieCard key={i} movie={movie} index={i}/>
           })}
         </Col>
         <Col md="4">
         {props.movies.map((movie, i)=> {
           console.log(movie)
-          return <Movietrailer movie={movie} />
+          return <Movietrailer key={i} movie={movie} />
         })}
         </Col>
       </Row>
