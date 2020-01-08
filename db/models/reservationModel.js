@@ -77,7 +77,3 @@ const findReservation = (objectCriteria = {}, callback) => {
 module.exports.insertReservation = insertReservation;
 module.exports.updateReservation = updateReservation;
 module.exports.findReservation = findReservation;
-
-const middleWare = (req, res, next) => {
-
-}
