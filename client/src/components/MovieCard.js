@@ -27,7 +27,7 @@ const MovieCard = ({movie, index}) => (
                 <CardTitle>{movie.Title}</CardTitle>imdbRating: {movie.imdbRating} <span>{data.imdbRating}</span>
                 <CardSubtitle className="mt-2">{movie.Plot}</CardSubtitle>
                 <CardSubtitle className="mt-2">Price: {movie.price}$</CardSubtitle>
-                <CardSubtitle className="mt-2">Time: {movie.playDate.toLocaleTimeString()} </CardSubtitle>
+                <CardSubtitle className="mt-2">Time: {console.log(movie)} </CardSubtitle>
                 <Link to={`/movieInfo/${index}`}><Button className="mt-4">Movie Info</Button></Link>
                 </CardBody>
               </Col>
