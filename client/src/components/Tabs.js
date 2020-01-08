@@ -44,33 +44,33 @@ class Daysbar extends React.Component {
             {this.endDate(3) + " / " + this.endDate(3, 'month')}
           </NavLink>
         </NavItem>
-        
+
       </Nav> 
-  ) 
-
-
-
-
-
-
-
-
-
-
-
-
-      
+    ) 
   }
 } 
-// const Daysbar = () => (
-//   <div>
-//     <Tabs style={temp} className="border" defaultActiveKey="home">
-//       <Tab eventKey="Day1" title="5/1"></Tab>
-//       <Tab eventKey="Day2" title="6/1"></Tab>
-//       <Tab eventKey="Day3" title="7/1"></Tab>
-//       <Tab eventKey="Day4" title="8/1"></Tab>
-//     </Tabs>
-//   </div>
-// )
+
+
+
+
+
+
+
+
+
+
+
+  // const Daysbar = () => (
+  //   <div>
+  //     <Tabs style={temp} className="border" defaultActiveKey="home">
+  //       <Tab eventKey="Day1" title="5/1"></Tab>
+  //       <Tab eventKey="Day2" title="6/1"></Tab>
+  //       <Tab eventKey="Day3" title="7/1"></Tab>
+  //       <Tab eventKey="Day4" title="8/1"></Tab>
+  //     </Tabs>
+  //   </div>
+  // )
+
+      
 
 export default Daysbar;

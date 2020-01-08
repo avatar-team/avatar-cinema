@@ -134,7 +134,7 @@ class App extends React.Component{
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
-          <Route path="/user" component={User}/>
+          <Route path="/user" exact component={User}/>
         </Switch>
 
       </BrowserRouter>
