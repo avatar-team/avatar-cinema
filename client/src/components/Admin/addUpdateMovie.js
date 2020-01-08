@@ -15,13 +15,15 @@ class AddUpdateMovie extends Component {
     let chairs = document.getElementById('chairs')
     let date = document.getElementById('date')
     let time = document.getElementById('time')
-    if(this.props.processType == 'add') result.Title = title.value 
     result.price = price.value;
     result.chairs = chairs.value;
     result.playDate = new Date(date.value + "  " + time.value);
     result.availability = true;
-    result.availableChairs = chairs.value
-    this.props.processType == 'add'? this.props.handleAdd(result): this.props.handleUpdate(movieId, result)
+    if(this.props.processType == 'add') {
+      result.Title = title.value;
+      result.availableChairs = chairs.value
+      this.props.handleAdd(result)
+    } else this.props.handleUpdate(movieId, result)
   }
   
   render() {

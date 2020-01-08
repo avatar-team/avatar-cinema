@@ -23,7 +23,7 @@ class User extends React.Component {
       render(){
           return(
             <div >
-                <Container>
+                <Container className="mb-3">
                     <Row>
                         <Col md="4" className="border border-primary">
                         <Card>

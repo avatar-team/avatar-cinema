@@ -8,7 +8,7 @@ import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
 import Test from './components/test'
 import Dashboard from './components/Admin/Dashboard'
-
+import User from './components/User'
 
 class App extends React.Component{
   constructor() {
@@ -122,12 +122,10 @@ class App extends React.Component{
       <BrowserRouter>
         <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
         <Switch>
-        {this.state.movies.length?
           <Route path="/" exact component={()=> {
-            console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
+            // console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
             return <MainPage movies={this.state.movies}/>
           }}/>
-          :''}
           <Route path="/movieInfo/:index" component={()=> {
             return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
@@ -136,6 +134,7 @@ class App extends React.Component{
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
+          <Route path="/user" component={User}/>
         </Switch>
 
       </BrowserRouter>
