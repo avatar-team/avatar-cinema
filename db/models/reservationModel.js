@@ -11,7 +11,8 @@ const _updateMovie = require('./movieModel').updateMovie;
 const reservationSchema = new Schema({
     clientName: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     clientEmail: {
         type: String,
@@ -22,11 +23,13 @@ const reservationSchema = new Schema({
             message: 'the email most contain @'
         },
         required: true,
-        unique: true
+        unique: true,
+        trim: true
     },
     movieTitle: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     }
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
@@ -65,6 +68,8 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
         .then(reservation => callback(null, reservation))
         .catch(err => callback(err, null))
 };
+
+db.tours.find({ price: { $gt: 500 }, rating: { $gte: 4.8 } })
 
 //this function well search the database for reservations according to the Criteria given in the firstParam
 //and well pass the result to the secound param to the callback function as followrd by the rules of Err-First Style
