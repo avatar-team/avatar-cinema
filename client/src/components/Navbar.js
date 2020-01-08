@@ -10,11 +10,13 @@ import {
   Input,
   NavbarText
 } from 'reactstrap';
+import {  } from 'react-bootstrap'
 
 const search = {
-    borderRadius: '1.6rem 0 0 1.6rem',
-    borderColor: 'transparent',
-    padding: '18px'
+  borderRadius: '1.6rem 1.6rem 1.6rem 1.6rem',
+  borderColor: 'transparent',
+  padding: '18px',
+  width: '300px'
 }
 
 const items = {
@@ -31,8 +33,8 @@ const Navbarz = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div>
-        <Navbar className="ddd" expand="md">
+    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
+        <Navbar expand="md">
           <NavbarBrand href="/" style={items}>Avatar</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>

@@ -8,20 +8,21 @@ import Daysbar from '../components/Tabs.js'
 
 const MainPage = (props)=> {
   return(
-    <div>
+    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       <SlideShow/>
 
       <Row>
         <Col md="8">
           <Daysbar />
           {props.movies.map((movie, i)=> {
+            console.log(movie)
             return <MovieCard key={i} movie={movie} index={i}/>
           })}
         </Col>
         <Col md="4">
         {props.movies.map((movie, i)=> {
           console.log(movie)
-          return <Movietrailer movie={movie} />
+          return <Movietrailer key={i} movie={movie} />
         })}
         </Col>
       </Row>
