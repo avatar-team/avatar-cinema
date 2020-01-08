@@ -37,9 +37,16 @@ const userSchema = new Schema({
             message: 'the email most contain @ character'
         }
     },
-    moviesBought: [_movieSchema],
-    favoriteMovies: [_movieSchema]
-
+    moviesBought: {
+        type: [_movieSchema],
+        required: false,
+        default: []
+    },
+    favoriteMovies: {
+        type: [_movieSchema],
+        required: false,
+        default: []
+    }
 });
 
 const User = new mongoose.model("User", userSchema);
