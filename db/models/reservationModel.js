@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
+const _findMovies = require('./movieModel').findMovies;
+const _updateMovie = require('./movieModel').updateMovie;
 //*******************************************//
 // all the functions exported from this module is in Error-First-Style// 
 //*******************************************//
@@ -32,11 +33,23 @@ const Reservation = new mongoose.model("Reservation", reservationSchema);
 
 //this function is used to add a reservation to the database 
 //it accepts one reservation Object According to the schema OR array of Objects as well 
-const insertReservation = (reservation, callback = (err, result) => {}) => {
-    Reservation.create(reservation)
-        .then(reservation => callback(null, reservation))
-        .catch(err => callback(err, null))
+
+const insertReservation = (reservation, callback) => {
+    _findMovies({ Title: reservation.movieTitle }, (error, movie) => {
+        if (error) {
+            callback(error, null);
+        } else if (movie.availableChairs <= 0) {
+            callback(new Error("There Are No more Available Chairs"), null);
+        } else {
+            _updateMovie(movie._id.toString(), { $inc: { availableChairs: -1 } });
+            Reservation.create(reservation)
+                .then(reservation => callback(null, reservation))
+                .catch(err => callback(err, null));
+        }
+    })
 };
+
+
 
 //this is used to update a certain reservation record in the reservations collection 
 // it accepts a object criteria 
@@ -64,3 +77,7 @@ const findReservation = (objectCriteria = {}, callback) => {
 module.exports.insertReservation = insertReservation;
 module.exports.updateReservation = updateReservation;
 module.exports.findReservation = findReservation;
+
+const middleWare = (req, res, next) => {
+
+}
