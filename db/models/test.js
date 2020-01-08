@@ -23,36 +23,14 @@ const movieModel = require('./movieModel');
 // First we check with user if it exist in DB
 // if exist take his ID send it to deleteUser function
 // if there is no error send json says that user deleted
-app.delete('/api/users/:userName', (req, res, next) => {
-    userModel.findUser(req.params, (err, data) => {
-        console.log(data)
-        if (err) res.status(404).send(err);
-        userModel.deleteUser(data._id, (err, result) => {
-            if (err) res.send('Error while deleting');
-            res.json({ deleted: true });
-        })
-    })
-})
-
-
-// Get Route
-// Takes userName in params find it in DB
-// send it back as json if exist
-app.get('/api/users/:userName', (req, res, next) => {
-    userModel.findUser(req.params, (err, data) => {
-        if (err) res.status(404).send(err);
-        res.json({ data })
-    })
-})
-
-// Get Route 
-// To retrieve All users from DB
-app.get('/api/users', (req, res, next) => {
-    userModel.findUser((err, data) => {
-        if (err) res.status(404).send(err);
-        res.json({ data })
-    })
-})
+app.delete('/api/users/:userName', )
+    // Get Route
+    // Takes userName in params find it in DB
+    // send it back as json if exist
+app.get('/api/users/:userName', )
+    // Get Route 
+    // To retrieve All users from DB
+app.get('/api/users', )
 
 
 // Get Route 
@@ -62,13 +40,7 @@ app.get('/api/users', (req, res, next) => {
 // TODO: still need refactoring , and it depends on someone else work
 // so it is not finished yet 
 
-app.get('/api/users/:userName/recommendedMovies', (req, res, next) => {
-    userModel.findUser(req.params, (errUser, userData) => {
-        movieModel.findMovies({ Genre: userData.moviesBought[0].Genre }, (err, data) => {
-            res.json(data)
-        })
-    })
-})
+app.get('/api/users/:userName/recommendedMovies', )
 
 // res.json( userData.moviesBought[0].Genre )
 

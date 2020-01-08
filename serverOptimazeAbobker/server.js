@@ -10,11 +10,14 @@ const reservationDb = require('./db/models/reservationModel'); //might have to m
 const adminDb = require('./db/models/adminModel');
 
 
-const movieRoute = require('./movieRoute')
+const movieRoute = require('./routes/movieRoute')
+const userRoute = require('./routes/userRoute')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use("/api/movies", movieRoute);
+app.use("/api/users", userRoute);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Avatar', {
