@@ -12,21 +12,25 @@ const userSchema = new Schema({
     userName: {
         type: String,
         unique: [true, 'name Most be unique'],
-        required: [true, 'name is required']
+        required: [true, 'name is required'],
+        trim: true
     },
     password: {
         type: String,
-        required: true
+        required: true,
+        trim: true
     },
     firstName: {
         type: String,
         required: false,
-        default: ""
+        default: "",
+        trim: true
     },
     lastName: {
         type: String,
         required: false,
-        default: ""
+        default: "",
+        trim: true
     },
     userEmail: {
         type: String,
@@ -35,7 +39,8 @@ const userSchema = new Schema({
         validate: {
             validator: userEmail => userEmail.includes("@"),
             message: 'the email most contain @ character'
-        }
+        },
+        trim: true
     },
     moviesBought: {
         type: [_movieSchema],
