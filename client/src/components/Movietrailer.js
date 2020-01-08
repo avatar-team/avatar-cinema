@@ -2,11 +2,12 @@ import React from 'react'
 
 
 const temp2 = {
-  margin: '60px'
+  marginRight: '100px',
+  marginTop: '34px',
 }
 
 const Movietrailer = (props) => (
-  <div className="m-4" style={temp2}>
+  <div style={temp2}>
   
     <iframe 
     width="580" 
