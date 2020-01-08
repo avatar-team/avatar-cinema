@@ -4,14 +4,14 @@ import Tab from 'react-bootstrap/Tab';
 
 
 const temp = {
-  width: '868px',
+  width: '1168px',
   margin: '33px',
   padding: '10px 10px 0px 10px'
 }
 
 const Daysbar = () => (
   <div>
-    <Tabs style={temp} className="border text-center" defaultActiveKey="home">
+    <Tabs style={temp} className="border" defaultActiveKey="home">
       <Tab eventKey="Day1" title="5/1"></Tab>
       <Tab eventKey="Day2" title="6/1"></Tab>
       <Tab eventKey="Day3" title="7/1"></Tab>
