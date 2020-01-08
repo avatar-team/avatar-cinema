@@ -21,6 +21,10 @@ const items = {
     paddingRight: '20px'
 }
 
+const bar = {
+  backgroundColor: 'transparent'
+}
+
 const Navbarz = (props) => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -28,7 +32,7 @@ const Navbarz = (props) => {
 
   return (
     <div>
-        <Navbar color="light" light expand="md">
+        <Navbar className="ddd" expand="md">
           <NavbarBrand href="/" style={items}>Avatar</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
