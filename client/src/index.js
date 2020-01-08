@@ -8,6 +8,9 @@ import Slideshow from './components/Slideshow.js';
 import Tabs from './components/Tabs.js';
 import Movietrailer from './components/Movietrailer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MovieControlller from './components/MovieController.js'
+
+
 import  User from "./components/User.js"
 
 
