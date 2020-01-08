@@ -6,7 +6,6 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: rgb(24, 24, 31); */
   background-size: cover;
   background-repeat: no-repeat;
   height: 900px;
@@ -41,9 +40,31 @@ body {
   background: #adceed;
 }
 
-.images {
-  /* height: 800px !important; */
-  /* width: 2000px !important; */
-  /* background-size: 150px; */
-  margin: auto;
+/* Movie Card */
+.title {
+  font-size: 26pt;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.spans {
+  font-size: 16pt;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.cardBody {
+  font-size: 13pt;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.cardBtn {
+  background-color: #ca3e47 ; 
+  border-radius: 6px ; 
+  border-color: transparent ; 
+  padding: 10px 20px;
+  color: dark;
+  font-weight: bold;
+}
+
+.imdb {
+  font-size: 12pt;
 }

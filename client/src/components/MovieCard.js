@@ -14,26 +14,29 @@ const div = {
 }
 
 const MovieCard = ({movie, index}) => (
-
   <div className="m-3" style={div}>
-        <Col>
-          <Card>
-            <Row className="no-gutters">
-              <Col md="4">
-                <CardImg src={movie.Poster}/>
-              </Col>
-              <Col  md="8">
-                <CardBody>
-                <CardTitle>{movie.Title}</CardTitle>imdbRating: {movie.imdbRating} <span>{data.imdbRating}</span>
-                <CardSubtitle className="mt-2">{movie.Plot}</CardSubtitle>
-                <CardSubtitle className="mt-2">Price: {movie.price}$</CardSubtitle>
-                <CardSubtitle className="mt-2">Time: {console.log(movie)} </CardSubtitle>
-                <Link to={`/movieInfo/${index}`}><Button className="mt-4">Movie Info</Button></Link>
-                </CardBody>
-              </Col>
-            </Row>
-          </Card>
-        </Col>
+      {console.log(movie)}
+      <Col>
+        <Card>
+          <Row>
+            <Col md="4">
+              <CardImg src={movie.Poster}/>
+            </Col>
+            <Col md="8">
+              <CardBody className="cardBody">
+                <CardTitle className="title">{movie.Title} <span class="imdb"> ... {movie.imdbRating} </span></CardTitle>
+                <CardSubtitle className="my-4"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
+                <CardSubtitle className="my-4"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
+                <CardSubtitle className="mt-4"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
+                <CardSubtitle className="mt-4"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
+                <CardSubtitle className="mt-4"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
+                <CardSubtitle className="mt-4"> <span className='spans'> Available Chairs: </span> {movie.chairs} </CardSubtitle>
+                <Link to={`/movieInfo/${index}`}><button className="mt-5 cardBtn">Movie Info</button></Link>
+              </CardBody>
+            </Col>
+          </Row>
+        </Card>
+      </Col>
   </div>
 )
 
