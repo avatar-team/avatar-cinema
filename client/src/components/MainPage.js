@@ -9,7 +9,7 @@ import Daysbar from '../components/Tabs.js';
 
 const MainPage = (props)=> {
   return(
-    <div>
+    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       <SlideShow/>
 
       <Row>

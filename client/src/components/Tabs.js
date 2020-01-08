@@ -5,7 +5,7 @@ import { NavLink, NavItem, Nav } from 'reactstrap';
 
 
 const temp = {
-  width: '868px',
+  width: '1168px',
   margin: '33px',
   padding: '10px 10px 0px 10px'
 }
@@ -23,30 +23,7 @@ class Daysbar extends React.Component {
 
   render() {
     return(
-    <div>
-      <Tabs style={temp} className="border text-center" defaultActiveKey="home">
-        <NavLink onClick={()=> this.props.pageShow(this.endDate(0))} eventKey="Day1" title={this.endDate(0) + " / " + this.endDate(0, 'month')}></NavLink>
-        <NavLink onClick={()=> this.props.pageShow(this.endDate(1))} eventKey="Day2" title={this.endDate(1) + " / " + this.endDate(1, 'month')}></NavLink>
-        <NavLink onClick={()=> this.props.pageShow(this.endDate(2))} eventKey="Day3" title={this.endDate(2) + " / " + this.endDate(2, 'month')}></NavLink>
-        <NavLink onClick={()=> this.props.pageShow(this.endDate(3))} eventKey="Day4" title={this.endDate(3) + " / " + this.endDate(3, 'month')}></NavLink>
-      </Tabs>
-
-    </div>
-  ) 
-
-
-
-
-
-
-
-
-
-
-
-
-
-      {/* <Nav tabs>
+      <Nav tabs style={temp} className="border">
         <NavItem>
           <NavLink onClick={() => { this.props.pageShow(this.endDate(0))}}>
             {this.endDate(0) + " / " + this.endDate(0, 'month')}
@@ -68,9 +45,32 @@ class Daysbar extends React.Component {
           </NavLink>
         </NavItem>
         
-      </Nav> */}
+      </Nav> 
+  ) 
+
+
+
+
+
+
+
+
+
+
+
+
       
   }
 } 
+// const Daysbar = () => (
+//   <div>
+//     <Tabs style={temp} className="border" defaultActiveKey="home">
+//       <Tab eventKey="Day1" title="5/1"></Tab>
+//       <Tab eventKey="Day2" title="6/1"></Tab>
+//       <Tab eventKey="Day3" title="7/1"></Tab>
+//       <Tab eventKey="Day4" title="8/1"></Tab>
+//     </Tabs>
+//   </div>
+// )
 
 export default Daysbar;
