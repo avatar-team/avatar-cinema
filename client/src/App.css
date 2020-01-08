@@ -71,3 +71,13 @@ h3 {
   margin: 0;
   background: #adceed;
 }
+
+.images {
+  max-height: 800px;  /* change this to whatever you want */
+  width: auto;
+  position: relative;
+}
+
+.ddd {
+  background-color: transparent;
+}

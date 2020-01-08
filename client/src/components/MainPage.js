@@ -10,6 +10,7 @@ const MainPage = (props)=> {
   return(
     <div>
       <SlideShow/>
+
       <Row>
         <Col md="8">
           <Daysbar />

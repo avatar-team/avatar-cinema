@@ -2,6 +2,7 @@ import React from 'react'
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 
+
 const temp = {
   width: '868px',
   margin: '33px',

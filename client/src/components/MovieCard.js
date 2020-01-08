@@ -8,11 +8,13 @@ import {Link} from 'react-router-dom';
 
   
 const div = {
-    width: '900px',
+    width: '1200px',
+    height: '600px',
     marginTop: '20px'
 }
 
 const MovieCard = ({movie, index}) => (
+
   <div className="m-3" style={div}>
         <Col>
           <Card>
@@ -32,7 +34,6 @@ const MovieCard = ({movie, index}) => (
             </Row>
           </Card>
         </Col>
-
   </div>
 )
 
