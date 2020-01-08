@@ -27,7 +27,7 @@ class App extends React.Component{
     .then((res)=> {
       console.log(res.data)
       this.setState({
-        movies: movies
+        movies: res.data
       })
     })
     .catch(err => {

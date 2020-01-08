@@ -21,7 +21,7 @@ const MainPage = (props)=> {
         <Col md="4">
         {props.movies.map((movie, i)=> {
           console.log(movie)
-          return <Movietrailer movie={movie} />
+          return <Movietrailer key={i} movie={movie} />
         })}
         </Col>
       </Row>
