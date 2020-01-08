@@ -15,6 +15,7 @@ const MainPage = (props)=> {
         <Col md="8">
           <Daysbar />
           {props.movies.map((movie, i)=> {
+            console.log(movie)
             return <MovieCard key={i} movie={movie} index={i}/>
           })}
         </Col>

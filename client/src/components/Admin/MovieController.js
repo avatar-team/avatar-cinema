@@ -3,7 +3,7 @@ import { Table } from 'reactstrap';
 import data from '../dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { Button } from 'reactstrap'
+import { Button, Card, CardTitle } from 'reactstrap'
 import AddUpdateMovie from './addUpdateMovie'
 
 const transparent = {
@@ -22,8 +22,10 @@ const td = {
 
 const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
 
-  let [check, setCheck] = useState(false)
+  let [addUpdate, showAddUpdate] = useState(false)
   let [precessType, setType] = useState('')
+  let [CurrentMovie, setMovie] = useState({});
+  let [deleteComponent, showDelete] = useState(false);
   
   return (
     <div>
@@ -38,13 +40,13 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
             <th>Chairs</th>
             <th className="text-center"><Button onClick={()=> {
               setType('add')
-              setCheck(true)
+              showAddUpdate(true)
             }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
           </tr>
         </thead>
 
         <tbody>
-        {data.map((movie, i) => {
+        {movies.map((movie, i) => {
           return (
               <tr key={i}>
                 <th>{movie.Title}</th>
@@ -55,17 +57,32 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 <td>12/10</td>
                 <td className="text-right"><button onClick={()=> {
                   setType('update')
-                  setCheck(true)
+                  showAddUpdate(true)
+                  setMovie(movie)
                 }} style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
-                <td><button style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
+                <td><button onClick={()=> {
+                  setType('delete')
+                  showDelete(true)
+                  setMovie(movie)
+                }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
               </tr>
           )
         })}
         </tbody>
       </Table>
-      {check? <AddUpdateMovie processType={precessType} 
-      movies={movies} handleUpdate={(updatedMovie)=> handleUpdate(updatedMovie)}
+      {addUpdate? <AddUpdateMovie processType={precessType} 
+      movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
+      {deleteComponent?
+          <Card style={{width: '50%', margin: 'auto'}} body inverse color="danger">
+            <CardTitle>do you want to delete {CurrentMovie.Title} </CardTitle>
+            <div style={{display: 'block-inline', margin: 'auto'}}>
+              <Button onClick={()=> showDelete(false)} style={{margin: '10px'}}>Cancel</Button><Button onClick={()=> {
+                handleDelete(CurrentMovie._id)
+              }} color="secondary">Delete</Button>
+            </div>
+          </Card>
+      : ''}
     </div>
   );
 }

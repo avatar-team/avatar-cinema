@@ -4,35 +4,35 @@ import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
 class AddUpdateMovie extends Component {
 
   constructor(props) {
-    // {movies, handleAdd, handleUpdate, processType}
+    // {movie, handleAdd, handleUpdate, processType}
     super(props)
   }
     
-  handleSubmit = () => {
+  handleSubmit = (movieId) => {
     let result = {}
     let title = document.getElementById('title')
     let price = document.getElementById('price')
     let chairs = document.getElementById('chairs')
     let date = document.getElementById('date')
     let time = document.getElementById('time')
-    result.Title = title.value 
+    if(this.props.processType == 'add') result.Title = title.value 
     result.price = price.value;
     result.chairs = chairs.value;
-    result.playDate = new Date(date.value + " " + time.value);
+    result.playDate = new Date(date.value + "  " + time.value);
     result.availability = true;
     result.availableChairs = chairs.value
-    this.props.handleAdd(result)
+    this.props.processType == 'add'? this.props.handleAdd(result): this.props.handleUpdate(movieId, result)
   }
   
   render() {
-
+    let isUpdate = this.props.processType == 'update'? true: false;
     return (
       <div style={{width: '50%', margin: 'auto'}}>
-        {console.log(this.props.processType)}
+        {console.log(this.props.movie)}
         <Form>
           <FormGroup>
-            <Label>Movie Title: </Label>
-            <Input id="title" name="Title" />
+            <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
+            <Input disabled={isUpdate} id="title" name="Title" />
             <Label>Price: </Label>
             <Input id="price" name="price" type="number"/>
             <Label>Chairs: </Label>
@@ -41,7 +41,7 @@ class AddUpdateMovie extends Component {
             <Input id="date" name="date" type="date"/>
             <Label>Time: </Label>
             <Input id="time" name="time" type="time"/>
-            <Button onClick={()=> this.handleSubmit()}>{this.props.processType}</Button>
+            <Button onClick={()=> this.handleSubmit(this.props.movie._id)}>{this.props.processType}</Button>
           </FormGroup>
         </Form>
       </div>

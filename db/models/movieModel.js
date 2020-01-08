@@ -14,7 +14,7 @@ const movieSchema = new Schema({
         required: [true, 'Title of The Movie is Required']
     },
     Year: {
-        type: Number,
+        type: String,
         required: [true, 'Year of The Movie is Required']
     },
     Rated: {
@@ -108,7 +108,7 @@ const deleteMovie = (objectId, callback = (err, result) => {}) => {
 const getMovies4Days = callback => {
     let currentDate = new Date();
     let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 4);
-    findMovies({ "date": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
+    findMovies({ "playDate": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
 
     // Movie.find( { "date": { "$gte": currentDate, "$lt": endDate }, availability: true } )
     //     .then(movies => callback(null, movies))

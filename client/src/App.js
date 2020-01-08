@@ -26,9 +26,18 @@ class App extends React.Component{
     axios.get('/API/movies')
     .then((res)=> {
       console.log(res.data)
-      this.setState({
-        movies: res.data
-      })
+      if(Array.isArray(res.data)) {
+        this.setState({
+          movies: [...res.data]
+        })
+      }else {
+        this.setState(prevState => {
+          prevState.movies.push(res.data)
+          return({
+            movies: [...prevState.movies]
+          })
+        })
+      }
     })
     .catch(err => {
       console.log(err)
@@ -62,6 +71,7 @@ class App extends React.Component{
   handleAdd(movieData) {
     axios.post('/api/movies/addMovie', movieData)
     .then(res => {
+      console.log(res)
       this.setState((prevState)=> {
         return ({
           movies: [...prevState.movies, res.data]
@@ -71,8 +81,10 @@ class App extends React.Component{
   }
 
   handleUpdate(movieId, newData) {
+    console.log(newData)
     axios.patch(`/api/movies/${movieId}`, newData)
     .then(res => {
+      console.log(res)
       this.setState(prevState => {
         var newMovies = prevState.movies.map((movie, i)=> {
           if(movie._id == movieId) return res.data;
@@ -109,19 +121,22 @@ class App extends React.Component{
     return (
       <BrowserRouter>
         <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
+        {this.state.movies.length?
         <Switch>
           <Route path="/" exact component={()=> {
+            console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
             return <MainPage movies={this.state.movies}/>
           }}/>
           <Route path="/movieInfo/:index" component={()=> {
             return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
           <Route path="/admin/Dashboard" component={()=> {
-            return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie)=> this.handleUpdate(updatedMovie)}
+            return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
         </Switch>
+        :''}
 
       </BrowserRouter>
     );

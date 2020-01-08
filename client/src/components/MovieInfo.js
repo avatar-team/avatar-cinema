@@ -33,7 +33,7 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
                     <CardSubtitle className="mt-3">imdbRating: {movie.imdbRating}</CardSubtitle>
                     <CardSubtitle className="mt-3">Price: {movie.price}$</CardSubtitle>
                     <CardSubtitle className="mt-3">Runtime: {movie.RunTime} </CardSubtitle>
-                    <CardSubtitle className="mt-3">Time: {movie.playDate.toLocaleTimeString()} </CardSubtitle>
+                    <CardSubtitle className="mt-3">Time: {new Date(movie.playDate).toLocaleTimeString()} </CardSubtitle>
                     <Button className="mt-4">Reserve Now!</Button>
                 </CardBody>
               </Col>
