@@ -139,3 +139,4 @@ module.exports.updateMovie = updateMovie;
 module.exports.insertMovie = insertMovie;
 module.exports.findMovies = findMovies;
 module.exports._movieSchema = movieSchema;
+module.exports.Movie = Movie;
