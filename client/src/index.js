@@ -8,5 +8,6 @@ import Slideshow from './components/Slideshow.js';
 import Tabs from './components/Tabs.js';
 import Movietrailer from './components/Movietrailer.js';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import MovieControlller from './components/MovieController.js'
 
-ReactDOM.render(<MovieControlller />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById('root'));
