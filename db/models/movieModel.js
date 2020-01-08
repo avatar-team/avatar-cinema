@@ -56,7 +56,7 @@ const movieSchema = new Schema({
         type: Number,
         required: [true, 'Available Chairs is Required']
     },
-    playDate: { //added by the admin
+    playDate: { //added by the admin 
         type: Date,
         required: [true, 'Moive Play time  is Required']
     },
@@ -67,7 +67,7 @@ const movieSchema = new Schema({
     },
     chairs: {
         type: Number,
-        required: true
+        required: [true, 'Chairs Count is Required']
     }
 });
 
@@ -94,10 +94,6 @@ const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) =
         .then(movie => callback(null, movie))
         .catch(err => callback(err, null))
 };
-
-updateMovie("asdaw213rd3ed", { Title: "qweasd", price: 123, availableChairs: 12 }, (error, result) => {
-
-})
 
 //this method well set The availability state of the movie to false, (making it deleted or Not available)
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
@@ -129,7 +125,6 @@ const getAllAvailableMovies = callback => {
 //this function well search the database for movies according to the Criteria given in the firstParam
 //and well pass the result to the second param to the callback function as followrd by the rules of Err-First Style
 //if the param is not given , it well return all the movies in the database 
-{ Title: "Spider-Man" }
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
         .then(movies => movies.length === 1 ? callback(null, movies[0]) : callback(null, movies))
