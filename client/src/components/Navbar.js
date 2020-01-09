@@ -13,22 +13,13 @@ import {
   InputGroupAddon,
   Button
 } from 'reactstrap';
-<<<<<<< HEAD
-import {  } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
-
-const search = {
-  borderRadius: '1.6rem',
-  borderColor: 'transparent',
-  width: '350px'
-=======
 
 const search = {
     borderRadius: '1.6rem 0 0 1.6rem',
     borderColor: 'transparent',
     padding: '18px'
->>>>>>> 4d37774fd2c01450d0e11fe4f912297be0516072
 }
 
 const items = {
