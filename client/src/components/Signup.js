@@ -63,10 +63,11 @@ class Signup extends Component {
     e.preventDefault()
     axios.post('/signup', this.state)
       .then(result => {
-        console.log(result)
+        // console.log(result.data.token)
         if (result.data.status) {
-          // TODO: signup success, Redirect him
+          window.localStorage.setItem('x-auth-token', result.data.token)
           document.getElementById('alert').textContent = 'Success'
+          // TODO: signup success, Redirect him
         }
         // if user exist , show something
         if (!result.data.status && result.data.data.error.message.includes('username')) {
