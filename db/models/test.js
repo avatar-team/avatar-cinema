@@ -24,6 +24,10 @@ mongoose.connect('mongodb://localhost/Avatar', {
 app.use(express.json())
 
 
+app.get('/', authController.protect, (req, res) => {
+    res.send('HIIII')
+})
+
 
 app.post('/login', authController.login)
 app.post('/signup', authController.signup)

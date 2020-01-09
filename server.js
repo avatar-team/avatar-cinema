@@ -8,7 +8,7 @@ const axios = require('axios');
 const movieDb = require('./db/models/movieModel');
 const reservationDb = require('./db/models/reservationModel');
 const adminDb = require('./db/models/adminModel');
-const authController = require('../../controllers/authController')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
