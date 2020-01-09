@@ -4,10 +4,7 @@
 // const userFunctions = require('./userModel');
 // const mongoose = require('mongoose')
 // const dotenv = require('dotenv')
-
 // dotenv.config({ path: "../../convig.env" })
-
-
 // mongoose.Promise = global.Promise;
 // mongoose.connect('mongodb://localhost/Avatar', {
 //     useCreateIndex: true,
