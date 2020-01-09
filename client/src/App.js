@@ -8,7 +8,9 @@ import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
 import Test from './components/test'
 import Dashboard from './components/Admin/Dashboard'
-import User from './components/User'
+import User from './components/User';
+import Signup from './components/Signup.js';
+import Login from './components/Login.js'
 
 class App extends React.Component{
   constructor() {
@@ -135,6 +137,8 @@ class App extends React.Component{
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
           <Route path="/user" exact component={User}/>
+          <Route path="/signup" exact component={Signup}/>
+          <Route path="/login" exact component={Login}/>
         </Switch>
 
       </BrowserRouter>
