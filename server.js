@@ -10,7 +10,6 @@ const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
 const adminRoute = require('./routes/adminRoute')
 
-const authController = require('./controllers/authController')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 

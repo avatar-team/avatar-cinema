@@ -129,6 +129,7 @@ class App extends React.Component{
     let helper = videoTitle => this.handleSearch(videoTitle)
     return (
       <BrowserRouter>
+        {console.log(this.state.movies)}
         <NavBar isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>
           <Route path="/" exact component={(data)=> {
