@@ -41,8 +41,11 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
-      password: ''
+      userName: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      userEmail: ''
     }
   }
 
@@ -57,12 +60,13 @@ class Signup extends Component {
   }
 
   handleSubmit() {
-    if (!this.state.username || !this.state.password) {
+    if (!this.state.userName || !this.state.password) {
       // TODO: do something
     }
     const data = this.state
     axios.post('/signup', data)
       .then(result => {
+        console.log(result)
         // if user exist , show something
         // otherwise
         // TODO: do something
@@ -81,8 +85,8 @@ class Signup extends Component {
         <input
         style={input}
         type="text"
-        name="username"
-        value={this.state.username}
+        name="userName"
+        value={this.state.userName}
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
@@ -92,6 +96,33 @@ class Signup extends Component {
         type="password"
         name="password"
         value={this.state.password}
+        onChange={(e) => {this.onChange(e)}}/>
+        <br />
+
+        First Name: <br />
+        <input
+        style={input}
+        type="text"
+        name="firstName"
+        value={this.state.firstName}
+        onChange={(e) => {this.onChange(e)}}/>
+        <br />
+
+        Last Name: <br />
+        <input
+        style={input}
+        type="text"
+        name="lastName"
+        value={this.state.lastName}
+        onChange={(e) => {this.onChange(e)}}/>
+        <br />
+
+        Email: <br />
+        <input
+        style={input}
+        type="text"
+        name="userEmail"
+        value={this.state.userEmail}
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
