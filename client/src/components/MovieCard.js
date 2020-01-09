@@ -25,7 +25,7 @@ const MovieCard = ({movie, index}) => (
             </Col>
             <Col md="7">
               <CardBody className="cardBody">
-                <CardTitle className="title">{movie.Title} <span class="imdb"> ... {movie.imdbRating} </span></CardTitle>
+                <CardTitle className="title">{movie.Title} <span className="imdb"> ... {movie.imdbRating} </span></CardTitle>
                 <CardSubtitle className="my-4"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
                 <CardSubtitle className="my-4"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
                 <CardSubtitle className="mt-4"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
