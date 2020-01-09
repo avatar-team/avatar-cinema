@@ -69,8 +69,10 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
         .catch(err => callback(err, null))
 };
 
-db.tours.find({ price: { $gt: 500 }, rating: { $gte: 4.8 } })
+<<<<<<< HEAD
+=======
 
+>>>>>>> 0c1998b2a91af6c481b489fa891fd1226b51d848
 //this function well search the database for reservations according to the Criteria given in the firstParam
 //and well pass the result to the secound param to the callback function as followrd by the rules of Err-First Style
 const findReservation = (objectCriteria = {}, callback) => {

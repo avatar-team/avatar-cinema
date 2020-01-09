@@ -2,16 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
 
 .App-header {
   background-color: #282c34;
@@ -80,4 +70,14 @@ h3 {
   align-items: center;
   margin: 0;
   background: #adceed;
+}
+
+.images {
+  max-height: 800px;  /* change this to whatever you want */
+  width: auto;
+  position: relative;
+}
+
+.ddd {
+  background-color: transparent;
 }

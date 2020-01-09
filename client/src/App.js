@@ -3,26 +3,41 @@ import './App.css';
 import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
 import axios from 'axios';
 import movies from './components/dummyData';
-import NavBar from './components/Navbar'
+import MainPage from './components/MainPage';
+import NavBar from './components/Navbar';
+import MovieInfo from './components/MovieInfo'
+import Test from './components/test'
+import Dashboard from './components/Admin/Dashboard'
+
 
 class App extends React.Component{
   constructor() {
     super()
     this.state = {
       movies: [],
+      currentReservation: {},
       currentMovie: {}
     }
-    this.currentReservation = {sofian: 5}
   }
 
   
+  //client handle functions
   getMovies() {
-    axios.get('/api/movies')
+    axios.get('/API/movies')
     .then((res)=> {
       console.log(res.data)
-      this.setState({
-        movies: movies
-      })
+      if(Array.isArray(res.data)) {
+        this.setState({
+          movies: [...res.data]
+        })
+      }else {
+        this.setState(prevState => {
+          prevState.movies.push(res.data)
+          return({
+            movies: [...prevState.movies]
+          })
+        })
+      }
     })
     .catch(err => {
       console.log(err)
@@ -30,16 +45,19 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    axios.post("/api/reserveFilm", reservationData)
-    .then((res)=> {
-      this.currentReservation =  res.data
+    // axios.post("//api/reserveFilm", reservationData)
+    // .then((res)=> {
+    //   this.currentReservation =  res.data
+    // })
+    this.setState({
+      currentReservation: reservationData
     })
   }
 
 
   handleSearch(videoTitle) {
     this.state.movies.map((movie)=> {
-      if(movie.Title == videoTitle) {
+      if(movie.Title === videoTitle) {
         this.setState({
           currentMovie: movie
         })
@@ -48,12 +66,52 @@ class App extends React.Component{
     })
   }
 
-  handleCardClick(i) {
-    this.setState({
-      currentMovie: this.state.movies[i]
+
+  //Admin handle functions
+  handleAdd(movieData) {
+    axios.post('/api/movies/addMovie', movieData)
+    .then(res => {
+      console.log(res)
+      this.setState((prevState)=> {
+        return ({
+          movies: [...prevState.movies, res.data]
+        })
+      }, ()=> console.log(this.state.movies))
     })
   }
 
+  handleUpdate(movieId, newData) {
+    console.log(newData)
+    axios.patch(`/api/movies/${movieId}`, newData)
+    .then(res => {
+      console.log(res)
+      this.setState(prevState => {
+        var newMovies = prevState.movies.map((movie, i)=> {
+          if(movie._id == movieId) return res.data;
+          return movie;
+        })
+        return({
+          movies: [...newMovies]
+        })
+      })
+    })
+  }
+
+  handleDelete(movieId) {
+    axios.delete(`/api/movies/${movieId}`)
+    .then(res => {
+      this.setState(prevState => {
+        var index;
+        prevState.movies.forEach((movie, i)=> {
+          if(movie._id == movieId) index = i;
+        })
+        prevState.movies.splice(index, 1)
+        return({
+          movies: [...prevState.movies]
+        })
+      })
+    })
+  }
 
   componentDidMount() {
     this.getMovies();
@@ -62,14 +120,24 @@ class App extends React.Component{
   render() {
     return (
       <BrowserRouter>
-        <div className="App">
-          <header className="App-header">
-            <p>
-              good luck guys.
-            </p>
-              Learn React
-          </header>
-        </div>
+        <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
+        {this.state.movies.length?
+        <Switch>
+          <Route path="/" exact component={()=> {
+            console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
+            return <MainPage movies={this.state.movies}/>
+          }}/>
+          <Route path="/movieInfo/:index" component={()=> {
+            return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+          }}/>
+          <Route path="/admin/Dashboard" component={()=> {
+            return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
+            handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
+            handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
+          }}/>
+        </Switch>
+        :''}
+
       </BrowserRouter>
     );
   }
