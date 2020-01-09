@@ -47,7 +47,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
         </thead>
 
         <tbody>
-        {movies.map((movie, i) => {
+        {movies?movies.map((movie, i) => {
           return (
               <tr key={i}>
                 <th>{movie.Title}</th>
@@ -70,7 +70,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
               </tr>
           )
-        })}
+        }):null}
         </tbody>
       </Table>
       {addUpdate? <AddUpdateMovie processType={precessType} 
