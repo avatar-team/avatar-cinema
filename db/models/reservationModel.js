@@ -3,19 +3,11 @@ const Schema = mongoose.Schema;
 const _findMovies = require('./movieModel').findMovies;
 const _updateMovie = require('./movieModel').updateMovie;
 const validator = require('validator')
-<<<<<<< HEAD
-//*******************************************//
-// all the functions exported from this module is in Error-First-Style// 
-//*******************************************//
-// mongoose library is REQUIRED//
-//*******************************************//
-=======
     //*******************************************//
     // all the functions exported from this module is in Error-First-Style// 
     //*******************************************//
     // mongoose library is REQUIRED//
     //*******************************************//
->>>>>>> 364e135a7ce24cadde5d2f20e95fde3466e0c8d6
 
 const reservationSchema = new Schema({
     clientName: {
