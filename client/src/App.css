@@ -68,3 +68,39 @@ body {
 .imdb {
   font-size: 12pt;
 }
+/* Movie Card */
+
+/* Signup & Login */
+.main {
+  text-align: center;
+  border-radius: 1.2rem;
+  padding: 10px;
+  font-family: 'Trebuchet MS';
+}
+
+.input {
+  width: 30%;
+  border: 2px solid #aaa;
+  border-radius: 4px;
+  margin: 8px 0;
+  outline: none;
+  padding: 8px;
+  box-sizing: border-box;
+  transition: .3s;
+}
+
+.btn {
+  background-color: '#4CAF50'; /* Green */
+  border-radius: '8px';
+  border-color: 'transparent';
+  color: 'white';
+  text-align: 'center';
+  text-decoration: 'none';
+  display: 'inline-block';
+  font-size: '16px';
+  margin:' 4px 2px';
+  cursor: 'pointer';
+  padding: '8px 28px'
+}
+
+/* Signup & Login */

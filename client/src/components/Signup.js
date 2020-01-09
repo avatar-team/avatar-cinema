@@ -1,37 +1,8 @@
+import '../App.css'
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+
 const axios = require('axios')
-
-const main = {
-  textAlign: 'center',
-  padding: '10px',
-  fontFamily:'Trebuchet MS'
-}
-
-const input = {
-  width: '30%',
-  border: '2px solid #aaa',
-  borderRadius: '4px',
-  margin: '12px 0',
-  outline: 'none',
-  padding: '8px',
-  boxSizing: 'border-box',
-  transition: '0.3s'
-}
-
-const button = {
-  backgroundColor: '#4CAF50', /* Green */
-  borderRadius: '8px',
-  borderColor: 'transparent',
-  color: 'white',
-  textAlign: 'center',
-  textDecoration: 'none',
-  display: 'inline-block',
-  fontSize: '16px',
-  margin:' 4px 2px',
-  cursor: 'pointer',
-  padding: '8px 28px'
-}
 
 class Signup extends Component {
   constructor(props) {
@@ -75,11 +46,11 @@ class Signup extends Component {
 
   render() {
     return (
-      <div style={main}>
+      <div className="main">
         <h2>Welcome to Signup Page</h2>
         Username: <br />
         <input
-        style={input}
+        className="input"
         type="text"
         name="username"
         value={this.state.username}
@@ -88,14 +59,14 @@ class Signup extends Component {
 
         Password: <br />
         <input
-        style={input}
+        className="input"
         type="password"
         name="password"
         value={this.state.password}
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        <input style={button} type="submit" onClick={this.handleSubmit.bind(this)}/>
+        <input className="btn" type="submit" onClick={this.handleSubmit.bind(this)}/>
         {this.renderRedirect()}
       </div>
     )
