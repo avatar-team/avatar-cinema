@@ -63,13 +63,20 @@ class Signup extends Component {
     e.preventDefault()
     axios.post('/signup', this.state)
       .then(result => {
-        console.log('Component', result)
+        console.log(result)
+        if (result.data.status) {
+          // TODO: signup success, Redirect him
+          document.getElementById('alert').textContent = 'Success'
+        }
         // if user exist , show something
-        // otherwise
-        // TODO: do something
+        if (!result.data.status && result.data.data.error.message.includes('username')) {
+          document.getElementById('alert').textContent = 'Username is Duplicated'
+        }
+        if (!result.data.status && result.data.data.error.message.includes('email')) {
+          document.getElementById('alert').textContent = 'Email is Duplicated'
+        }
       })
       .catch(err => {
-        // TODO: do something
         console.log(err)
       })
   }
@@ -78,7 +85,6 @@ class Signup extends Component {
   render() {
     return (
       <div style={main}>
-      {console.log(this.state)}
       <form onSubmit={this.handleSubmit.bind(this)}>
         <h2>Welcome to Signup Page</h2>
         Username: <br />
@@ -125,6 +131,8 @@ class Signup extends Component {
         value={this.state.userEmail}
         onChange={(e) => {this.onChange(e)}}/>
         <br />
+
+        <div id="alert"></div>
 
         <input style={button} type="submit"/>
         </form>

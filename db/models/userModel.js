@@ -68,18 +68,24 @@ const User = new mongoose.model("User", userSchema);
 //this function inserts a new user to the database 
 //the user should be a object with keys and values exactly as the schema Respectively 
 const insertUser = (user, callback) => {
-
-        findUser({ userName: user.userName }, (err, result) => {
+        findUser({ $or: [{ userName: user.userName }, { userEmail: user.userEmail }] }, (err, result) => {
             if (err) {
-
                 callback(err, null)
             } else if (result.length === 0) {
                 User.create(user)
                     .then(user => callback(null, user))
-                    .catch(err => callback({
+                    .catch(err => callback(err, null))
+            } else {
+                if (result[0].userName === user.userName) {
+                    callback({
+                        status: false,
+                        message: "username is Duplicated"
+                    }, null)
+                } else if (result[0].userEmail === user.userEmail) {
+                    callback({
                         status: false,
                         message: "email is Duplicated"
-                    }, null))
+                    }, null)
             } else {
                 callback({
                     status: false,
@@ -87,9 +93,10 @@ const insertUser = (user, callback) => {
                 }, null)
             }
 
-        })
+        }
 
-    }
+    })
+}
     // User.create(user)
     //     .then(user => callback(null, user))
     //     .catch(err => callback(err, null))
