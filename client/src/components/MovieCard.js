@@ -9,20 +9,21 @@ import {Link} from 'react-router-dom';
   
 const div = {
     width: '1200px',
-    height: '600px',
+    height: '1200px',
     marginTop: '20px'
 }
 
 const MovieCard = ({movie, index}) => (
   <div className="m-3" style={div}>
       {console.log(movie)}
+      <Row>
       <Col>
         <Card>
           <Row>
-            <Col md="4">
+            <Col md="5">
               <CardImg src={movie.Poster}/>
             </Col>
-            <Col md="8">
+            <Col md="7">
               <CardBody className="cardBody">
                 <CardTitle className="title">{movie.Title} <span class="imdb"> ... {movie.imdbRating} </span></CardTitle>
                 <CardSubtitle className="my-4"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
@@ -37,6 +38,7 @@ const MovieCard = ({movie, index}) => (
           </Row>
         </Card>
       </Col>
+      </Row>
   </div>
 )
 
