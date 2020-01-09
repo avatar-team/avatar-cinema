@@ -77,10 +77,10 @@ const Navbarz = (props) => {
             :
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} style={items} to="/">Sign In</NavLink>
+                <NavLink tag={Link} style={items} to="/login">Log in</NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink tag={Link} style={items} to="/">Sign Up</NavLink>
+                <NavLink tag={Link} style={items} to="/signup">Sign Up</NavLink>
               </NavItem>
             </Nav>}
           </Collapse>

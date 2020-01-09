@@ -65,8 +65,9 @@ class Signup extends Component {
       .then(result => {
         // console.log(result.data.token)
         if (result.data.status) {
-          window.localStorage.setItem('x-auth-token', result.data.token)
+          localStorage.setItem('x-auth-token', result.data.token)
           document.getElementById('alert').textContent = 'Success'
+          this.props.changeUserState(true)
           // TODO: signup success, Redirect him
         }
         // if user exist , show something
@@ -84,6 +85,7 @@ class Signup extends Component {
 
 
   render() {
+    if(this.props.isUserLoggedIn) return <Redirect/>
     return (
       <div style={main}>
       <form onSubmit={this.handleSubmit.bind(this)}>
