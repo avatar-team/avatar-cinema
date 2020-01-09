@@ -23,7 +23,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 8
+        minlength: 8,
+        select: false
     },
     firstName: {
         type: String,
