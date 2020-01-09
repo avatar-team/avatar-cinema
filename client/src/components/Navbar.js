@@ -8,8 +8,13 @@ import {
   NavItem,
   NavLink,
   Input,
-  NavbarText
+  NavbarText,
+  InputGroup,
+  InputGroupAddon,
+  Button
 } from 'reactstrap';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const search = {
     borderRadius: '1.6rem 0 0 1.6rem',
@@ -45,7 +50,10 @@ const Navbarz = (props) => {
               </NavItem>
             </Nav>
             <NavbarText>
-                <Input style={search} placeholder="Search..." />
+            <InputGroup style={search}>
+              <InputGroupAddon addonType="prepend"><Button onClick={props.handleSearch}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
+              <Input />
+            </InputGroup>
             </NavbarText>
           </Collapse>
         </Navbar>
