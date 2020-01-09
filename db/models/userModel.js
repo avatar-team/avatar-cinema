@@ -90,8 +90,9 @@ const insertUser = (user, callback) => {
                 }, null)
             }
 
-        })
-    }
+        }
+    })
+}
 
     // User.create(user)
     //     .then(user => callback(null, user))
