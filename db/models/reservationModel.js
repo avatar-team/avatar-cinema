@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _findMovies = require('./movieModel').findMovies;
 const _updateMovie = require('./movieModel').updateMovie;
-//*******************************************//
-// all the functions exported from this module is in Error-First-Style// 
-//*******************************************//
-// mongoose library is REQUIRED//
-//*******************************************//
+const validator = require('validator')
+    //*******************************************//
+    // all the functions exported from this module is in Error-First-Style// 
+    //*******************************************//
+    // mongoose library is REQUIRED//
+    //*******************************************//
 
 const reservationSchema = new Schema({
     clientName: {
@@ -16,12 +17,7 @@ const reservationSchema = new Schema({
     },
     clientEmail: {
         type: String,
-        validate: {
-            validator: () => {
-                return clientEmail.includes('@');
-            },
-            message: 'the email most contain @'
-        },
+        validate: [validator.isEmail, 'must be a vailed email'],
         required: true,
         unique: true,
         trim: true
@@ -73,7 +69,7 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
 //and well pass the result to the secound param to the callback function as followrd by the rules of Err-First Style
 const findReservation = (objectCriteria = {}, callback) => {
     Reservation.find(objectCriteria)
-        .then(reservations => reservations.length === 1 ? callback(null, reservations[0]) : callback(null, reservations))
+        .then(reservations => callback(null, reservations))
         .catch(err => callback(err, null))
 }
 

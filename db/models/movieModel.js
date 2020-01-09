@@ -12,7 +12,6 @@ const movieSchema = new Schema({
     Title: {
         type: String,
         required: [true, 'Title of The Movie is Required'],
-        unique: [true, 'Title can not be duplicated'],
         trim: true
     },
     Year: {
@@ -137,7 +136,7 @@ const getAllAvailableMovies = callback => {
 //if the param is not given , it well return all the movies in the database 
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
-        .then(movies => movies.length === 1 ? callback(null, movies[0]) : callback(null, movies))
+        .then(movies => callback(null, movies))
         .catch(err => callback(err, null))
 }
 
