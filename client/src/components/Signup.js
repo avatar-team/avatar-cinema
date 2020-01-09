@@ -60,9 +60,6 @@ class Signup extends Component {
   }
 
   handleSubmit() {
-    if (!this.state.userName || !this.state.password) {
-      // TODO: do something
-    }
     const data = this.state
     axios.post('/signup', data)
       .then(result => {
@@ -73,6 +70,7 @@ class Signup extends Component {
       })
       .catch(err => {
         // TODO: do something
+        console.log(err)
       })
   }
 
