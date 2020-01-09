@@ -8,15 +8,18 @@ import {
   NavItem,
   NavLink,
   Input,
-  NavbarText
+  NavbarText,
+  InputGroup,
+  InputGroupAddon,
+  Button
 } from 'reactstrap';
-import {  } from 'react-bootstrap'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faSearch } from '@fortawesome/free-solid-svg-icons'
 
 const search = {
-  borderRadius: '1.6rem 1.6rem 1.6rem 1.6rem',
-  borderColor: 'transparent',
-  padding: '18px',
-  width: '300px'
+    borderRadius: '1.6rem 0 0 1.6rem',
+    borderColor: 'transparent',
+    padding: '18px'
 }
 
 const items = {
@@ -33,8 +36,8 @@ const Navbarz = (props) => {
   const toggle = () => setIsOpen(!isOpen);
 
   return (
-    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
-        <Navbar expand="md">
+    <div>
+        <Navbar className="ddd" expand="md">
           <NavbarBrand href="/" style={items}>Avatar</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
@@ -47,7 +50,10 @@ const Navbarz = (props) => {
               </NavItem>
             </Nav>
             <NavbarText>
-                <Input style={search} placeholder="Search..." />
+            <InputGroup style={search}>
+              <InputGroupAddon addonType="prepend"><Button onClick={props.handleSearch}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
+              <Input />
+            </InputGroup>
             </NavbarText>
           </Collapse>
         </Navbar>
