@@ -30,6 +30,7 @@ const movieModel = require('./movieModel');
 // })	
 
 
+
 // Here when it receive a delete request with username	
 // First we check with user if it exist in DB	
 // if exist take his ID send it to deleteUser function	
@@ -129,6 +130,7 @@ let movie3 = {
     movieTrailer: "aojfdbiayhg",	
     chairs: 16	
 }	
+
 
 // movieModel.insertMovie(movie)	
 // movieModel.insertMovie(movie2)	

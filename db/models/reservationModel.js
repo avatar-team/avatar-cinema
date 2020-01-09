@@ -2,11 +2,12 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _findMovies = require('./movieModel').findMovies;
 const _updateMovie = require('./movieModel').updateMovie;
-//*******************************************//
-// all the functions exported from this module is in Error-First-Style// 
-//*******************************************//
-// mongoose library is REQUIRED//
-//*******************************************//
+const validator = require('validator')
+    //*******************************************//
+    // all the functions exported from this module is in Error-First-Style// 
+    //*******************************************//
+    // mongoose library is REQUIRED//
+    //*******************************************//
 
 const reservationSchema = new Schema({
     clientName: {
