@@ -1,5 +1,4 @@
-const userModel = require('./userModel');
-
+const userModel = require('../db/models/userModel.js')
 exports.deleteUser = (req, res) => {
     userModel.findUser(req.params, (err, data) => {
         console.log(data)
