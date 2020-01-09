@@ -3,9 +3,6 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 const mongoose = require("mongoose");
-const movieTra = require('movie-trailer'); //might have to move them in the movieController
-const axios = require('axios'); //might have to move them in the movieController
-const movieDb = require('./db/models/movieModel'); //might have to move them in the movieController
 const reservationDb = require('./db/models/reservationModel'); //might have to move them in the movieController
 const adminDb = require('./db/models/adminModel');
 

@@ -22,7 +22,6 @@ const adminSchema = new Schema({
 });
 const Admin = new mongoose.model("Admin", adminSchema);
 
-
 const insertAdmin = (adminObject, callback = (err, result) => {}) => {
     Admin.create(adminObject)
         .then(adminObject => callback(null, adminObject))
@@ -32,7 +31,7 @@ const insertAdmin = (adminObject, callback = (err, result) => {}) => {
 
 const findAdmin = (objectCriteria = {}, callback) => {
     Admin.find(objectCriteria)
-        .then(admin => admin.length === 1 ? callback(null, admin[0]) : callback(null, admin))
+        .then(admin => callback(null, admin))
         .catch(err => callback(err, null))
 }
 
