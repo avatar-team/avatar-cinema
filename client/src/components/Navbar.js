@@ -15,6 +15,7 @@ import {
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import {Redirect, Link} from 'react-router-dom'
 
 const search = {
     borderRadius: '1.6rem 0 0 1.6rem',
@@ -32,18 +33,28 @@ const bar = {
 
 const Navbarz = (props) => {
   const [isOpen, setIsOpen] = useState(false);
+  let [redirect, setRedirect] = useState(null);
 
   const toggle = () => setIsOpen(!isOpen);
+  let handleSearch = (videoTitle) => {
+    props.movies.map((movie, i)=> {
+      if(movie.Title.includes(videoTitle)) {
+        console.log(videoTitle);
+        setRedirect("/movieInfo/" + i)
+      }
 
+    })
+  }
   return (
     <div>
+      {redirect? <Redirect to={redirect}/>: ''}
         <Navbar className="ddd" expand="md">
-          <NavbarBrand href="/" style={items}>Avatar</NavbarBrand>
+          <NavbarBrand tag={Link} to="/" style={items}>Avatar</NavbarBrand>
           <NavbarToggler onClick={toggle} />
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink style={items} href="#">Home</NavLink>
+                <NavLink tag={Link} style={items} to="/">Home</NavLink>
               </NavItem>
               <NavItem>
                 <NavLink style={items} href="#">Contact</NavLink>
@@ -51,10 +62,27 @@ const Navbarz = (props) => {
             </Nav>
             <NavbarText>
             <InputGroup style={search}>
-              <InputGroupAddon addonType="prepend"><Button onClick={props.handleSearch}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
-              <Input />
+              <InputGroupAddon addonType="prepend"><Button onClick={()=> {
+                handleSearch(document.getElementById('search').value)
+              }}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
+              <Input id="search" />
             </InputGroup>
             </NavbarText>
+            {props.isUserLoggedIn?
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink tag={Link} style={items} to="/">Log Out</NavLink>
+              </NavItem>
+            </Nav>
+            :
+            <Nav className="ml-auto" navbar>
+              <NavItem>
+                <NavLink tag={Link} style={items} to="/">Sign In</NavLink>
+              </NavItem>
+              <NavItem className="ml-auto">
+                <NavLink tag={Link} style={items} to="/">Sign Up</NavLink>
+              </NavItem>
+            </Nav>}
           </Collapse>
         </Navbar>
     </div>

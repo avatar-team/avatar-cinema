@@ -83,11 +83,12 @@ const insertUser = (user, callback) => {
                         status: false,
                         message: "email is Duplicated"
                     }, null)
-            } else {
-                callback({
-                    status: false,
-                    message: "username is Duplicated"
-                }, null)
+                } else {
+                    callback({
+                        status: false,
+                        message: "username is Duplicated"
+                    }, null)
+                }
             }
 
         }
