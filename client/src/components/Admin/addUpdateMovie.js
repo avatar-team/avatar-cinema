@@ -8,22 +8,26 @@ class AddUpdateMovie extends Component {
     super(props)
   }
     
-  handleSubmit = (movieId) => {
+  handleSubmit = (movie) => {
     let result = {}
     let title = document.getElementById('title')
     let price = document.getElementById('price')
     let chairs = document.getElementById('chairs')
     let date = document.getElementById('date')
     let time = document.getElementById('time')
-    result.price = price.value;
-    result.chairs = chairs.value;
-    result.playDate = new Date(date.value + "  " + time.value);
+    console.log(price.value.length, chairs.value.length, date.value.length)
+    result.price = price.value.length > 0? price.value: movie.price;
+    result.chairs = chairs.value.length > 0? chairs.value: movie.chairs;
+    result.playDate = date.value.length > 0? new Date(date.value + "  " + time.value): new Date(movie.playDate);
     result.availability = true;
     if(this.props.processType == 'add') {
       result.Title = title.value;
       result.availableChairs = chairs.value
       this.props.handleAdd(result)
-    } else this.props.handleUpdate(movieId, result)
+    } else {
+      result.availableChairs = movie.availableChairs - (movie.chairs - result.chairs)
+      this.props.handleUpdate(movie._id, result)
+    }
   }
   
   render() {
@@ -34,16 +38,16 @@ class AddUpdateMovie extends Component {
         <Form>
           <FormGroup>
             <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
-            <Input disabled={isUpdate} id="title" name="Title" />
+            <Input required disabled={isUpdate} id="title" name="Title" />
             <Label>Price: </Label>
-            <Input id="price" name="price" type="number"/>
+            <Input required id="price" name="price" type="number"/>
             <Label>Chairs: </Label>
-            <Input id="chairs" name="chairs" type="number"/>
+            <Input required id="chairs" name="chairs" type="number"/>
             <Label>Date: </Label>
-            <Input id="date" name="date" type="date"/>
+            <Input required id="date" name="date" type="date"/>
             <Label>Time: </Label>
-            <Input id="time" name="time" type="time"/>
-            <Button onClick={()=> this.handleSubmit(this.props.movie._id)}>{this.props.processType}</Button>
+            <Input required id="time" name="time" type="time"/>
+            <Button onClick={()=> this.handleSubmit(this.props.movie)}>{this.props.processType}</Button>
           </FormGroup>
         </Form>
       </div>

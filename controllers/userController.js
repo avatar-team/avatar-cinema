@@ -1,3 +1,4 @@
+const userModel = require('../db/models/userModel.js')
 exports.deleteUser = (req, res) => {
     userModel.findUser(req.params, (err, data) => {
         console.log(data)
@@ -8,18 +9,16 @@ exports.deleteUser = (req, res) => {
         })
     })
 }
-
 exports.findUser = (req, res, next) => {
     userModel.findUser(req.params, (err, data) => {
         if (err) res.status(404).send(err);
-        res.json({ data })
+        res.json(data)
     })
 }
-
 exports.getAllUsers = (req, res, next) => {
-    userModel.findUser((err, data) => {
+    userModel.findUser({}, (err, data) => {
         if (err) res.status(404).send(err);
-        res.json({ data })
+        res.json(data)
     })
 }
 exports.getRecommendedMovie = (req, res, next) => {

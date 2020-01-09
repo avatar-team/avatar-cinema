@@ -6,31 +6,59 @@ import MovieCard from './MovieCard';
 import Movietrailer from './Movietrailer.js';
 import Daysbar from '../components/Tabs.js';
 
+class MainPage extends React.Component{
+  constructor(props) {
+    super(props)
+  
+    this.state = {
+      moviesforDay : []
+    };
+  };
 
-const MainPage = (props)=> {
-  return(
-    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
+  check(date){
+    var array = []
+    this.props.movies.map((movie, i)=>{
+      const day  =  new Date(movie.playDate).getDate()
+      if(day === date ){
+        array.push(movie)
+      }  
+    }) 
+    this.setState({
+      moviesforDay : [...array] 
+    },()=>{
+      console.log(this.state.moviesforDay)
+    })
+
+   
+  }
+ 
+  
+  render(){
+    return (
+      <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       <SlideShow/>
-
       <Row>
         <Col md="8">
           <Daysbar pageShow={(date = new Date().getDate()) => {
-            console.log('tab clicked')
+            // console.log('tab clicked')
+            // console.log(date)
+             this.check(date)
           }}/>
-          {props.movies.map((movie, i)=> {
+          {this.state.moviesforDay.map((movie, i)=> {
             console.log(movie)
             return <MovieCard key={i} movie={movie} index={i}/>
           })}
         </Col>
         <Col md="4">
-            {props.movies.map((movie, i)=> {
+            {this.state.moviesforDay.map((movie, i)=> {
               console.log(movie)
               return <Movietrailer key={i} movie={movie} />
             })}
         </Col>
       </Row>
     </div>
-  )
+    )
+  } 
 }
 
 export default MainPage;
