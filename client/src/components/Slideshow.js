@@ -3,20 +3,20 @@ import { Slide } from 'react-slideshow-image';
 import '../App.css';
 
 const slideImages = [
-    'https://i.pinimg.com/originals/2f/55/fb/2f55fbc8f9cafd314115e7e58136e274.jpg',
-    'https://i.ytimg.com/vi/selq7kFhGWE/maxresdefault.jpg',
-    'https://www.movienewsletters.net/media/slider/1200x444/275172.jpg',
+  'https://cdn.suwalls.com/wallpapers/movies/batman-the-dark-knight-rises-14671-1920x1200.jpg',
+  'http://cdn.wallpapername.com/1680x1050/20130113/horror%20dark%20movies%20screaming%20scream%20movie%201680x1050%20wallpaper_www.wallpapername.com_62.jpg',
+  'https://cdn.suwalls.com/wallpapers/movies/dark-shadows-12934-1920x1200.jpg'
 ];
 
 const properties = {
-    duration: 5000,
-    transitionDuration: 500,
-    infinite: true,
-    indicators: true,
-    arrows: true,
-    onChange: (oldIndex, newIndex) => {
-      console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-    }
+  duration: 5000,
+  transitionDuration: 500,
+  infinite: true,
+  indicators: true,
+  arrows: true,
+  onChange: (oldIndex, newIndex) => {
+    console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+  }
 }
 
 const d = {

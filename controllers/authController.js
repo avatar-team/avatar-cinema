@@ -1,8 +1,8 @@
 const userFunctions = require('../db/models/userModel.js');
+const { promisify } = require('util')
 const jwt = require('jsonwebtoken');
 const brcypt = require('bcryptjs');
 const mongoose = require('mongoose');
-
 const User = mongoose.model("User")
 
 
@@ -11,7 +11,6 @@ const signToken = id => jwt.sign({ id }, "GROUP-5-IS-THE-BEST-GROUP-EVER-AVATAR-
 
 exports.signup = (req, res) => {
     userFunctions.insertUser(req.body, (err, result) => {
-        console.log('asd')
         if (err) {
             return res.status(500).json({
                 status: false,
@@ -65,4 +64,37 @@ exports.login = (req, res) => {
         }
 
     })
+}
+
+exports.protect = (req, res, next) => {
+    let token;
+    if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
+        token = req.headers.authorization.split(' ')[1]
+    }
+    if (!token) {
+        return res.json({
+            status: false,
+            error: "You Are not logged in "
+        })
+    }
+    //verification of the token// 
+    promisify(jwt.verify)(token, "GROUP-5-IS-THE-BEST-GROUP-EVER-AVATAR-ABOBKER-ESAM-FARED-ALI").then(decodedPayLoad => {
+        User.findById(decodedPayLoad.id).then(theUser => {
+            if (!theUser) {
+                return res.status(401).json({
+                    status: false,
+                    error: "the user does not longer exists"
+                })
+            } else {
+                next()
+            }
+        })
+    }).catch(err => {
+        return res.status(401).json({
+            status: false,
+            error: err
+        })
+    })
+
+
 }

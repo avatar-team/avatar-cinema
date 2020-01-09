@@ -71,13 +71,20 @@ const insertUser = (user, callback) => {
 
         findUser({ userName: user.userName }, (err, result) => {
             if (err) {
+
                 callback(err, null)
             } else if (result.length === 0) {
                 User.create(user)
                     .then(user => callback(null, user))
-                    .catch(err => callback(err, null))
+                    .catch(err => callback({
+                        status: false,
+                        message: "email is Duplicated"
+                    }, null))
             } else {
-                callback("Duplicated Username", null)
+                callback({
+                    status: false,
+                    message: "username is Duplicated"
+                }, null)
             }
 
         })

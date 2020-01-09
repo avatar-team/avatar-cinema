@@ -8,7 +8,9 @@ import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
 import Test from './components/test'
 import Dashboard from './components/Admin/Dashboard'
-
+import User from './components/User';
+import Signup from './components/Signup.js';
+import Login from './components/Login.js'
 
 class App extends React.Component{
   constructor() {
@@ -45,7 +47,7 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    // axios.post("//api/reserveFilm", reservationData)
+    // axios.post("/api/reserveFilm", reservationData)
     // .then((res)=> {
     //   this.currentReservation =  res.data
     // })
@@ -69,7 +71,7 @@ class App extends React.Component{
 
   //Admin handle functions
   handleAdd(movieData) {
-    axios.post('/api/movies/addMovie', movieData)
+    axios.post('/api/movies', movieData)
     .then(res => {
       console.log(res)
       this.setState((prevState)=> {
@@ -121,10 +123,9 @@ class App extends React.Component{
     return (
       <BrowserRouter>
         <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
-        {this.state.movies.length?
         <Switch>
           <Route path="/" exact component={()=> {
-            console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
+            // console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
             return <MainPage movies={this.state.movies}/>
           }}/>
           <Route path="/movieInfo/:index" component={()=> {
@@ -135,8 +136,10 @@ class App extends React.Component{
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
           }}/>
+          <Route path="/user" exact component={User}/>
+          <Route path="/signup" exact component={Signup}/>
+          <Route path="/login" exact component={Login}/>
         </Switch>
-        :''}
 
       </BrowserRouter>
     );
