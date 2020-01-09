@@ -11,6 +11,7 @@ const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
 
 const authController = require('./controllers/authController')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
@@ -124,6 +125,9 @@ const requestReservation = (req, res) => {
 //             })
 //     }).catch(err => console.log(err))
 // })
+
+app.post('/signup', authController.signup)
+app.post('/login', authController.login)
 
 
 app.listen(8000)

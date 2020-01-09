@@ -60,8 +60,8 @@ const requestReservation = (req, res) => {
 app.post("/api/reserveFilm", requestReservation)
     // post request to addmovie to database end send the result back to frontend
 
-app.post('/login', authController.login)
-app.post('/signup', authController.signup)
+// app.post('/login', authController.login)
+// app.post('/signup', authController.signup)
 
 app.listen(8000, () => {
     console.log("Server Started")

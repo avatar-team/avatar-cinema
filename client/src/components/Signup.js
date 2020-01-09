@@ -59,11 +59,11 @@ class Signup extends Component {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleSubmit() {
-    const data = this.state
-    axios.post('/signup', data)
+  handleSubmit(e) {
+    e.preventDefault()
+    axios.post('/signup', this.state)
       .then(result => {
-        console.log(result)
+        console.log('Component', result)
         // if user exist , show something
         // otherwise
         // TODO: do something
@@ -78,6 +78,8 @@ class Signup extends Component {
   render() {
     return (
       <div style={main}>
+      {console.log(this.state)}
+      <form onSubmit={this.handleSubmit.bind(this)}>
         <h2>Welcome to Signup Page</h2>
         Username: <br />
         <input
@@ -124,8 +126,8 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        <input style={button} type="submit" onClick={this.handleSubmit.bind(this)}/>
-        {/* {this.renderRedirect()} */}
+        <input style={button} type="submit"/>
+        </form>
       </div>
     )
   }
