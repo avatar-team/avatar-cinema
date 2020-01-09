@@ -32,13 +32,6 @@ mongoose.connect('mongodb://localhost/Avatar', {
     }
 });
 
-/////////hundlers//////////
-
-
-//movies//
-
-//////////////
-
 const requestReservation = (req, res) => {
     const data = req.body
     reservationDb.insertReservation(data, (err, reservation) => {
@@ -69,6 +62,9 @@ const requestReservation = (req, res) => {
 // post request for Reservation movie to save it in the database then send the result to frontend 
 app.post("/api/reserveFilm", requestReservation)
     // post request to addmovie to database end send the result back to frontend
+
+app.post('/login', authController.login)
+app.post('/signup', authController.signup)
 
 app.listen(8000, () => {
     console.log("Server Started")

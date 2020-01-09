@@ -25,6 +25,7 @@ app.use(express.json())
 
 
 
+app.post('/login', authController.login)
 app.post('/signup', authController.signup)
 
 app.listen(3456);
