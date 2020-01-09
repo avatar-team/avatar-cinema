@@ -16,12 +16,7 @@ const reservationSchema = new Schema({
     },
     clientEmail: {
         type: String,
-        validate: {
-            validator: () => {
-                return clientEmail.includes('@');
-            },
-            message: 'the email most contain @'
-        },
+        validate: [validator.isEmail, 'must be a vailed email'],
         required: true,
         unique: true,
         trim: true
@@ -69,15 +64,11 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
         .catch(err => callback(err, null))
 };
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 0c1998b2a91af6c481b489fa891fd1226b51d848
 //this function well search the database for reservations according to the Criteria given in the firstParam
 //and well pass the result to the secound param to the callback function as followrd by the rules of Err-First Style
 const findReservation = (objectCriteria = {}, callback) => {
     Reservation.find(objectCriteria)
-        .then(reservations => reservations.length === 1 ? callback(null, reservations[0]) : callback(null, reservations))
+        .then(reservations => callback(null, reservations))
         .catch(err => callback(err, null))
 }
 
