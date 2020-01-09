@@ -1,20 +1,21 @@
 const mongoose = require('mongoose');
-const validate = require('validate')
+const validator = require('validator')
 const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
-//*******************************************//
-// all the functions exported from this module is in Error-First-Style// 
-//*******************************************//
-// mongoose library is REQUIRED//
-//*******************************************//
+const brcypt = require('bcryptjs')
+    //*******************************************//
+    // all the functions exported from this module is in Error-First-Style// 
+    //*******************************************//
+    // mongoose library is REQUIRED//
+    //*******************************************//
 
 
 
 const userSchema = new Schema({
     userName: {
         type: String,
-        unique: [true, 'name Most be unique'],
+        unique: true,
         required: [true, 'name is required'],
         trim: true
     },
@@ -22,7 +23,8 @@ const userSchema = new Schema({
         type: String,
         required: true,
         trim: true,
-        minlength: 8
+        minlength: 8,
+        select: false
     },
     firstName: {
         type: String,
@@ -43,34 +45,64 @@ const userSchema = new Schema({
         lowercase: true,
         trim: true,
         validate: [validator.isEmail, 'must be a vailed email']
-
     },
     moviesBought: {
         type: [_movieSchema],
-        required: false,
-        default: []
+        required: false
     },
     favoriteMovies: {
         type: [_movieSchema],
-        required: false,
-        default: []
+        required: false
     }
 });
 
-const User = new mongoose.model("User", userSchema);
+userSchema.pre('save', function(next) {
+    if (!this.isModified('password')) return next();
+    this.password = brcypt.hashSync(this.password, 8);
+    next();
+})
 
+
+const User = new mongoose.model("User", userSchema);
 
 //this function inserts a new user to the database 
 //the user should be a object with keys and values exactly as the schema Respectively 
-const insertUser = (user, callback = (err, result) => {}) => {
-    User.create(user)
-        .then(user => callback(null, user))
-        .catch(err => callback(err, null))
-}
+const insertUser = (user, callback) => {
+        findUser({ $or: [{ userName: user.userName }, { userEmail: user.userEmail }] }, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else if (result.length === 0) {
+                User.create(user)
+                    .then(user => callback(null, user))
+                    .catch(err => callback(err, null))
+            } else {
+                if (result[0].userName === user.userName) {
+                    callback({
+                        status: false,
+                        message: "username is Duplicated"
+                    }, null)
+                } else if (result[0].userEmail === user.userEmail) {
+                    callback({
+                        status: false,
+                        message: "email is Duplicated"
+                    }, null)
+            } else {
+                callback({
+                    status: false,
+                    message: "username is Duplicated"
+                }, null)
+            }
 
-//this function updates a user Based on the @(code)criteriaObject
-// updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
-// updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
+        }
+
+    })
+}
+    // User.create(user)
+    //     .then(user => callback(null, user))
+    //     .catch(err => callback(err, null))
+    //this function updates a user Based on the @(code)criteriaObject
+    // updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
+    // updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
 const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}) => {
     User.findByIdAndUpdate(userObjectId, criteriaObject)
         .then(user => callback(null, user))
@@ -83,7 +115,7 @@ const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}
 //NOTE_ its recommended to use Object id to return One Single user 
 const findUser = (objectCriteria = {}, callback) => {
     User.find(objectCriteria)
-        .then(user => user.length === 1 ? callback(null, user[0]) : callback(null, user))
+        .then(user => callback(null, user))
         .catch(err => callback(err, null))
 }
 
