@@ -5,14 +5,12 @@ import {
     CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
-
   
 const div = {
     width: '1200px',
     height: '1200px',
     marginTop: '20px'
 }
-
 const MovieCard = ({movie, index}) => (
   <div className="m-3" style={div}>
       {console.log(movie)}
@@ -41,5 +39,4 @@ const MovieCard = ({movie, index}) => (
       </Row>
   </div>
 )
-
 export default MovieCard;

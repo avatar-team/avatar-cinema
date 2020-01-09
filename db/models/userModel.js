@@ -61,15 +61,11 @@ userSchema.pre('save', function(next) {
     this.password = brcypt.hashSync(this.password, 8);
     next();
 })
-
-
 const User = new mongoose.model("User", userSchema);
-
 //this function inserts a new user to the database 
 //the user should be a object with keys and values exactly as the schema Respectively 
 const insertUser = (user, callback) => {
-
-        findUser({ userName: user.userName }, (err, result) => {
+        findUser({ $or: [{ userName: user.userName }, { userEmail: user.userEmail }] }, (err, result) => {
             if (err) {
                 callback(err, null)
             } else if (result.length === 0) {
@@ -77,12 +73,26 @@ const insertUser = (user, callback) => {
                     .then(user => callback(null, user))
                     .catch(err => callback(err, null))
             } else {
-                callback("Duplicated Username", null)
+                if (result[0].userName === user.userName) {
+                    callback({
+                        status: false,
+                        message: "username is Duplicated"
+                    }, null)
+                } else if (result[0].userEmail === user.userEmail) {
+                    callback({
+                        status: false,
+                        message: "email is Duplicated"
+                    }, null)
+            } else {
+                callback({
+                    status: false,
+                    message: "username is Duplicated"
+                }, null)
             }
 
         })
-
     }
+
     // User.create(user)
     //     .then(user => callback(null, user))
     //     .catch(err => callback(err, null))
@@ -90,27 +100,23 @@ const insertUser = (user, callback) => {
     // updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
     // updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
 const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}) => {
-    User.findByIdAndUpdate(userObjectId, criteriaObject)
-        .then(user => callback(null, user))
-        .catch(err => callback(err, null))
-}
-
-
-//this function is used to find a user/users based on a @{objectCriteria} -- an object containing the KEY-VALUE criteria to search with
-//it can be anything Object id, firstName , LastName ,etc..
-//NOTE_ its recommended to use Object id to return One Single user 
+        User.findByIdAndUpdate(userObjectId, criteriaObject)
+            .then(user => callback(null, user))
+            .catch(err => callback(err, null))
+    }
+    //this function is used to find a user/users based on a @{objectCriteria} -- an object containing the KEY-VALUE criteria to search with
+    //it can be anything Object id, firstName , LastName ,etc..
+    //NOTE_ its recommended to use Object id to return One Single user 
 const findUser = (objectCriteria = {}, callback) => {
     User.find(objectCriteria)
         .then(user => callback(null, user))
         .catch(err => callback(err, null))
 }
-
 const deleteUser = (userObjectId, callback = (err, result) => {}) => {
     User.findByIdAndRemove(userObjectId)
         .then(user => callback(null, user))
         .catch(err => callback(err, null))
 }
-
 const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
     _findMovies(movieObjectId, (error, movie) => {
             if (error) {
@@ -120,7 +126,6 @@ const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
         }, callback)
         // updateUser(userObjectId, { $push { moviesBought: } })
 }
-
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
     _findMovies(movieObjectId, (error, movie) => {
             if (error) {
