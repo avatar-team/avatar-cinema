@@ -90,7 +90,7 @@ body {
 }
 
 .btn {
-  background-color: '#4CAF50'; /* Green */
+  background-color: rgb(54, 175, 54); /* Green */
   border-radius: '8px';
   border-color: 'transparent';
   color: 'white';
