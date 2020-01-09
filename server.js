@@ -10,7 +10,7 @@ const adminDb = require('./db/models/adminModel');
 const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
 
-const authController = require('../../controllers/authController')
+const authController = require('./controllers/authController')
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
