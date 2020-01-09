@@ -7,8 +7,8 @@ const reservationDb = require('./db/models/reservationModel'); //might have to m
 const adminDb = require('./db/models/adminModel');
 
 
-const movieRoute = require('./routes/movieRoute')
-const userRoute = require('./routes/userRoute')
+const movieRoute = require('../routes/movieRoute')
+const userRoute = require('../routes/userRoute')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))

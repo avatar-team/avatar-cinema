@@ -69,7 +69,7 @@ class App extends React.Component{
 
   //Admin handle functions
   handleAdd(movieData) {
-    axios.post('/api/movies/addMovie', movieData)
+    axios.post('/api/movies', movieData)
     .then(res => {
       console.log(res)
       this.setState((prevState)=> {
