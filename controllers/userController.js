@@ -1,3 +1,5 @@
+const userModel = require('./userModel');
+
 exports.deleteUser = (req, res) => {
     userModel.findUser(req.params, (err, data) => {
         console.log(data)

@@ -1,3 +1,7 @@
+const movieTra = require('movie-trailer'); //might have to move them in the movieController
+const axios = require('axios'); //might have to move them in the movieController
+const movieDb = require('./db/models/movieModel'); //might have to move them in the movieController
+
 exports.get4Days = (req, res) => {
     movieDb.getMovies4Days((err, movie) => {
         if (movie) {

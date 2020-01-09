@@ -26,10 +26,8 @@ mongoose.connect('mongodb://localhost/Avatar',{
 });
 
 
-// app.use(express.static(__dirname  + "/client"))
-// app.get("*",(req,res)=>{
-// 	res.sendFile(path.join(__dirname  + "/public/app/index.html"))
-// })
+// app.use(express.static(path.join(__dirname, 'client/build')));
+
 
 
 ////////////////////////////////////////
@@ -45,32 +43,32 @@ app.get("/api/movies", (req, res)=>{
     }else{
       res.json({message:"error reading from the database "})
     }}) 
-})
- 
-// post request for Reservation movie to save it in the database then send the result to frontend 
-app.post("/api/reserveFilm",(req,res)=>{
-
-  var data = req.body 
-
-  reservationDb.insertReservation(data,(err,reservation)=>{
-   
-  reservation ? res.json(data) : res.send(err)
-
   })
- 
-})
-
-app.delete("/api/movies/:id", (req, res)=>{
-
-  var id = req.params.id ; 
-  movieDb.deleteMovie({_id: id} , (err,deleted)=>{
-    deleted ? res.json({message:"Movie deleted successfully"}) : res.json(err)
-  }) 
-
-})
-
-app.patch("/api/movies/:id", (req, res)=>{
-  var id = req.params.id ; 
+  
+  // post request for Reservation movie to save it in the database then send the result to frontend 
+  app.post("/api/reserveFilm",(req,res)=>{
+    
+    var data = req.body 
+    
+    reservationDb.insertReservation(data,(err,reservation)=>{
+      
+      reservation ? res.json(data) : res.send(err)
+      
+    })
+    
+  })
+  
+  app.delete("/api/movies/:id", (req, res)=>{
+    
+    var id = req.params.id ; 
+    movieDb.deleteMovie({_id: id} , (err,deleted)=>{
+      deleted ? res.json({message:"Movie deleted successfully"}) : res.json(err)
+    }) 
+    
+  })
+  
+  app.patch("/api/movies/:id", (req, res)=>{
+    var id = req.params.id ; 
   movieDb.updateMovie({_id: id}, req.body, (err,updated)=>{
     console.log(updated)
     updated ? res.json(updated) : res.json(err)
@@ -95,18 +93,21 @@ app.post("/api/movies/addMovie", (req,res)=>{
       var movieData = {...data ,...movieInfo}
       
       console.log(movieData)
-        movieDb.insertMovie(movieData,(err,result) => {
-          if(result){
+      movieDb.insertMovie(movieData,(err,result) => {
+        if(result){
             console.log("data saved")
             res.json(result)
-            }else{
+          }else{
             console.log(err)
             res.send(err)
-            }
-          })  
+          }
+        })  
       })  
     }).catch(err => console.log(err))
-} )
-
+  } )
+  
+  // app.get('/*', (req, res) => {
+  //   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+  // });
 
 app.listen(8000)
