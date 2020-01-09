@@ -40,7 +40,8 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
             <th>Chairs</th>
             <th className="text-center"><Button onClick={()=> {
               setType('add')
-              showAddUpdate(true)
+              showAddUpdate(!addUpdate)
+              showDelete(false)
             }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
           </tr>
         </thead>
@@ -50,19 +51,21 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
           return (
               <tr key={i}>
                 <th>{movie.Title}</th>
-                <td>12:00AM</td>
-                <td>5/Jan</td>
+                <td>{new Date(movie.playDate).toLocaleTimeString()} </td>
+                <td>{new Date(movie.playDate).toLocaleDateString()}</td>
 
-                <td>16$</td>  
-                <td>12/10</td>
+                <td>{movie.price}$</td>  
+                <td>{movie.availableChairs} / {movie.chairs}</td>
                 <td className="text-right"><button onClick={()=> {
                   setType('update')
-                  showAddUpdate(true)
+                  showAddUpdate(!addUpdate)
                   setMovie(movie)
+                  showDelete(false)
                 }} style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
                 <td><button onClick={()=> {
                   setType('delete')
-                  showDelete(true)
+                  showAddUpdate(false)
+                  showDelete(!deleteComponent)
                   setMovie(movie)
                 }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
               </tr>

@@ -3,20 +3,20 @@ import { Slide } from 'react-slideshow-image';
 import '../App.css';
 
 const slideImages = [
-    'https://i.pinimg.com/originals/2f/55/fb/2f55fbc8f9cafd314115e7e58136e274.jpg',
-    'https://i.ytimg.com/vi/selq7kFhGWE/maxresdefault.jpg',
-    'https://www.movienewsletters.net/media/slider/1200x444/275172.jpg',
+  'https://img.wallpapersafari.com/desktop/1536/864/66/88/wfxJB8.jpg',
+  'https://i.ytimg.com/vi/selq7kFhGWE/maxresdefault.jpg',
+  'https://www.movienewsletters.net/media/slider/1200x444/275172.jpg'
 ];
 
 const properties = {
-    duration: 5000,
-    transitionDuration: 500,
-    infinite: true,
-    indicators: true,
-    arrows: true,
-    onChange: (oldIndex, newIndex) => {
-      console.log(`slide transition from ${oldIndex} to ${newIndex}`);
-    }
+  duration: 5000,
+  transitionDuration: 500,
+  infinite: true,
+  indicators: true,
+  arrows: true,
+  onChange: (oldIndex, newIndex) => {
+    console.log(`slide transition from ${oldIndex} to ${newIndex}`);
+  }
 }
 
 const d = {

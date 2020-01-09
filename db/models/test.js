@@ -4,11 +4,11 @@ const app = express();
 
 
 mongoose.connect('mongodb://localhost/Avatar', (err) => {
-	if (err) {
-		console.log("not connected to database" + err)
-	} else {
-		console.log("connected to database")
-	}
+    if (err) {
+        console.log("not connected to database" + err)
+    } else {
+        console.log("connected to database")
+    }
 });
 
 const userModel = require('./userModel');
@@ -23,36 +23,14 @@ const movieModel = require('./movieModel');
 // First we check with user if it exist in DB
 // if exist take his ID send it to deleteUser function
 // if there is no error send json says that user deleted
-app.delete('/api/users/:userName', (req, res, next) => {
-  userModel.findUser(req.params, (err, data) => {
-    console.log(data)
-    if (err) res.status(404).send(err);
-    userModel.deleteUser(data._id, (err, result) => {
-      if (err) res.send('Error while deleting');
-      res.json({ deleted: true });
-    })
-  })
-})
-
-
-// Get Route
-// Takes userName in params find it in DB
-// send it back as json if exist
-app.get('/api/users/:userName', (req, res, next) => {
-  userModel.findUser(req.params, (err, data) => {
-    if (err) res.status(404).send(err);
-    res.json({ data })
-  })
-})
-
-// Get Route 
-// To retrieve All users from DB
-app.get('/api/users', (req, res, next) => {
-  userModel.findUser((err, data) => {
-    if (err) res.status(404).send(err);
-    res.json({ data })
-  })
-})
+app.delete('/api/users/:userName', )
+    // Get Route
+    // Takes userName in params find it in DB
+    // send it back as json if exist
+app.get('/api/users/:userName', )
+    // Get Route 
+    // To retrieve All users from DB
+app.get('/api/users', )
 
 
 // Get Route 
@@ -62,13 +40,7 @@ app.get('/api/users', (req, res, next) => {
 // TODO: still need refactoring , and it depends on someone else work
 // so it is not finished yet 
 
-app.get('/api/users/:userName/recommendedMovies', (req, res, next) => {
-  userModel.findUser(req.params, (errUser, userData) => {
-    movieModel.findMovies({ Genre: userData.moviesBought[0].Genre }, (err, data) => {
-      res.json(data)
-    })
-  })
-})
+app.get('/api/users/:userName/recommendedMovies', )
 
 // res.json( userData.moviesBought[0].Genre )
 
@@ -85,66 +57,66 @@ app.get('/api/users/:userName/recommendedMovies', (req, res, next) => {
 
 
 let user = {
-  userName: 'Ali_Jalal',
-  password: '00000000',
-  firstName: 'Ali',
-  lastName: 'Jalal',
-  userEmail: 'aajmabilal@gmail.com',
-  moviesBought: [],
-  favoriteMovies: []
+    userName: 'Ali_Jalal',
+    password: '00000000',
+    firstName: 'Ali',
+    lastName: 'Jalal',
+    userEmail: 'aajmabilal@gmail.com',
+    moviesBought: [],
+    favoriteMovies: []
 }
 
 userModel.insertUser(user)
 
 let movie = {
-  Title: "John Wick",
-  Year: 2014,
-  Rated: "R",
-  Genre: "Action, Crime, Thriller",
-  Runtime: 123,
-  Plot:"An ex-hit-man comes out of retirement",
-  Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
-  imdbRating: "7.4",
-  availability:true,
-  price:16,
-  availableChairs:39,
-  playDate: new Date(2020,6,24,12,30,20),
-  movieTrailer:"aojfdbiayhg",
-  chairs: 16
+    Title: "John Wick",
+    Year: 2014,
+    Rated: "R",
+    Genre: "Action, Crime, Thriller",
+    Runtime: 123,
+    Plot: "An ex-hit-man comes out of retirement",
+    Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
+    imdbRating: "7.4",
+    availability: true,
+    price: 16,
+    availableChairs: 39,
+    playDate: new Date(2020, 6, 24, 12, 30, 20),
+    movieTrailer: "aojfdbiayhg",
+    chairs: 16
 }
 
 let movie2 = {
-  Title: "John Wick 2",
-  Year: 2014,
-  Rated: "R",
-  Genre: "Action, Crime, Thriller",
-  Runtime: 123,
-  Plot:"An ex-hit-man comes out of retirement",
-  Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
-  imdbRating: "7.4",
-  availability:true,
-  price:16,
-  availableChairs:39,
-  playDate: new Date(2020,6,24,12,30,20),
-  movieTrailer:"aojfdbiayhg",
-  chairs: 16
+    Title: "John Wick 2",
+    Year: 2014,
+    Rated: "R",
+    Genre: "Action, Crime, Thriller",
+    Runtime: 123,
+    Plot: "An ex-hit-man comes out of retirement",
+    Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
+    imdbRating: "7.4",
+    availability: true,
+    price: 16,
+    availableChairs: 39,
+    playDate: new Date(2020, 6, 24, 12, 30, 20),
+    movieTrailer: "aojfdbiayhg",
+    chairs: 16
 }
 
 let movie3 = {
-  Title: "John Wick 3",
-  Year: 2019,
-  Rated: "R",
-  Genre: "Action, Crime, Thriller",
-  Runtime: 123,
-  Plot:"An ex-hit-man comes out of retirement",
-  Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
-  imdbRating: "7.4",
-  availability:true,
-  price:16,
-  availableChairs:32,
-  playDate: new Date(2020,6,24,12,30,20),
-  movieTrailer:"aojfdbiayhg",
-  chairs: 16
+    Title: "John Wick 3",
+    Year: 2019,
+    Rated: "R",
+    Genre: "Action, Crime, Thriller",
+    Runtime: 123,
+    Plot: "An ex-hit-man comes out of retirement",
+    Poster: "https://m.media-amazon.com/images/M/MV5BMTU2NjA1ODgzMF5BMl5BanBnXkFtZTgwMTM2MTI4MjE@._V1_SX300.jpg",
+    imdbRating: "7.4",
+    availability: true,
+    price: 16,
+    availableChairs: 32,
+    playDate: new Date(2020, 6, 24, 12, 30, 20),
+    movieTrailer: "aojfdbiayhg",
+    chairs: 16
 }
 
 // movieModel.insertMovie(movie)

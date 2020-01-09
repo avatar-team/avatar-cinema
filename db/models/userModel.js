@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const validate = require('validate')
 const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
@@ -7,6 +8,8 @@ const _findMovies = require('./movieModel').findMovies;
 //*******************************************//
 // mongoose library is REQUIRED//
 //*******************************************//
+
+
 
 const userSchema = new Schema({
     userName: {
@@ -18,7 +21,8 @@ const userSchema = new Schema({
     password: {
         type: String,
         required: true,
-        trim: true
+        trim: true,
+        minlength: 8
     },
     firstName: {
         type: String,
@@ -36,11 +40,10 @@ const userSchema = new Schema({
         type: String,
         required: true,
         unique: [true, 'email Most be unique'],
-        validate: {
-            validator: userEmail => userEmail.includes("@"),
-            message: 'the email most contain @ character'
-        },
-        trim: true
+        lowercase: true,
+        trim: true,
+        validate: [validator.isEmail, 'must be a vailed email']
+
     },
     moviesBought: {
         type: [_movieSchema],
