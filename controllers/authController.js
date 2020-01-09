@@ -66,7 +66,6 @@ exports.login = (req, res) => {
 
     })
 }
-
 exports.protect = (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -78,7 +77,10 @@ exports.protect = (req, res, next) => {
             error: "You Are not logged in "
         })
     }
-    //verification of the token// 
+    //verification of the token//
+    //promisify, promisifises the jwt.verfiy, function and then calles it with the token and secret password.
+    // and then calles the resualt on the then function so if the the token is valid and the user still exists
+    // than he well be automatclly signed in // if not he well not we diracted to that protected page 
     promisify(jwt.verify)(token, "GROUP-5-IS-THE-BEST-GROUP-EVER-AVATAR-ABOBKER-ESAM-FARED-ALI").then(decodedPayLoad => {
         User.findById(decodedPayLoad.id).then(theUser => {
             if (!theUser) {
@@ -87,6 +89,7 @@ exports.protect = (req, res, next) => {
                     error: "the user does not longer exists"
                 })
             } else {
+                //:) access is permitted :) //
                 next()
             }
         })
@@ -96,6 +99,4 @@ exports.protect = (req, res, next) => {
             error: err
         })
     })
-
-
 }
