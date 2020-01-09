@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import MovieController from './MovieController'
+import UserController from './UserConttroller'
 import {  Row, Col ,Container ,Button} from 'reactstrap';
 import axios from 'axios';
 
@@ -11,7 +12,8 @@ constructor(props) {
   super(props)
 
   this.state = {
-    users : [] 
+    users : [] ,
+    movieShow : true
   };
 };
 
@@ -28,16 +30,17 @@ constructor(props) {
 
 render(){
   return(
-    <Row>
-        <Col md="2">
-          <Button>user</Button>
-         <br/>
-          <Button>movie</Button>
+  
+      <Row>
+        <Col md="2" className="text-center">
+          <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
+          <Button onClick={()=>this.setState({movieShow : true })}>movie</Button>  
         </Col>
         <Col md="10">
-        <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
+          { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
           handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
-          handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/>
+          handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
+          }
         </Col>
       </Row>
   )
@@ -47,3 +50,24 @@ render(){
 
 
 export default Dashboard;
+
+
+const userData = [{
+  userName :"weeeha",
+  firstName :"moahemd",
+  lastName : "fared",
+  userEmail:"weeehbla@gmail.com"
+},
+{
+  userName :"weasdeeha",
+  firstName :"moahemd",
+  lastName : "salah",
+  userEmail:"weeeasdhbla@gmail.com"
+},
+{
+  userName :"asd",
+  firstName :"ah,ed",
+  lastName : "fared",
+  userEmail:"weeasdehbla@gmail.com"
+}
+]
