@@ -11,8 +11,8 @@ const temp = {
 }
 
 class Daysbar extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
   }
   
   endDate(day, kind = 'day') { 

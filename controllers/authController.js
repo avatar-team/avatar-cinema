@@ -10,9 +10,11 @@ const signToken = id => jwt.sign({ id }, "GROUP-5-IS-THE-BEST-GROUP-EVER-AVATAR-
 
 
 exports.signup = (req, res) => {
+    console.log(req.body)
     userFunctions.insertUser(req.body, (err, result) => {
         if (err) {
             return res.json({
+
                 status: false,
                 data: {
                     error: err

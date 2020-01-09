@@ -119,5 +119,8 @@ app.post('/login', authController.login)
 //     }).catch(err => console.log(err))
 // })
 
+app.post('/signup', authController.signup)
+app.post('/login', authController.login)
+
 
 app.listen(8000)
