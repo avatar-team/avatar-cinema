@@ -4,9 +4,22 @@ const authController = require('../../controllers/authController')
 const userFunctions = require('./userModel');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const adminFunction = require('./adminModel')
 dotenv.config({ path: "../../convig.env" })
 mongoose.Promise = global.Promise;
 app.use(express.json())
+
+
+const DB = "mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority"
+mongoose.connect(DB, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    useFindAndModify: false
+}).then(con => {
+    console.log();
+    console.log('DB connection Successfully')
+})
+
 
 const middelWare = (req, res, next) => {
     req.body.user = new Date()
@@ -16,14 +29,19 @@ const middelWare = (req, res, next) => {
 
 
 app.get('/', middelWare, (req, res) => {
-    res.send(req.body.user);
+    res.send("Done")
 })
 
 
 
 
 app.listen(8000, () => {
-    console.log("Server is listikng ")
+    adminFunction.insertAdmin({ username: "Avatar", password: "group5" }, (err, result) => {
+        if (err)
+            console.log(err)
+
+        console.log(result)
+    })
 })
 
 
