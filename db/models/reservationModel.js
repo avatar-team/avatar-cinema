@@ -12,14 +12,10 @@ const validator = require('validator')
 const reservationSchema = new Schema({
     firstName: {
         type: String,
-        required: true,
         trim: true
     },
     lastName: {
         type: String,
-        validate: [validator.isEmail, 'must be a vailed email'],
-        required: true,
-        unique: true,
         trim: true
     },
     movieId: {
