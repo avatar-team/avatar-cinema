@@ -115,6 +115,21 @@ class App extends React.Component{
 
   componentDidMount() {
     let token = localStorage.getItem('x-auth-token')
+    axios.get('/api/user/',{
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(res => {
+      console.log(res)
+      if(res.data.status) {
+        this.setState({
+          currentUser: res.data.user,
+          isUserLoggedIn: true
+        })
+      }
+    }).catch(err=> {
+      console.log(err)
+    })
     this.getMovies();
   }
 
@@ -139,11 +154,13 @@ class App extends React.Component{
           }}/>
           <Route path="/user" exact component={User}/>
           <Route path="/signup" exact component={()=> {
-            return <Signup changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            return <Signup changeUserState={(state, userData)=> this.changeUserState(state, userData)} 
+            isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
           <Route path="/login" exact component={(data)=> {
             console.log(data)
-            return <Login history={data.history}  changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            return <Login history={data.history}  changeUserState={(state, userData)=>this.changeUserState(state, userData)} 
+            isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
         </Switch>
 
