@@ -171,12 +171,15 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
         // updateUser(userObjectId, { $push { moviesBought: } })
 }
 
+const pullFavoriteMovie = (userObjectId, movieObjectId, callback) => {
+    updateUser({ _id: userObjectId }, { $pull: { favoriteMovies: { _id: movieObjectId } } }, callback);
+}
 
-
-
+//User.findByIdAndUpdate({ _id: "5e18813b5fdce621accc1ba8" }, { $pull: { moviesBought: { _id: "" } } }).then(e => { console.log(e) })
 module.exports.insertUser = insertUser;
 module.exports.updateUser = updateUser;
 module.exports.findUser = findUser;
 module.exports.deleteUser = deleteUser;
 module.exports.pushMoviesBought = pushMoviesBought;
 module.exports.pushFavoriteMovies = pushFavoriteMovies;
+module.exports.pullFavoriteMovie = pullFavoriteMovie;

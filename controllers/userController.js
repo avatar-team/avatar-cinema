@@ -117,3 +117,20 @@ exports.insertReservation = (req, res, next) => {
 
     })
 }
+exports.pullFavorite = (req, res, next) => {
+    const { userId, movieId } = req.body;
+    userModel.pullFavoriteMovie(userId, movieId, (err, user) => {
+        if (err) {
+            return res.status(500).json({
+                status: false,
+                message: "Internal Server Error with the Database",
+                error: err
+            })
+        }
+        res.status(200).json({
+            status: true,
+            message: "OK",
+            user
+        })
+    })
+}
