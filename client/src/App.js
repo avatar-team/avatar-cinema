@@ -11,6 +11,7 @@ import Dashboard from './components/Admin/Dashboard'
 import User from './components/User';
 import Signup from './components/Signup.js';
 import Login from './components/Login.js'
+import AdminLogin from './components/Admin/adminLogin';
 
 class App extends React.Component{
   constructor() {
@@ -163,8 +164,8 @@ class App extends React.Component{
             isUserLoggedIn={this.state.isUserLoggedIn} userData={this.state.user}
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
-          <Route path="/admin" component={()=> {
-            return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
+          <Route path="/admin" component={(data)=> {
+            return <Dashboard match={data.match} movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovie)=> this.handleDelete(deletedMovie)} />
           }}/>
