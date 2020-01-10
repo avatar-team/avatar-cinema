@@ -4,10 +4,10 @@ const authController = require('../controllers/authController')
 const router = express.Router();
 
 
-
+localhost: 8000 / user
 
 router.route('/')
-    .get(userController.getAllUsers)
+    // .get(authController.protect, userController.getAllUsers)
 router.route('/:userName')
     .get(userController.findUser)
     .delete(userController.deleteUser)
