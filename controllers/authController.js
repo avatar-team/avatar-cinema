@@ -97,7 +97,8 @@ exports.protect = (req, res, next) => {
                 })
             } else {
                 //:) access is permitted :) //
-                next()
+                req.body.user = theUser;
+                next();
             }
         })
     }).catch(err => {
