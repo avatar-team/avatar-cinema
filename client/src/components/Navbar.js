@@ -14,8 +14,9 @@ import {
   Button
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
+import User from './User';
 
 const search = {
     borderRadius: '1.6rem 0 0 1.6rem',
@@ -71,7 +72,10 @@ const Navbarz = (props) => {
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} style={items} to="/">Log Out</NavLink>
+                <NavLink onClick={()=> props.changeUserState(false)} tag={Link} style={items} to="/">Log Out</NavLink>
+              </NavItem>
+              <NavItem className="ml-auto">
+                <NavLink tag={Link} style={items} to="/user"><FontAwesomeIcon icon={faUser}/></NavLink>
               </NavItem>
             </Nav>
             :
