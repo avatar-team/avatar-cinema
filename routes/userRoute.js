@@ -19,3 +19,4 @@ router.route('/reservation')
     //@return 
 router.route("/favorite")
     .post(userController.insertFavoriteMovie) //hundle this functions
+    .delete(userController.pullFavorite)

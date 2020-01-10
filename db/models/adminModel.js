@@ -58,7 +58,7 @@ const insertAdmin = (adminObject, callback) => {
  * @param {*} callback Error-First Callback function 
  */
 const findAdmin = (objectCriteria = {}, callback) => {
-    Admin.find(objectCriteria)
+    Admin.findOne(objectCriteria)
         .then(admin => callback(null, admin))
         .catch(err => callback(err, null))
 }
