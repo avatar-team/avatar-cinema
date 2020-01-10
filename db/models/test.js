@@ -4,27 +4,39 @@ const authController = require('../../controllers/authController')
 const userFunctions = require('./userModel');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
+const adminFunction = require('./adminModel')
 dotenv.config({ path: "../../convig.env" })
 mongoose.Promise = global.Promise;
 app.use(express.json())
 
-const middelWare = (req, res, next) => {
-    req.body.user = new Date()
-    next()
-}
+const User = mongoose.model('User')
+
+mongoose.connect('mongodb://localhost/Avatar', {
+    useCreateIndex: true,
+    useNewUrlParser: true,
+    useFindAndModify: false
+}, (err) => {
+    if (err) {
+        console.log("not connected to database" + err)
+    } else {
+        console.log("connected to database")
+    }
+});
 
 
+app.get('/', (req, res) => {
 
-app.get('/', middelWare, (req, res) => {
-    res.send(req.body.user);
 })
-
-
 
 
 app.listen(8000, () => {
-    console.log("Server is listikng ")
+
+
 })
+
+// 5e18813b5fdce621accc1ba8
+
+
 
 
 
@@ -174,9 +186,9 @@ app.listen(8000, () => {
 // }	
 
 
-// // movieModel.insertMovie(movie)	
-// // movieModel.insertMovie(movie2)	
-// // movieModel.insertMovie(movie3)	
+//  movieModel.insertMovie(movie)	
+//  movieModel.insertMovie(movie2)	
+//  movieModel.insertMovie(movie3)	
 
 
 

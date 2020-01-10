@@ -8,7 +8,6 @@ const User = mongoose.model("User")
 
 const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
 
-
 exports.signup = (req, res) => {
     console.log(req.body)
     userFunctions.insertUser(req.body, (err, result) => {
@@ -42,7 +41,6 @@ exports.login = (req, res) => {
             error: "MOST PROVIDE BOTH USERNAME AND PASSWORD"
         })
     }
-
     User.findOne({ userName }).select('+password').then(user => {
         if (user) {
             brcypt.compare(password, user.password).then(bool => {
@@ -74,7 +72,7 @@ exports.protect = (req, res, next) => {
         token = req.headers.authorization.split(' ')[1]
     }
     if (!token) {
-        return res.json({
+        return res.status(404).json({
             status: false,
             error: "You Are not logged in "
         })

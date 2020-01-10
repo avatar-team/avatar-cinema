@@ -13,10 +13,19 @@ const div = {
   backgroundColor: 'rgb(24, 24, 31)'
 }
 
-const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
+const MovieInfo = ({movies, handleReservation, userData}) => {
   let { index } = useParams()
   let movie = movies[index];
-  console.log(index, handleReservation)
+  //TODO create a function
+  const collect = ()=> {
+    let data = {
+      firstName : userData.firstName,
+      lastName : userData.lastName,
+      userId : userData._id,
+      moviveId : movie._id
+    }
+   handleReservation(data)
+  }
 
   return(
     <div className='m-auto' style={div}>
@@ -37,7 +46,7 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
                     <CardSubtitle className="my-4"> <span className='spans'>available Chairs: </span>{movie.availableChairs}/{movie.chairs} </CardSubtitle>
                     <CardSubtitle className="my-4"> <span className='spans'>Time: </span>{new Date(movie.playDate).toLocaleTimeString()} </CardSubtitle>
                     <CardSubtitle className="my-4"> <span className='spans'>Date: </span>{new Date(movie.playDate).toLocaleDateString()} </CardSubtitle>
-                    <button className="mt-4 cardBtn" disabled={!movie.availableChairs? true: false}>Reserve Now!</button>
+                    <button onClick={()=>{collect()}} className="mt-4 cardBtn" disabled={!movie.availableChairs? true: false}>Reserve Now!</button>
                 </CardBody>
               </Col>
             </Row>
@@ -49,7 +58,7 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
         </Col>
       </Row>
       :
-      <div>this video is not available</div>
+      <div>this Movie is not available</div>
     }
     </div>
   )
