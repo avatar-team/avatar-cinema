@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import {BrowserRouter, Link, Switch, Route} from 'react-router-dom';
+import {BrowserRouter, Link, Switch, Route, Redirect} from 'react-router-dom';
 import axios from 'axios';
 import movies from './components/dummyData';
 import MainPage from './components/MainPage';
@@ -18,7 +18,9 @@ class App extends React.Component{
     this.state = {
       movies: [],
       currentReservation: {},
-      currentMovie: {}
+      currentMovieId: 0,
+      isUserLoggedIn: false,
+      currentUser: {}
     }
   }
 
@@ -28,18 +30,21 @@ class App extends React.Component{
     axios.get('/API/movies')
     .then((res)=> {
       console.log(res.data)
-      if(Array.isArray(res.data)) {
-        this.setState({
-          movies: [...res.data]
-        })
-      }else {
-        this.setState(prevState => {
-          prevState.movies.push(res.data)
-          return({
-            movies: [...prevState.movies]
-          })
-        })
-      }
+      this.setState({
+        movies: [...this.state.movies, ...res.data]
+      })
+      // if(Array.isArray(res.data)) {
+      //   this.setState({
+      //     movies: [...res.data]
+      //   })
+      // }else {
+      //   this.setState(prevState => {
+      //     prevState.movies.push(res.data)
+      //     return({
+      //       movies: [...prevState.movies]
+      //     })
+      //   })
+      // }
     })
     .catch(err => {
       console.log(err)
@@ -56,19 +61,6 @@ class App extends React.Component{
     })
   }
 
-
-  handleSearch(videoTitle) {
-    this.state.movies.map((movie)=> {
-      if(movie.Title === videoTitle) {
-        this.setState({
-          currentMovie: movie
-        })
-      }
-
-    })
-  }
-
-
   //Admin handle functions
   handleAdd(movieData) {
     axios.post('/api/movies', movieData)
@@ -76,7 +68,7 @@ class App extends React.Component{
       console.log(res)
       this.setState((prevState)=> {
         return ({
-          movies: [...prevState.movies, res.data]
+          movies: [...prevState.movies, ...res.data]
         })
       }, ()=> console.log(this.state.movies))
     })
@@ -115,30 +107,45 @@ class App extends React.Component{
     })
   }
 
+  changeUserState(state) {
+    console.log(state)
+    this.setState({
+      isUserLoggedIn: state
+    })
+  }
+
   componentDidMount() {
+    localStorage.getItem('x-auth-token')
     this.getMovies();
   }
 
   render() {
+    let helper = videoTitle => this.handleSearch(videoTitle)
     return (
       <BrowserRouter>
-        <NavBar handleSearch={(videoTitle)=> this.handleSearch(videoTitle)}/>
+        {console.log(this.state.movies)}
+        <NavBar changeUserState={(state)=> this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>
-          <Route path="/" exact component={()=> {
-            // console.log(new Date(this.state.movies[0].playDate).toLocaleDateString())
-            return <MainPage movies={this.state.movies}/>
+          <Route path="/" exact component={(data)=> {
+            // console.log(data)
+            return <MainPage isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
           }}/>
           <Route path="/movieInfo/:index" component={()=> {
-            return <MovieInfo reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+            return <MovieInfo isUserLoggedIn={this.state.isUserLoggedIn} reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
-          <Route path="/admin/Dashboard" component={()=> {
+          <Route path="/admin" component={()=> {
             return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
-            handleDelete={(deletedMovi)=> this.handleDelete(deletedMovi)} />
+            handleDelete={(deletedMovie)=> this.handleDelete(deletedMovie)} />
           }}/>
           <Route path="/user" exact component={User}/>
-          <Route path="/signup" exact component={Signup}/>
-          <Route path="/login" exact component={Login}/>
+          <Route path="/signup" exact component={()=> {
+            return <Signup changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+          }}/>
+          <Route path="/login" exact component={(data)=> {
+            console.log(data)
+            return <Login history={data.history}  changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+          }}/>
         </Switch>
 
       </BrowserRouter>

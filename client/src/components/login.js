@@ -39,71 +39,72 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: '',
+      userName: '',
       password: ''
-      // redirect: false,
     }
   }
 
-
-  // renderRedirect () {
-  //   if (this.state.redirect) {
-  //     return <Redirect to='/home' />
-  //   }
-  // }
 
   onChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    e.preventDefault()
+    var token = localStorage.getItem('x-auth-token')
     if (!this.state.username || !this.state.password) {
       // TODO: show something Red!
     }
-    axios.post('/signin', this.state)
-      .then(result => {
-        if (result.data.match) {
-          this.setState({
-            redirect: true
-          })
-        }
-      })
-      .catch(err => {
-        // TODO: show something
-      })
+    axios.post('/login', this.state, {
+      headers: {
+        Authorization: 'Bearer ' + token
+      }
+    })
+    .then(result => {
+      // TODO: we need to redirect him
+      console.log(result)
+      console.log('I am in')
+      localStorage.setItem('x-auth-token', result.data.token)
+      this.props.changeUserState(true)
+      this.props.history.replace('/')
+    })
+    .catch(err => {
+      // TODO: show something
+    })
   }
 
   render() {
     console.log(this.state)
     return (
-    <div style={main}>
-        <h2>Welcome to Signin Page</h2>
+      <form onSubmit={this.handleSubmit.bind(this)}>
+        <div style={main}>
+          <h2>Welcome to Signin Page</h2>
 
-        Username: <br />
-        <input
-        style={input}
-        type="text"
-        name="username"
-        value={this.state.username}
-        onChange={(e) => {this.onChange(e)}}/>
-        <br />
+          Username: <br />
+          <input
+          style={input}
+          type="text"
+          name="userName"
+          value={this.state.userName}
+          onChange={(e) => {this.onChange(e)}}/>
+          <br />
 
-        Password: <br />
-        <input
-        style={input}
-        type="password"
-        name="password"
-        value={this.state.password}
-        onChange={(e) => {this.onChange(e)}}
-        />
-        <br />
+          Password: <br />
+          <input
+          style={input}
+          type="password"
+          name="password"
+          value={this.state.password}
+          onChange={(e) => {this.onChange(e)}}
+          />
+          <br />
 
-        <input
-        style={button}
-        type="submit"
-        onClick={this.handleSubmit.bind(this)}/>
-        {/* {this.renderRedirect()} */}
-    </div>
+          <input
+          style={button}
+          type="submit"/>
+        </div>
+      </form>
+    
     )
   }
 }

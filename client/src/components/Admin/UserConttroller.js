@@ -5,40 +5,69 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
+const transparent = {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
+  }
+  
+  const table = {
+    borderCollapse: 'collapse',
+    padding: '10px'
+  }
+  
+  const td = {
+    padding: '12px'
+  }
+
+  
 class UserController extends React.Component{
-    constructor({users}) {
-      super({users})
- 
-    };
+    constructor(props) {
+      super(props)
+
+       this.state = {
+        delete : false ,
+        deleteUser : "" 
+       };
+     };
     
     render(){
+       
         return(
             <div>
-                <Table>
+                <Table style={table} dark className="w-75 text-center m-auto" >
                 <thead>
                     <tr>
-                        <th>first name</th>
-                        <th>last name</th>
-                        <th>email</th>
+                        <th>Username</th>
+                        <th>First name</th>
+                        <th>Last name</th>
+                        <th>Email</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map((user,i)=>{
-                        <tr key={i}>
-                            <th>user.fistname</th>
-                            <th>user.lastname</th>
-                            <th>user.email</th>
-                            <th><button><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></th>
+                    {this.props.users? this.props.users.map((user,i)=>{
+                        return  <tr key={i}>
+                            <td>{user.userName}</td>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.userEmail}</td>
+                            <td><button style={transparent} onClick={()=>{  this.setState({delete : !this.state.delete , deleteUser : user.userName })
+                             }}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
                         </tr>
-                    })}   
+                          
+                     }): null}   
                 </tbody>
                 </Table>
+                {this.state.delete?
+                        <Card style={{width: '50%', margin: 'auto'}} body inverse color="danger">
+                           <CardTitle>do you want to delete {this.state.deleteUser}  </CardTitle>
+                           <div style={{display: 'block-inline', margin: 'auto'}}>
+                           <Button  style={{margin: '10px'}}>Cancel</Button><Button  color="secondary">Delete</Button>
+                            </div> 
+                        </Card>: null}
             </div>
         )
     }
 }
-
-
 
 export default UserController
 
