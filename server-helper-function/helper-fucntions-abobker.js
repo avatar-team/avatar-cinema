@@ -8,8 +8,8 @@ const bcrypt = require('bcrypt');
 //it accepts only one @(param) password 
 //and return a hashed version of that password
 //e.g.. 
-//@(param) password = 123123
-//@(return) = $2b$08$n84teUcpD7AMY2lrL2yMKOQ/Q/OGUKTMAuNAX1MbaZBsNzTlWBOqC
+//@param password = 123123
+//@return = $2b$08$n84teUcpD7AMY2lrL2yMKOQ/Q/OGUKTMAuNAX1MbaZBsNzTlWBOqC
 const generateHash = password => {
     return bcrypt.hashSync(password, bcrypt.genSaltSync(8), null);
 }
