@@ -32,7 +32,7 @@ const reservationSchema = new Schema({
         type: Date
     },
     price: Number,
-    Title: String
+    title: String
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
 
