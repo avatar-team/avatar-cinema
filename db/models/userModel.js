@@ -3,7 +3,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
-const brcypt = require('bcryptjs')
+// const brcypt = require('bcryptjs')
     //*******************************************//
     // all the functions exported from this module is in Error-First-Style// 
     //*******************************************//

@@ -14,10 +14,10 @@ const s = {
     textAlign: 'right'
 }
 
-const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
+const MovieInfo = ({movies, handleReservation, userData}) => {
   let { index } = useParams()
   let movie = movies[index];
-  console.log(index, handleReservation)
+  //TODO create a function
 
   return(
     <div style={div}>
@@ -47,7 +47,7 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
         </Col>
       </Row>
       :
-      <div>this video is not available</div>
+      <div>this Movie is not available</div>
     }
     </div>
   )

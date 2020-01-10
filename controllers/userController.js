@@ -17,7 +17,7 @@ exports.findUser = (req, res, next) => {
 exports.getUser = (req, res, next) => {
     res.status(200).json({
         status: true,
-        data: req.body.user
+        user: req.body.user
     });
 }
 exports.getRecommendedMovie = (req, res, next) => {
