@@ -3,9 +3,9 @@ const app = express();
 const bodyParser = require('body-parser');
 const path = require("path");
 const mongoose = require("mongoose");
-const reservationDb = require('./db/models/reservationModel'); //might have to move them in the movieController
+const reservationDb = require('../db/models/reservationModel'); //might have to move them in the movieController
 const adminDb = require('./db/models/adminModel');
-const authController = require('../../controllers/authController')
+const authController = require('../controllers/authController.js')
 
 const movieRoute = require('../routes/movieRoute')
 const userRoute = require('../routes/userRoute')
@@ -60,8 +60,8 @@ const requestReservation = (req, res) => {
 app.post("/api/reserveFilm", requestReservation)
     // post request to addmovie to database end send the result back to frontend
 
-app.post('/login', authController.login)
-app.post('/signup', authController.signup)
+// app.post('/login', authController.login)
+// app.post('/signup', authController.signup)
 
 app.listen(8000, () => {
     console.log("Server Started")

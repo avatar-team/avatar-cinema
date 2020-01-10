@@ -5,14 +5,46 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
+import UserData from './UserData'
+import { Table } from 'reactstrap';
 
+
+const transparent = {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent'
+  }
+  
+  const table = {
+    borderCollapse: 'collapse',
+    padding: '10px'
+  }
+  
+  const td = {
+    padding: '12px'
+  }
+
+  const purchasedMoives =[ {
+    movie : "joker",
+    price: 12,
+    time : "SDfsdf",
+    date : "SDfsdf"
+}]
+
+const favoriteMoives = [{
+    movie : "x-men",
+    price: 213,
+    time : "SDf",
+    date : "DSF"
+}]
 
 
 class User extends React.Component {
     constructor(props) {
         super(props)
 
-        
+        this.state = {
+            counter : 0 
+        }
       
       };
 
@@ -34,14 +66,34 @@ class User extends React.Component {
                           </Card>
                         </Col>
                         <Col md="8" className="border border-primary ">
-                        <Tabs   className="border border-primary rounded mt-3" >
-                            <Tab title="purchased moive " ></Tab>
-                            <Tab title="purchased moive "></Tab>
-                            <Tab title="purchased moive "></Tab>   
-                        </Tabs>
+
+                         <Nav tabs  className="border">
+                             <NavItem>
+                                 <NavLink  onClick={()=>{this.setState({counter:0})}}>
+                                 purchased moives
+                                 </NavLink>   
+                             </NavItem>
+                             <NavItem>
+                                 <NavLink onClick={()=>{this.setState({counter:1})}}>
+                                favorite moives
+                                 </NavLink>
+                             </NavItem>
+                         </Nav>
+                         <Table style={table}  dark className="w-100 text-center m-auto">
+                             <tr>
+                                 <th>Movie Name</th>
+                                 <th>Price</th>
+                                 <th>Date</th>
+                                 <th>Time</th>
+                             </tr>
+                             {( this.state.counter == 0)? <UserData movies={ purchasedMoives} /> : null }
+                             {( this.state.counter == 1)? <UserData movies={ favoriteMoives} /> : null }
+                         </Table>
+                         
                         </Col>
                     </Row>
                 </Container>
+                
           </div>
              
           )
