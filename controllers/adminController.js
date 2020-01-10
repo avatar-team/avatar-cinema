@@ -1,6 +1,6 @@
 const Admin = require('../db/models/adminModel')
 const User = require('../db/models/userModel')
-const brcypt = require('brcyptjs')
+const brcypt = require('bcryptjs')
 exports.hundleSginin = (req, res) => {
     admin = req.body;
     Admin.findAdmin({ username: admin.username }, (err, result) => {
