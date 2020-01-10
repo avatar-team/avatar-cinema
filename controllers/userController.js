@@ -15,7 +15,10 @@ exports.findUser = (req, res, next) => {
     })
 }
 exports.getUser = (req, res, next) => {
-    res.status(200).json(req.body.user);
+    res.status(200).json({
+        status: true,
+        data: req.body.user
+    });
 }
 exports.getRecommendedMovie = (req, res, next) => {
     userModel.findUser({ _id: req.params.id }, (errUser, userData) => {
