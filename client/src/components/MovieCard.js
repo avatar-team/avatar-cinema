@@ -16,12 +16,12 @@ const MovieCard = ({movie, index}) => (
       {console.log(movie)}
       <Row>
       <Col>
-        <Card>
+        <Card style={{width:"80%", height:"60%"}}>
           <Row>
-            <Col md="5">
+            <Col md="4">
               <CardImg src={movie.Poster}/>
             </Col>
-            <Col md="7">
+            <Col md="8">
               <CardBody className="cardBody">
                 <CardTitle className="title">{movie.Title} <span className="imdb"> ... {movie.imdbRating} </span></CardTitle>
                 <CardSubtitle className="my-4"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>

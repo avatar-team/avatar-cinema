@@ -16,6 +16,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
+import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
 
 const search = {
   borderRadius: '0 1.6rem 1.6rem 0',
@@ -88,8 +89,9 @@ const Navbarz = (props) => {
                 <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><Button color="primary">Signup</Button></NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink className='mt-1 mx-2' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
+                <NavLink className='mt-1 mr-4' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
               </NavItem>
+              
             </Nav>}
           </Collapse>
         </Navbar>
