@@ -41,7 +41,6 @@ exports.login = (req, res) => {
             error: "MOST PROVIDE BOTH USERNAME AND PASSWORD"
         })
     }
-
     User.findOne({ userName }).select('+password').then(user => {
         if (user) {
             brcypt.compare(password, user.password).then(bool => {

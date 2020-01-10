@@ -171,6 +171,13 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
         // updateUser(userObjectId, { $push { moviesBought: } })
 }
 
+
+/**
+ * @function pullFavoriteMovie this function is used to remove a movie from a user's favorate movies array
+ * @param {*} userObjectId Objectid of the user to pull the movie from 
+ * @param {*} movieObjectId the Object Id of the movie to be deleted 
+ * @param {*} callback Error-First Callback Function
+ */
 const pullFavoriteMovie = (userObjectId, movieObjectId, callback) => {
     updateUser({ _id: userObjectId }, { $pull: { favoriteMovies: { _id: movieObjectId } } }, callback);
 }
