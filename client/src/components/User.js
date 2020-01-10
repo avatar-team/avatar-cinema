@@ -5,7 +5,7 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col 
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
-import PurchasedMovie from './purchasedMoive'
+import UserData from './UserData'
 import { Table } from 'reactstrap';
 
 
@@ -23,7 +23,19 @@ const transparent = {
     padding: '12px'
   }
 
-  
+  const purchasedMoives =[ {
+    movie : "joker",
+    price: 12,
+    time : "SDfsdf",
+    date : "SDfsdf"
+}]
+
+const favoriteMoives = [{
+    movie : "x-men",
+    price: 213,
+    time : "SDf",
+    date : "DSF"
+}]
 
 
 class User extends React.Component {
@@ -66,11 +78,6 @@ class User extends React.Component {
                                 favorite moives
                                  </NavLink>
                              </NavItem>
-                             <NavItem>
-                                <NavLink onClick={()=>{this.setState({counter:2})}}>
-                                recommended movies
-                                </NavLink>
-                             </NavItem>
                          </Nav>
                          <Table style={table}  dark className="w-100 text-center m-auto">
                              <tr>
@@ -79,11 +86,9 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
+                             {( this.state.counter == 0)? <UserData movies={ purchasedMoives} /> : null }
+                             {( this.state.counter == 1)? <UserData movies={ favoriteMoives} /> : null }
                          </Table>
-                         
-                         {( this.state.counter == 0)? <PurchasedMovie /> : null }
-                         {( this.state.counter == 1)?  console.log(" favorite moives") : null }
-                         {( this.state.counter == 2)? console.log("  recommended movies") : null }
                          
                         </Col>
                     </Row>
