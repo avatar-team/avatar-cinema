@@ -80,7 +80,10 @@ const Navbarz = (props) => {
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={()=> props.changeUserState(false)} tag={Link} style={items} to="/">Log Out</NavLink>
+                <NavLink onClick={()=> {
+                  props.changeUserState(false)
+                  localStorage.setItem('x-auth-token', '')
+                }} tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>
               <NavItem className="ml-auto">
                 <NavLink tag={Link} style={items} to="/user"><FontAwesomeIcon icon={faUser}/></NavLink>

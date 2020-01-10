@@ -28,11 +28,7 @@ exports.hundleSginin = (req, res) => {
         }
     })
 }
-res.status(200).json({
-    status: true,
-    message: "OK",
-    data: result
-})
+
 exports.hundleMainDashboard = (req, res) => {
     User.findUser({}, (err, result) => {
         if (result) {
