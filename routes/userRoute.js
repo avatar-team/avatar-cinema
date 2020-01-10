@@ -21,4 +21,4 @@ router.route("/favorite")
     .post(userController.insertFavoriteMovie) //hundle this functions
     .delete(userController.pullFavorite)
 
-    module.exports = router;
+module.exports = router;
