@@ -51,7 +51,7 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    var token = window.localStorage.getItem('x-auth-token')
+    var token = localStorage.getItem('x-auth-token')
     if (!this.state.username || !this.state.password) {
       // TODO: show something Red!
     }
@@ -64,6 +64,9 @@ class Login extends Component {
       // TODO: we need to redirect him
       console.log(result)
       console.log('I am in')
+      localStorage.setItem('x-auth-token', result.data.token)
+      this.props.changeUserState(true)
+      this.props.history.replace('/')
     })
     .catch(err => {
       // TODO: show something

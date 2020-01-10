@@ -98,6 +98,7 @@ const insertUser = (user, callback) => {
                     status: false,
                     message: "something went wrong is Duplicated"
                 }, null)
+
             }
         }
     })
