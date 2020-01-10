@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _findMovies = require('./movieModel').findMovies;
 const _updateMovie = require('./movieModel').updateMovie;
+const _userFunction = require('./userModel')
 const validator = require('validator')
-    //*******************************************//
-    // all the functions exported from this module is in Error-First-Style// 
-    //*******************************************//
-    // mongoose library is REQUIRED//
-    //*******************************************//
+
+//*******************************************//
+// all the functions exported from this module is in Error-First-Style// 
+//*******************************************//
+// mongoose library is REQUIRED//
+//*******************************************//
 
 const reservationSchema = new Schema({
     firstName: {
@@ -31,7 +33,16 @@ const reservationSchema = new Schema({
     playDate: {
         type: Date
     },
-    price: Number,
+    price: {
+        type: Number,
+        min: 0,
+        validate: {
+            validator: function(value) {
+                return value > 0;
+            },
+            message: 'Price need to be > 0'
+        }
+    },
     title: String
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
@@ -50,6 +61,7 @@ const insertReservation = (reservation, callback) => {
             callback("No More Available Chairs For this Movie", null);
         } else {
             _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } });
+            _userFunction.pushMoviesBought(reservation.userId, reservation.movieId);
             Reservation.create(reservation)
                 .then(reservation => callback(null, reservation))
                 .catch(err => callback(err, null));
