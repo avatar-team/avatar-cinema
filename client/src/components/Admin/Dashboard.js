@@ -16,7 +16,7 @@ constructor(props) {
   this.state = {
     users : [] ,
     movieShow : true,
-    isAdminLoggedIn: false
+    isAdminLoggedIn: true
   };
 };
 

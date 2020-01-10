@@ -34,7 +34,8 @@ const items = {
 
 const logo = {
   fontSize: '28pt',
-  padding: '0 45px 0 25px'
+  padding: '0 45px 0 25px',
+  color: '#ca3e47'
   // fontFamily: 'Gill Sans Gill Sans MT Calibri Trebuchet MS sans-serif'
 }
 
@@ -73,7 +74,7 @@ const Navbarz = (props) => {
             <InputGroup style={search}>
               <InputGroupAddon addonType="prepend"><Button onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
+              }}><FontAwesomeIcon color='black' icon={faSearch}/></Button></InputGroupAddon>
               <Input id="search" />
             </InputGroup>
             </NavbarText>
