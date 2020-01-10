@@ -66,13 +66,13 @@ userSchema.pre('save', function(next) {
     next();
 })
 const User = new mongoose.model("User", userSchema);
-//this function inserts a new user to the database 
-//the user should be a object with keys and values exactly as the schema Respectively 
+
 
 /**
- * insert a user into the Database
+ * @function insertUser insert a user into the Database
  * @param {*} user the user expected to be saved
  * @param {*} callback Error-First Callback Function
+ * @note the user should be a object with keys and values exactly as the schema Respectively
  */
 const insertUser = (user, callback) => {
     findUser({ $or: [{ userName: user.userName }, { userEmail: user.userEmail }] }, (err, result) => {
@@ -94,33 +94,20 @@ const insertUser = (user, callback) => {
                     message: "email is Duplicated"
                 }, null)
             } else {
-                if (result[0].userName === user.userName) {
-                    callback({
-                        status: false,
-                        message: "username is Duplicated"
-                    }, null)
-                } else if (result[0].userEmail === user.userEmail) {
-                    callback({
-                        status: false,
-                        message: "email is Duplicated"
-                    }, null)
-            } else {
                 callback({
                     status: false,
-                    message: "username is Duplicated"
+                    message: "something went wrong is Duplicated"
                 }, null)
             }
         }
+    })
+}
 
-        })
-    }
-
-    // User.create(user)
-    //     .then(user => callback(null, user))
-    //     .catch(err => callback(err, null))
-    //this function updates a user Based on the @(code)criteriaObject
-    // updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
-    // updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
+/**
+ * this @function updateUser updates a user Based on the @param criteriaObject
+ * @example updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
+ * @example updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
+ */
 const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}) => {
     User.findByIdAndUpdate(userObjectId, criteriaObject)
         .then(user => callback(null, user))
