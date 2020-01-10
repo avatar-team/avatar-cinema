@@ -1,6 +1,7 @@
 body {
   overflow-x: hidden;
   scroll-behavior: smooth;
+  background-color: rgb(24, 24, 31);
 }
 
 /* Movie Card */
@@ -78,13 +79,12 @@ body {
 
 /* Tab - Main Page */
 .tabItem {
-  /* padding-right: 12px; */
   cursor: pointer;
+  transition: 0.3 all ease-in-out;
 }
 
 .tabItem :hover {
   background-color: #ca3e47;
-  border-radius: none;
 }
 
 /* Tab - Main Page */

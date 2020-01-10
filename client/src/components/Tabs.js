@@ -10,7 +10,7 @@ import { NavLink, NavItem, Nav } from 'reactstrap';
 const temp = {
   width: '1196px',
   margin: '30px 18px auto',
-  borderRadius: '.8rem',
+  borderRadius: '0 .8rem .8rem 0',
   padding: '10px 10px 0px 10px',
   color: 'white'
 }
