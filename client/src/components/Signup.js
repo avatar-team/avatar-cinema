@@ -7,7 +7,9 @@ const main = {
   textAlign: 'center',
   borderRadius: '1.2rem',
   padding: '10px',
-  fontFamily:'Trebuchet MS'
+  fontFamily:'Trebuchet MS',
+  color: 'white',
+  fontSize: '14pt'
 }
 
 const input = {
