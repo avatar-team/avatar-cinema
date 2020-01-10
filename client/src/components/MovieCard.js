@@ -6,17 +6,18 @@ import {
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
   
-const div = {
-    width: '1200px',
-    height: '1200px',
-    marginTop: '20px'
-}
+// const div = {
+//     width: '1200px',
+//     height: '1200px',
+//     marginTop: '20px'
+// }
+
 const MovieCard = ({movie, index}) => (
-  <div className="m-3" style={div}>
+  <div className="m-3 w-50">
       {console.log(movie)}
       <Row>
       <Col>
-        <Card style={{width:"80%", height:"60%"}}>
+        <Card className='my-3' style={{width:"1200px", height:"563px", backgroundColor: '#414141', color: 'white', borderRadius: '0 1rem 1rem 0'}}>
           <Row>
             <Col md="4">
               <CardImg src={movie.Poster}/>
