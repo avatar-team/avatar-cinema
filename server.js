@@ -9,6 +9,9 @@ const authController = require('./controllers/authController')
 const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
 const adminRoute = require('./routes/adminRoute')
+const dotenv = require('dotenv')
+
+dotenv.config({ path: './config.env' })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -126,4 +129,4 @@ app.post('/signup', authController.signup)
 app.post('/login', authController.login)
 
 
-app.listen(8000)
+app.listen(8000);

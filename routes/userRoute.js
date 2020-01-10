@@ -9,7 +9,7 @@ const router = express.Router();
 // router.post('/login', authController.login)
 
 router.route('/')
-    .get(userController.getAllUsers)
+    .get(authController.protect, userController.getUser)
 router.route('/:userName')
     .get(userController.findUser)
     .delete(userController.deleteUser)
