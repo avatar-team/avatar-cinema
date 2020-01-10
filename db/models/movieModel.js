@@ -115,7 +115,7 @@ const deleteMovie = (objectId, callback = (err, result) => {}) => {
 //this function well get the movies availble in the next four days, of the availability:TRUE 
 //this function only accepts callback function and well pass to that callback the result (array of movies) 
 const getMovies4Days = callback => {
-    let currentDate = new Date();
+    let currentDate = new Date(new Date().toLocaleDateString());
     let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 4);
     findMovies({ "playDate": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
 

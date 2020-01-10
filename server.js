@@ -6,14 +6,18 @@ const mongoose = require("mongoose");
 const reservationDb = require('./db/models/reservationModel'); //might have to move them in the movieController
 const adminDb = require('./db/models/adminModel');
 const authController = require('./controllers/authController')
-
 const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
+const adminRoute = require('./routes/adminRoute')
+
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+
 app.use("/api/movies", movieRoute);
 app.use("/api/users", userRoute);
+app.use("/api/admin", adminRoute);
 
 mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/Avatar', {
@@ -38,6 +42,7 @@ const requestReservation = (req, res) => {
 // // app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/signup', authController.signup)
 app.post('/login', authController.login)
+
 
 
 // ////////////////////////////////////////

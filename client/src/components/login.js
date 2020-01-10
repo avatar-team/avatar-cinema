@@ -51,19 +51,18 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    var token = window.localStorage.getItem('x-auth-token')
+    var token = localStorage.getItem('x-auth-token')
     if (!this.state.username || !this.state.password) {
       // TODO: show something Red!
     }
-    axios.post('/login', this.state, {
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    })
+    axios.post('/login', this.state)
     .then(result => {
       // TODO: we need to redirect him
-      console.log(result)
+      window.localStorage.setItem('x-auth-token', result.data.token)
       console.log('I am in')
+      localStorage.setItem('x-auth-token', result.data.token)
+      this.props.changeUserState(true)
+      this.props.history.replace('/')
     })
     .catch(err => {
       // TODO: show something
