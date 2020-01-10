@@ -10,6 +10,7 @@ import Movietrailer from '../components/Movietrailer.js'
 
 const div = {
   width: '1610px',
+  backgroundColor: 'rgb(24, 24, 31)'
 }
 
 const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
@@ -18,14 +19,14 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
   console.log(index, handleReservation)
 
   return(
-    <div className='m-auto' style={{backgroundColor: 'rgb(24, 24, 31)'}} style={div}>
+    <div className='m-auto' style={div}>
     {movie?
       <Row>
         <Col md='7'>
-          <Card className='mt-5' style={{height:"563px", backgroundColor: '#414141', color: 'white'}}>
+          <Card style={{height:"563px", backgroundColor: 'rgb(24, 24, 31)', color: 'white', marginTop: '140px'}}>
             <Row className="no-gutters">
               <Col md='4'>
-                <CardImg  style={{height:"563px"}} src={movie.Poster} />
+                <CardImg  style={{height:"562px", paddingRight: '10px'}} src={movie.Poster} />
               </Col>
               <Col md='8'>
                 <CardBody>
@@ -42,8 +43,8 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
             </Row>
           </Card>
         </Col>
-        <Col md='5' className='w-75 mt-5 p-5 text-center' style={{height:"563px", backgroundColor: '#414141', color: 'white'}}>
-          <h3>Movie Trailer</h3>
+        <Col md='5' className='w-75 p-5 text-center' style={{height:"563px", marginTop: '140px', backgroundColor: 'rgb(24, 24, 31)', color: 'white'}}>
+          <h2 className='py-4'>Movie Trailer</h2>
           <Movietrailer movie={movie}/>
         </Col>
       </Row>
