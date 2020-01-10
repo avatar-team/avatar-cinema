@@ -18,7 +18,6 @@ class App extends React.Component{
     this.state = {
       movies: [],
       currentReservation: {},
-      currentMovieId: 0,
       isUserLoggedIn: false,
       currentUser: {}
     }
@@ -115,7 +114,7 @@ class App extends React.Component{
   }
 
   componentDidMount() {
-    localStorage.getItem('x-auth-token')
+    let token = localStorage.getItem('x-auth-token')
     this.getMovies();
   }
 
