@@ -94,21 +94,33 @@ const insertUser = (user, callback) => {
                     message: "email is Duplicated"
                 }, null)
             } else {
+                if (result[0].userName === user.userName) {
+                    callback({
+                        status: false,
+                        message: "username is Duplicated"
+                    }, null)
+                } else if (result[0].userEmail === user.userEmail) {
+                    callback({
+                        status: false,
+                        message: "email is Duplicated"
+                    }, null)
+            } else {
                 callback({
                     status: false,
-                    message: "something went wrong"
+                    message: "username is Duplicated"
                 }, null)
             }
         }
 
-    })
-}
+        })
+    }
 
-/**
- *   this function updates a user Based on the @param criteriaObject
- *   @example updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
- *   @example updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
- */
+    // User.create(user)
+    //     .then(user => callback(null, user))
+    //     .catch(err => callback(err, null))
+    //this function updates a user Based on the @(code)criteriaObject
+    // updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
+    // updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
 const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}) => {
     User.findByIdAndUpdate(userObjectId, criteriaObject)
         .then(user => callback(null, user))
