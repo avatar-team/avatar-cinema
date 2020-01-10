@@ -17,7 +17,7 @@ const MovieCard = ({movie, index}) => (
       {console.log(movie)}
       <Row>
       <Col>
-        <Card className='my-3' style={{width:"1200px", height:"563px", backgroundColor: '#414141', color: 'white', borderRadius: '0 1rem 1rem 0'}}>
+        <Card className='my-3' style={{width:"1200px", height:"563px", backgroundColor: 'rgb(24, 24, 31)', color: 'white'}}>
           <Row>
             <Col md="4">
               <CardImg src={movie.Poster}/>

@@ -37,7 +37,7 @@ const MovieInfo = ({movies, handleReservation, reservationInfo}) => {
                     <CardSubtitle className="my-4"> <span className='spans'>available Chairs: </span>{movie.availableChairs}/{movie.chairs} </CardSubtitle>
                     <CardSubtitle className="my-4"> <span className='spans'>Time: </span>{new Date(movie.playDate).toLocaleTimeString()} </CardSubtitle>
                     <CardSubtitle className="my-4"> <span className='spans'>Date: </span>{new Date(movie.playDate).toLocaleDateString()} </CardSubtitle>
-                    <button className="mt-3 cardBtn" disabled={!movie.availableChairs? true: false}>Reserve Now!</button>
+                    <button className="mt-4 cardBtn" disabled={!movie.availableChairs? true: false}>Reserve Now!</button>
                 </CardBody>
               </Col>
             </Row>
