@@ -92,8 +92,9 @@ const Navbarz = (props) => {
                 <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><Button color="primary">Signup</Button></NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink className='mt-1 mx-2' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
+                <NavLink className='mt-1 mr-4' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
               </NavItem>
+              
             </Nav>}
           </Collapse>
         </Navbar>
