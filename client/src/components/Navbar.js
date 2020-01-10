@@ -18,18 +18,24 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
 
 const search = {
-    borderRadius: '1.6rem 0 0 1.6rem',
-    borderColor: 'transparent',
-    padding: '18px'
+  borderRadius: '0 1.6rem 1.6rem 0',
+  width: '450px',
+  backgroundColor: 'rgb(24, 24, 31)',
+  borderColor: 'transparent',
+  padding: '18px'
 }
 
 const items = {
-    paddingRight: '20px'
+  paddingRight: '45px',
+  fontSize: '14pt'
 }
 
-const bar = {
-  backgroundColor: 'transparent'
+const logo = {
+  fontSize: '20pt',
+  padding: '0 45px 0 25px'
 }
+
+
 
 const Navbarz = (props) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -46,18 +52,18 @@ const Navbarz = (props) => {
     })
   }
   return (
-    <div>
+    <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       {redirect? <Redirect to={redirect}/>: ''}
-        <Navbar className="ddd" expand="md">
-          <NavbarBrand tag={Link} to="/" style={items}>Avatar</NavbarBrand>
-          <NavbarToggler onClick={toggle} />
+        <Navbar expand="md">
+          <NavbarBrand tag={Link} to="/" style={logo}>Avatar</NavbarBrand>
+          {/* <NavbarToggler onClick={toggle} /> */}
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} style={items} to="/">Home</NavLink>
+                <NavLink className='mt-1' tag={Link} style={items} to="/">Home</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink style={items} href="#">Contact</NavLink>
+                <NavLink className='mt-1' style={items} href="#">Contact</NavLink>
               </NavItem>
             </Nav>
             <NavbarText>
@@ -71,16 +77,16 @@ const Navbarz = (props) => {
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} style={items} to="/">Log Out</NavLink>
+                <NavLink className='mt-1' tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>
             </Nav>
             :
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink tag={Link} style={items} to="/">Sign In</NavLink>
+                <NavLink className='mt-1' tag={Link} style={items} to="/login">Sign In</NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink tag={Link} style={items} to="/">Sign Up</NavLink>
+                <NavLink className='mt-1' tag={Link} style={items} to="/signup">Sign Up</NavLink>
               </NavItem>
             </Nav>}
           </Collapse>
