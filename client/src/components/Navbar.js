@@ -38,7 +38,7 @@ const Navbarz = (props) => {
   const toggle = () => setIsOpen(!isOpen);
   let handleSearch = (videoTitle) => {
     props.movies.map((movie, i)=> {
-      if(movie.Title.includes(videoTitle)) {
+      if(movie.Title.toLowerCase().includes(videoTitle.toLowerCase())) {
         console.log(videoTitle);
         setRedirect("/movieInfo/" + i)
       }
