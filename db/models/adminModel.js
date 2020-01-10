@@ -26,7 +26,15 @@ adminSchema.pre('save', function(next) {
     this.password = brcypt.hashSync(this.password, 8);
     next();
 })
+
+
 const Admin = new mongoose.model("Admin", adminSchema);
+
+/**
+ * @function insertAdmin is used to add an admin to the database 
+ * @param {*} adminObject 
+ * @param {*} callback Error-First Callback function
+ */
 const insertAdmin = (adminObject, callback) => {
     findAdmin({ username: adminObject.username }, (err, result) => {
         if (err) {
@@ -46,6 +54,12 @@ const insertAdmin = (adminObject, callback) => {
         }
     })
 };
+
+/**
+ * @function findAdmin is used to find an admin in the database based on the @param objectCriteria 
+ * @param {*} objectCriteria criteria that is used to search the database 
+ * @param {*} callback Error-First Callback function 
+ */
 const findAdmin = (objectCriteria = {}, callback) => {
     Admin.find(objectCriteria)
         .then(admin => callback(null, admin))

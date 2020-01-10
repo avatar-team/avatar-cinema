@@ -1,14 +1,52 @@
-// const express = require('express');
-// const app = express();
-// const authController = require('../../controllers/authController')
-// const userFunctions = require('./userModel');
-// const mongoose = require('mongoose')
-// const dotenv = require('dotenv')
+const express = require('express');
+const app = express();
+const authController = require('../../controllers/authController')
+const userFunctions = require('./userModel');
+const mongoose = require('mongoose')
+const dotenv = require('dotenv')
+dotenv.config({ path: "../../convig.env" })
+mongoose.Promise = global.Promise;
+app.use(express.json())
 
-// dotenv.config({ path: "../../convig.env" })
+const middelWare = (req, res, next) => {
+    req.body.user = new Date()
+    next()
+}
 
 
-// mongoose.Promise = global.Promise;
+
+app.get('/', middelWare, (req, res) => {
+    res.send(req.body.user);
+})
+
+
+
+
+app.listen(8000, () => {
+    console.log("Server is listikng ")
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // mongoose.connect('mongodb://localhost/Avatar', {
 //     useCreateIndex: true,
 //     useNewUrlParser: true,
