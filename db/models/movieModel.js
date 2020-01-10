@@ -82,58 +82,72 @@ const movieSchema = new Schema({
 
 const Movie = new mongoose.model("Movie", movieSchema);
 
-//this function is used to add a Movie to the database 
-//it accepts one Movie Object According to the schema OR array of Objects as well 
+/**
+ * this @function insertMovie is used to add a Movie to the database 
+ * it accepts one Movie Object According to the schema OR array of Objects as well 
+ * @param movie is the movie object that well be added to the database 
+ * @param callback Error-First Callback
+ */
 const insertMovie = (movie, callback = (err, result) => {}) => {
     Movie.create(movie)
         .then(movie => callback(null, movie))
         .catch(err => callback(err, null))
 };
 
-//this is used to update a certain movie record in the movies collection 
-// it accepts a object criteria 
-// e.g.. -- (e.g.. mean For Example)
-/*
-update("1231b23bwd", {title:"Spider-Man"}); this is Single item Editing 
-update( "1231b23bwd" ,{title:"Spider-Man",playTime:120, date :movieDate }) this is Multi item Editing 
-the objectCriteria param must be set respectfully to the movieSchema
-*/
+/**
+ * this @function updateMovie is used to update a certain movie record in the movies collection 
+ * it accepts a @param criteriaObject 
+ * e.g.. -- (e.g.. mean For Example)
+ * @example update("1231b23bwd", {title:"Spider-Man"}); this is Single item Editing 
+ * @example update( "1231b23bwd" ,{title:"Spider-Man",playTime:120, date :movieDate }) this is Multi item Editing 
+ * @param criteriaObject  must be set respectfully to the movieSchema
+ * 
+ */
 const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, criteriaObject)
         .then(movie => callback(null, movie))
         .catch(err => callback(err, null))
 };
 
-//this method well set The availability state of the movie to false, (making it deleted or Not available)
+/**
+ * this @function deleteMovie well set The @code availability state of the movie to false, (making it deleted or Not available)
+ * @param objectId the object id of the movie to be deleted
+ * @param callback Error-First Callback function
+ */
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, { availability: false })
         .then(movie => callback(null, movie))
         .catch(err => callback(err, null))
 }
 
-
-//this function well get the movies availble in the next four days, of the availability:TRUE 
-//this function only accepts callback function and well pass to that callback the result (array of movies) 
+/** 
+ * this @function getMovies4Days well get the movies availble in the next four days, of the @code availability:TRUE 
+ * this @function getMovies4Days only accepts callback function and well pass to that callback the result (array of movies) 
+ * @param callback Error-First Callback function
+ */
 const getMovies4Days = callback => {
     let currentDate = new Date(new Date().toLocaleDateString());
     let endDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + 4);
     findMovies({ "playDate": { "$gte": currentDate, "$lt": endDate }, availability: true }, callback);
-
-    // Movie.find( { "date": { "$gte": currentDate, "$lt": endDate }, availability: true } )
-    //     .then(movies => callback(null, movies))
-    //     .catch(err => callback(err, null))
 }
 
-//this function well return all the available movies 
-//this function only accepts callback function and well pass to that callback the result (array of movies)
+
+/**
+ * this @function getAllAvailableMovies well return all the available movies 
+ * this @function getAllAvailableMovies only accepts callback function and well pass to that callback the result (array of movies)
+ * @param callback Error-First Callback function
+ */
 const getAllAvailableMovies = callback => {
     findMovies({ availability: true }, callback);
 }
 
-
-//this function well search the database for movies according to the Criteria given in the firstParam
-//and well pass the result to the second param to the callback function as followrd by the rules of Err-First Style
-//if the param is not given , it well return all the movies in the database 
+/**
+ * this @function findMovies well search the database for movies according to the Criteria given in the firstParam
+ * and well pass the result to the second param to the @param callback function as followrd by the rules of Err-First Style
+ * if the param is not given , it well return all the movies in the database 
+ * @param objectCriteria the object that have Criteria of searching
+ * @param callback Error-First Callback function
+ */
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)
         .then(movies => callback(null, movies))
