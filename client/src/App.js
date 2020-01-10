@@ -52,11 +52,14 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    // axios.post(`/api/user/reservation`, reservationData)
-    // .then((res)=> {
-    //   return res.data
-    // })
-    return {successs: true}
+    axios.post(`/api/user/reservation`, reservationData)
+    .then((res)=> {
+      if(res.data.status) {
+        return res.data.reservation
+      }
+    })
+    console.log(reservationData)
+    // return {successs: true}
   }
 
   //Admin handle functions

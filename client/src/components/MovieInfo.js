@@ -1,12 +1,13 @@
 import '../App.css';
-import React from 'react'
+import React, {useState} from 'react'
 import data from './dummyData.js';
 import {
     Card, CardImg, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap';
 import {useParams} from 'react-router-dom';
-import Movietrailer from '../components/Movietrailer.js'
+import Movietrailer from '../components/Movietrailer.js';
+import Ticket from './Ticket.js'
 
 const div = {
   width: '1610px',
@@ -16,15 +17,20 @@ const div = {
 const MovieInfo = ({movies, handleReservation, userData}) => {
   let { index } = useParams()
   let movie = movies[index];
+  let [ticket, showTicket] = useState(false);
   //TODO create a function
   const collect = ()=> {
     let data = {
       firstName : userData.firstName,
       lastName : userData.lastName,
       userId : userData._id,
-      moviveId : movie._id
+      movieId : movie._id,
+      playDate: movie.playDate,
+      price: movie.price,
+      title: movie.Title
     }
-   handleReservation(data)
+   let ticket = handleReservation(data)
+   showTicket(true);
   }
 
   return(
@@ -59,7 +65,7 @@ const MovieInfo = ({movies, handleReservation, userData}) => {
       </Row>
       :
       <div>this Movie is not available</div>
-    }
+    }{ticket? <Ticket ticket={ticket}/>:''}
     </div>
   )
 }

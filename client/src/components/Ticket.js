@@ -3,7 +3,7 @@ import React from 'react'
 
 const Ticket = () => (
   <div class="commercial-ticket" >
-    <h3 className='text-center'> <span class='logo-ticket'>Avatar</span> Cinema </h3>
+    <h3 className='text-center'> <span className='logo-ticket'>Avatar</span> Cinema </h3>
     <div className=' text-center present'> <span class='temp'>...</span> Presents</div>
     <div className='titles my-3'>Movie Name :</div>
     <div className='titles my-3'>Time :</div>
