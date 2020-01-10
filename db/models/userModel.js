@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
 const bcrypt = require('bcryptjs')
+
     //*******************************************//
     // all the functions exported from this module is in Error-First-Style// 
     //*******************************************//

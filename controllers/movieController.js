@@ -39,8 +39,8 @@ exports.addMovie = (req, res) => {
                 console.log(movieData)
                 movieDb.insertMovie(movieData, (err, result) => {
                     if (result) {
-                        console.log("Data saved")
-                        res.json(result)
+                        console.log("data saved")
+                        res.json([result])
                     } else {
                         console.log(err)
                         res.send(err)

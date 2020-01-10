@@ -55,14 +55,10 @@ class Login extends Component {
     if (!this.state.username || !this.state.password) {
       // TODO: show something Red!
     }
-    axios.post('/login', this.state, {
-      headers: {
-        Authorization: 'Bearer ' + token
-      }
-    })
+    axios.post('/login', this.state)
     .then(result => {
       // TODO: we need to redirect him
-      console.log(result)
+      window.localStorage.setItem('x-auth-token', result.data.token)
       console.log('I am in')
       localStorage.setItem('x-auth-token', result.data.token)
       this.props.changeUserState(true)
