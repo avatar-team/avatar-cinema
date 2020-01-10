@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+// const brcypt = require('bcryptjs')
 const Schema = mongoose.Schema;
 
 //*******************************************//
@@ -17,8 +18,7 @@ const adminSchema = new Schema({
     password: {
         type: String,
         required: true,
-        trim: true,
-        select: false
+        trim: true
     }
 });
 adminSchema.pre('save', function(next) {
@@ -38,19 +38,16 @@ const Admin = new mongoose.model("Admin", adminSchema);
 const insertAdmin = (adminObject, callback) => {
     findAdmin({ username: adminObject.username }, (err, result) => {
         if (err) {
-            return res.status(401).json({
-                status: false,
-                err
-            })
+            callback(err, null)
         } else if (!result.length) {
             Admin.create(adminObject)
                 .then(admin => callback(null, admin))
                 .catch(err => callback(err, null))
         } else {
-            res.status(401).json({
+            callback({
                 status: false,
-                message: "Error!"
-            })
+                message: "Admin Username is Deplicated or Other Error"
+            }, null)
         }
     })
 };

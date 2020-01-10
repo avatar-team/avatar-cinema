@@ -74,7 +74,7 @@ exports.protect = (req, res, next) => {
         token = req.headers.authorization.split(' ')[1]
     }
     if (!token) {
-        return res.json({
+        return res.status(404).json({
             status: false,
             error: "You Are not logged in "
         })

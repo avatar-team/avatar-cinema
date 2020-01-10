@@ -19,7 +19,7 @@ class App extends React.Component{
       movies: [],
       currentReservation: {},
       isUserLoggedIn: false,
-      currentUser: {}
+      user: {}
     }
   }
 
@@ -51,13 +51,11 @@ class App extends React.Component{
   }
 
   handleReservation(reservationData) {
-    // axios.post("/api/reserveFilm", reservationData)
+    // axios.post(`/api/user/reservation`, reservationData)
     // .then((res)=> {
-    //   this.currentReservation =  res.data
+    //   return res.data
     // })
-    this.setState({
-      currentReservation: reservationData
-    })
+    return {successs: true}
   }
 
   //Admin handle functions
@@ -113,8 +111,37 @@ class App extends React.Component{
     })
   }
 
+
+  addFavoriteMovie(movieId, userId) {
+    //TODO you will receive a movie id, you should take the userId from the user state
+    //and send the data to this route '/api/user/movie save this film 
+  }
+
+  isFavorite(movieId) {
+    this.user.favoriteMovies.map((movie)=> {
+      if(movie._id === movieId) return true;
+    })
+    return false;
+  }
+
+
   componentDidMount() {
     let token = localStorage.getItem('x-auth-token')
+    axios.get('/api/user/',{
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    }).then(res => {
+      console.log(res)
+      if(res.data.status) {
+        this.setState({
+          user: res.data.user,
+          isUserLoggedIn: true
+        })
+      }
+    }).catch(err=> {
+      console.log(err)
+    })
     this.getMovies();
   }
 
@@ -122,15 +149,19 @@ class App extends React.Component{
     let helper = videoTitle => this.handleSearch(videoTitle)
     return (
       <BrowserRouter>
-        {console.log(this.state.movies)}
-        <NavBar changeUserState={(state)=> this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
+        {console.log(this.state.user)}
+        <NavBar changeUserState={(state)=> this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn} 
+        movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>
           <Route path="/" exact component={(data)=> {
             // console.log(data)
-            return <MainPage isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
+            return <MainPage addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
+            isFavorite={()=> this.isFavorite()} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
           }}/>
-          <Route path="/movieInfo/:index" component={()=> {
-            return <MovieInfo isUserLoggedIn={this.state.isUserLoggedIn} reservationInfo={this.state.currentReservation} handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+          <Route isFavorite={()=> this.isFavorite()} path="/movieInfo/:index" component={()=> {
+            return <MovieInfo handleReservation={(reservationData)=> this.handleReservation(reservationData)} addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
+            isUserLoggedIn={this.state.isUserLoggedIn} userData={this.state.user}
+            handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
           <Route path="/admin" component={()=> {
             return <Dashboard movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
@@ -139,11 +170,13 @@ class App extends React.Component{
           }}/>
           <Route path="/user" exact component={User}/>
           <Route path="/signup" exact component={()=> {
-            return <Signup changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            return <Signup changeUserState={(state, userData)=> this.changeUserState(state, userData)} 
+            isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
           <Route path="/login" exact component={(data)=> {
             console.log(data)
-            return <Login history={data.history}  changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+            return <Login history={data.history}  changeUserState={(state, userData)=>this.changeUserState(state, userData)} 
+            isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
         </Switch>
 

@@ -1,13 +1,23 @@
 const Admin = require('../db/models/adminModel')
 const User = require('../db/models/userModel')
+const brcypt = require('bcryptjs')
 exports.hundleSginin = (req, res) => {
     admin = req.body;
     Admin.findAdmin({ username: admin.username }, (err, result) => {
         if (result) {
-            res.status(200).json({
-                status: true,
-                message: "OK",
-                data: result
+            brcypt.compare(admin.password, result.password).then(bool => {
+                if (bool) {
+                    res.status(200).json({
+                        status: true,
+                        message: "OK",
+                        data: result
+                    })
+                } else {
+                    res.status(401).json({
+                        status: false,
+                        message: "UNAUTHORIZED ACCESS, Password is Wrong"
+                    })
+                }
             })
         } else {
             res.status(401).json({

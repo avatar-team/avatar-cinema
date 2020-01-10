@@ -80,7 +80,10 @@ const Navbarz = (props) => {
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink onClick={()=> props.changeUserState(false)} tag={Link} style={items} to="/">Log Out</NavLink>
+                <NavLink onClick={()=> {
+                  props.changeUserState(false)
+                  localStorage.setItem('x-auth-token', '')
+                }} tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>
               <NavItem className="ml-auto">
                 <NavLink tag={Link} style={items} to="/user"><FontAwesomeIcon icon={faUser}/></NavLink>
@@ -92,8 +95,9 @@ const Navbarz = (props) => {
                 <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><Button color="primary">Signup</Button></NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink className='mt-1 mx-2' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
+                <NavLink className='mt-1 mr-4' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
               </NavItem>
+              
             </Nav>}
           </Collapse>
         </Navbar>

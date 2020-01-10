@@ -25,7 +25,7 @@ const properties = {
 const subDiv = {
   maxWitdh: '100%',
   width: '100%',
-  height: '870px',
+  height: '879px',
   maxHeight: '100%'
 }
 
