@@ -3,6 +3,8 @@ import MovieController from './MovieController'
 import UserController from './UserConttroller'
 import {  Row, Col ,Container ,Button} from 'reactstrap';
 import axios from 'axios';
+import {BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
+import AdminLogin from './adminLogin.js'
 
 
 class Dashboard extends React.Component {
@@ -13,7 +15,8 @@ constructor(props) {
 
   this.state = {
     users : [] ,
-    movieShow : true
+    movieShow : true,
+    isAdminLoggedIn: false
   };
 };
 
@@ -28,22 +31,40 @@ constructor(props) {
   
 // }
 
+changeAdminState(state) {
+  this.setState({
+    isAdminLoggedIn: state
+  })
+}
+
 render(){
   return(
-    <Container>
-      <Row>
-        <Col md="2" className="text-center">
-          <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
-          <Button onClick={()=>this.setState({movieShow : true })}>movie</Button>  
-        </Col>
-        <Col md="10">
-          { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
-          handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
-          handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
-          }
-        </Col>
-      </Row>
-    </Container>
+    <BrowserRouter>
+      <Switch>
+        <Route path={`${this.props.match.path}`} exact component={()=> {
+          return <div>
+          {this.state.isAdminLoggedIn?<Row>
+            <Col md="2" className="text-center">
+              <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
+              <Button onClick={()=>this.setState({movieShow : true })}>movie</Button>  
+            </Col>
+            <Col md="10">
+              { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
+              handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
+              handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
+            }
+            </Col>
+          </Row>:
+          <Redirect to={`${this.props.match.url}/login`} />}
+          </div>
+        }}/>
+
+        <Route path={`${this.props.match.path}/login`} component={(data)=> {
+          return <AdminLogin changeAdminState={(state)=> this.changeAdminState(state)} history={data.history}/>
+        }}/>
+
+      </Switch>
+    </BrowserRouter>
   )
 }
 

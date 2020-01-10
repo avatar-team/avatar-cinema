@@ -10,7 +10,7 @@ exports.hundleSginin = (req, res) => {
                     res.status(200).json({
                         status: true,
                         message: "OK",
-                        data: result
+                        admin: result
                     })
                 } else {
                     res.status(401).json({
@@ -18,6 +18,8 @@ exports.hundleSginin = (req, res) => {
                         message: "UNAUTHORIZED ACCESS, Password is Wrong"
                     })
                 }
+            }).catch(err=>{
+                console.error(err)
             })
         } else {
             res.status(401).json({
