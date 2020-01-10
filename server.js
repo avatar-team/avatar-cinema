@@ -16,6 +16,8 @@ dotenv.config({ path: './config.env' })
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 
+
+
 app.use("/api/movies", movieRoute);
 app.use("/api/users", userRoute);
 app.use("/api/admin", adminRoute);
@@ -43,6 +45,7 @@ const requestReservation = (req, res) => {
 // // app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/signup', authController.signup)
 app.post('/login', authController.login)
+
 
 
 // ////////////////////////////////////////
