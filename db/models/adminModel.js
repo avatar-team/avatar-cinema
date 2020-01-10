@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const brcypt = require('bcryptjs')
+const bcrypt = require('bcryptjs')
 const Schema = mongoose.Schema;
 
 //*******************************************//
@@ -23,7 +23,7 @@ const adminSchema = new Schema({
 });
 adminSchema.pre('save', function(next) {
     if (!this.isModified('password')) return next();
-    this.password = brcypt.hashSync(this.password, 8);
+    this.password = bcrypt.hashSync(this.password, 8);
     next();
 })
 

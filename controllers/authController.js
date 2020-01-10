@@ -8,7 +8,6 @@ const User = mongoose.model("User")
 
 const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
 
-
 exports.signup = (req, res) => {
     console.log(req.body)
     userFunctions.insertUser(req.body, (err, result) => {

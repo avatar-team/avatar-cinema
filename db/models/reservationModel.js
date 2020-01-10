@@ -10,19 +10,24 @@ const validator = require('validator')
     //*******************************************//
 
 const reservationSchema = new Schema({
-    clientName: {
+    firstName: {
         type: String,
         required: true,
         trim: true
     },
-    clientEmail: {
+    lastName: {
         type: String,
         validate: [validator.isEmail, 'must be a vailed email'],
         required: true,
         unique: true,
         trim: true
     },
-    movieTitle: {
+    movieId: {
+        type: String,
+        required: true,
+        trim: true
+    },
+    userId: {
         type: String,
         required: true,
         trim: true
@@ -37,11 +42,11 @@ const Reservation = new mongoose.model("Reservation", reservationSchema);
  * @param callback Error-First Callback Function 
  */
 const insertReservation = (reservation, callback) => {
-    _findMovies({ Title: reservation.movieTitle }, (error, movie) => {
+    _findMovies({ _id: reservation.movieId }, (error, movie) => {
         if (error) {
             callback(error, null);
         } else if (movie.availableChairs <= 0) {
-            callback(new Error("There Are No more Available Chairs"), null);
+            callback("No More Available Chairs For this Movie", null);
         } else {
             _updateMovie(movie._id.toString(), { $inc: { availableChairs: -1 } });
             Reservation.create(reservation)

@@ -3,7 +3,7 @@ const validator = require('validator')
 const Schema = mongoose.Schema;
 const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
-const brcypt = require('bcryptjs')
+const bcrypt = require('bcryptjs')
     //*******************************************//
     // all the functions exported from this module is in Error-First-Style// 
     //*******************************************//
@@ -62,7 +62,7 @@ const userSchema = new Schema({
  */
 userSchema.pre('save', function(next) {
     if (!this.isModified('password')) return next();
-    this.password = brcypt.hashSync(this.password, 8);
+    this.password = bcrypt.hashSync(this.password, 8);
     next();
 })
 const User = new mongoose.model("User", userSchema);
@@ -170,6 +170,7 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
         }, callback)
         // updateUser(userObjectId, { $push { moviesBought: } })
 }
+
 
 
 
