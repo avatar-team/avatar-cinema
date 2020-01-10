@@ -9,40 +9,34 @@ dotenv.config({ path: "../../convig.env" })
 mongoose.Promise = global.Promise;
 app.use(express.json())
 
+const User = mongoose.model('User')
 
-const DB = "mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority"
-mongoose.connect(DB, {
-    useNewUrlParser: true,
+mongoose.connect('mongodb://localhost/Avatar', {
     useCreateIndex: true,
+    useNewUrlParser: true,
     useFindAndModify: false
-}).then(con => {
-    console.log();
-    console.log('DB connection Successfully')
+}, (err) => {
+    if (err) {
+        console.log("not connected to database" + err)
+    } else {
+        console.log("connected to database")
+    }
+});
+
+
+app.get('/', (req, res) => {
+
 })
-
-
-const middelWare = (req, res, next) => {
-    req.body.user = new Date()
-    next()
-}
-
-
-
-app.get('/', middelWare, (req, res) => {
-    res.send("Done")
-})
-
-
 
 
 app.listen(8000, () => {
-    adminFunction.insertAdmin({ username: "Avatar", password: "group5" }, (err, result) => {
-        if (err)
-            console.log(err)
 
-        console.log(result)
-    })
+
 })
+
+// 5e18813b5fdce621accc1ba8
+
+
 
 
 
@@ -192,9 +186,9 @@ app.listen(8000, () => {
 // }	
 
 
-// // movieModel.insertMovie(movie)	
-// // movieModel.insertMovie(movie2)	
-// // movieModel.insertMovie(movie3)	
+//  movieModel.insertMovie(movie)	
+//  movieModel.insertMovie(movie2)	
+//  movieModel.insertMovie(movie3)	
 
 
 
