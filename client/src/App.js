@@ -19,7 +19,8 @@ class App extends React.Component{
       movies: [],
       currentReservation: {},
       currentMovieId: 0,
-      isUserLoggedIn: false
+      isUserLoggedIn: false,
+      currentUser: {}
     }
   }
 
@@ -29,18 +30,21 @@ class App extends React.Component{
     axios.get('/API/movies')
     .then((res)=> {
       console.log(res.data)
-      if(Array.isArray(res.data)) {
-        this.setState({
-          movies: [...res.data]
-        })
-      }else {
-        this.setState(prevState => {
-          prevState.movies.push(res.data)
-          return({
-            movies: [...prevState.movies]
-          })
-        })
-      }
+      this.setState({
+        movies: [...this.state.movies, ...res.data]
+      })
+      // if(Array.isArray(res.data)) {
+      //   this.setState({
+      //     movies: [...res.data]
+      //   })
+      // }else {
+      //   this.setState(prevState => {
+      //     prevState.movies.push(res.data)
+      //     return({
+      //       movies: [...prevState.movies]
+      //     })
+      //   })
+      // }
     })
     .catch(err => {
       console.log(err)
@@ -57,18 +61,6 @@ class App extends React.Component{
     })
   }
 
-
-  handleSearch(videoTitle) {
-    this.state.movies.map((movie, i)=> {
-      if(movie.Title.includes(videoTitle)) {
-        console.log(videoTitle);
-        return <Redirect to={"/movieInfo/" + i}/>
-      }
-
-    })
-  }
-
-
   //Admin handle functions
   handleAdd(movieData) {
     axios.post('/api/movies', movieData)
@@ -76,7 +68,7 @@ class App extends React.Component{
       console.log(res)
       this.setState((prevState)=> {
         return ({
-          movies: [...prevState.movies, res.data]
+          movies: [...prevState.movies, ...res.data]
         })
       }, ()=> console.log(this.state.movies))
     })
@@ -122,6 +114,7 @@ class App extends React.Component{
   }
 
   componentDidMount() {
+    localStorage.getItem('x-auth-token')
     this.getMovies();
   }
 
@@ -148,8 +141,9 @@ class App extends React.Component{
           <Route path="/signup" exact component={()=> {
             return <Signup changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
-          <Route path="/login" exact component={()=> {
-            return <Login changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
+          <Route path="/login" exact component={(data)=> {
+            console.log(data)
+            return <Login history={data.history}  changeUserState={(state)=>this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn}/>
           }}/>
         </Switch>
 
