@@ -30,7 +30,7 @@ constructor(props) {
 
 render(){
   return(
-  
+    <Container>
       <Row>
         <Col md="2" className="text-center">
           <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
@@ -43,6 +43,7 @@ render(){
           }
         </Col>
       </Row>
+    </Container>
   )
 }
 
