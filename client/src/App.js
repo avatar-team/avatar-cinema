@@ -51,16 +51,7 @@ class App extends React.Component{
     })
   }
 
-  handleReservation(reservationData) {
-    axios.post(`/api/user/reservation`, reservationData)
-    .then((res)=> {
-      if(res.data.status) {
-        return res.data.reservation
-      }
-    })
-    console.log(reservationData)
-    // return {successs: true}
-  }
+
 
   //Admin handle functions
   handleAdd(movieData) {
@@ -162,8 +153,8 @@ class App extends React.Component{
             return <MainPage addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
             isFavorite={()=> this.isFavorite()} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
           }}/>
-          <Route isFavorite={()=> this.isFavorite()} path="/movieInfo/:index" component={()=> {
-            return <MovieInfo handleReservation={(reservationData)=> this.handleReservation(reservationData)} addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
+          <Route isFavorite={()=> this.isFavorite()} path="/movieInfo/:index" component={(data)=> {
+            return <MovieInfo match={data.match} handleReservation={(reservationData)=> this.handleReservation(reservationData)} addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
             isUserLoggedIn={this.state.isUserLoggedIn} userData={this.state.user}
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
@@ -172,7 +163,9 @@ class App extends React.Component{
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
             handleDelete={(deletedMovie)=> this.handleDelete(deletedMovie)} />
           }}/>
-          <Route path="/user" exact component={User}/>
+          <Route path="/user" exact component={() => {
+            return <User user={this.state.user}/>
+          }}/>
           <Route path="/signup" exact component={()=> {
             return <Signup changeUserState={(state, userData)=> this.changeUserState(state, userData)} 
             isUserLoggedIn={this.state.isUserLoggedIn}/>

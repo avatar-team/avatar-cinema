@@ -58,10 +58,9 @@ class User extends React.Component {
                         <Card>
                              <CardImg top width="100%" src={data[0].Poster} alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>User title</CardTitle>
-                                <CardSubtitle>Card subtitle</CardSubtitle>
-                                <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                <Button>Button</Button>
+                                <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
+                                <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
+                                <CardText>email: {this.props.user.userEmail}</CardText>
                              </CardBody>
                           </Card>
                         </Col>

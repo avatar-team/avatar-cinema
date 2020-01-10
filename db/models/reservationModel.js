@@ -27,7 +27,12 @@ const reservationSchema = new Schema({
         type: String,
         required: true,
         trim: true
-    }
+    },
+    playDate: {
+        type: Date
+    },
+    price: Number,
+    title: String
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
 
@@ -39,24 +44,31 @@ const Reservation = new mongoose.model("Reservation", reservationSchema);
  */
 const insertReservation = (reservation, callback) => {
     _findMovies({ _id: reservation.movieId }, (error, movie) => {
-        
+
         if (error) {
             callback(error, null);
         } else if (movie[0].availableChairs <= 0) {
             callback("No More Available Chairs For this Movie", null);
         } else {
-            _updateMovie(movie[0]._id, { $inc: { availableChairs: -1 } },(err,data)=>{
-                if(err)
-                    {
-                    callback(err,null);
-                }else{
-                    Reservation.create(reservation)
-                    .then(reservation => callback(null, reservation))
-                    .catch(err => callback(err, null));
-                }
+            // _updateMovie(movie[0]._id, { $inc: { availableChairs: -1 } },(err,data)=>{
+            //     if(err)
+            //         {
+            //         callback(err,null);
+            //     }else{
+            //         Reservation.create(reservation)
+            //         .then(reservation => callback(null, reservation))
+            //         .catch(err => {
+            //             console.log(err)
+            //             callback(err, null)
+            //         });
+            //     }
                 
-            });
+            // });
             
+            _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } });
+            Reservation.create(reservation)
+                .then(reservation => callback(null, reservation))
+                .catch(err => callback(err, null));
         }
     })
 };

@@ -115,7 +115,6 @@ exports.insertReservation = (req, res, next) => {
             message: "OK",
             reservation: result
         })
-
     })
 }
 exports.pullFavorite = (req, res, next) => {
