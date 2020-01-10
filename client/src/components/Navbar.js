@@ -14,9 +14,9 @@ import {
   Button
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
-import { MDBCol, MDBFormInline, MDBIcon } from "mdbreact";
+import User from './User';
 
 const search = {
   borderRadius: '0 1.6rem 1.6rem 0',
@@ -47,7 +47,7 @@ const Navbarz = (props) => {
   const toggle = () => setIsOpen(!isOpen);
   let handleSearch = (videoTitle) => {
     props.movies.map((movie, i)=> {
-      if(movie.Title.includes(videoTitle)) {
+      if(movie.Title.toLowerCase().includes(videoTitle.toLowerCase())) {
         console.log(videoTitle);
         setRedirect("/movieInfo/" + i)
       }
@@ -80,7 +80,10 @@ const Navbarz = (props) => {
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink className='mt-1' tag={Link} style={items} to="/">Log Out</NavLink>
+                <NavLink onClick={()=> props.changeUserState(false)} tag={Link} style={items} to="/">Log Out</NavLink>
+              </NavItem>
+              <NavItem className="ml-auto">
+                <NavLink tag={Link} style={items} to="/user"><FontAwesomeIcon icon={faUser}/></NavLink>
               </NavItem>
             </Nav>
             :
