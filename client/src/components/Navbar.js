@@ -27,12 +27,14 @@ const search = {
 
 const items = {
   paddingRight: '45px',
-  fontSize: '14pt'
+  fontSize: '14pt',
+  color: 'white'
 }
 
 const logo = {
-  fontSize: '20pt',
+  fontSize: '28pt',
   padding: '0 45px 0 25px'
+  // fontFamily: 'Gill Sans Gill Sans MT Calibri Trebuchet MS sans-serif'
 }
 
 
@@ -55,7 +57,7 @@ const Navbarz = (props) => {
     <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       {redirect? <Redirect to={redirect}/>: ''}
         <Navbar expand="md">
-          <NavbarBrand tag={Link} to="/" style={logo}>Avatar</NavbarBrand>
+          <NavbarBrand tag={Link} to="/" className='logo' style={logo}>Avatar</NavbarBrand>
           {/* <NavbarToggler onClick={toggle} /> */}
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
@@ -83,10 +85,10 @@ const Navbarz = (props) => {
             :
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink className='mt-1' tag={Link} style={items} to="/login">Sign In</NavLink>
+                <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><Button color="primary">Signup</Button></NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink className='mt-1' tag={Link} style={items} to="/signup">Sign Up</NavLink>
+                <NavLink className='mt-1 mx-2' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
               </NavItem>
             </Nav>}
           </Collapse>
