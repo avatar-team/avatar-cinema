@@ -18,7 +18,6 @@ class App extends React.Component{
     this.state = {
       movies: [],
       currentReservation: {},
-      currentMovieId: 0,
       isUserLoggedIn: false,
       currentUser: {}
     }
@@ -108,13 +107,14 @@ class App extends React.Component{
   }
 
   changeUserState(state) {
+    console.log(state)
     this.setState({
       isUserLoggedIn: state
     })
   }
 
   componentDidMount() {
-    localStorage.getItem('x-auth-token')
+    let token = localStorage.getItem('x-auth-token')
     this.getMovies();
   }
 
@@ -123,7 +123,7 @@ class App extends React.Component{
     return (
       <BrowserRouter>
         {console.log(this.state.movies)}
-        <NavBar isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
+        <NavBar changeUserState={(state)=> this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>
           <Route path="/" exact component={(data)=> {
             // console.log(data)
