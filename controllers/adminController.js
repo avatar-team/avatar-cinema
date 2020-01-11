@@ -3,6 +3,8 @@ const User = require('../db/models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+
+
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME_ADMIN });
 exports.hundleSginin = (req, res) => {
     admin = req.body;
@@ -40,7 +42,7 @@ exports.hundleMainDashboard = (req, res) => {
         if (result) {
             res.status(200).json({
                 status: true,
-                data: result
+                users: result
             })
         } else {
             res.status(404).json({

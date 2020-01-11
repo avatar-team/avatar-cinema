@@ -4,6 +4,10 @@ body {
   background-color: rgb(24, 24, 31);
 }
 
+/* Navbar */
+
+/* Navbar */
+
 /* Movie Card */
 .title {
   font-size: 26pt;
@@ -144,3 +148,24 @@ body {
 .titles {
   font-size: 14pt;
 }
+
+/* Test */
+
+.signup {
+  background-color: #ca3e47;
+  color: black;
+  padding: 7px;
+  border-color: transparent;
+  border-radius: .4rem;
+
+}
+
+.login {
+  border: 2px solid #ca3e47;
+  background-color: transparent;
+  color: #ca3e47;
+  padding: 7.5px;
+  border-radius: .4rem;
+}
+
+/*  */

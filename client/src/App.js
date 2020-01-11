@@ -99,10 +99,11 @@ class App extends React.Component{
     })
   }
 
-  changeUserState(state) {
+  changeUserState(state, userData) {
     console.log(state)
     this.setState({
-      isUserLoggedIn: state
+      isUserLoggedIn: state,
+      user: userData
     })
   }
 

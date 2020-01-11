@@ -5,22 +5,24 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 
-let header = '';
-const UserData = ({movies, type})=>(
-  <div>
- 
-   
-    <tbody>
-      {movies.map((movie,i)=>{
-        return  <tr key={i} >
-        <td>{movie.movie}</td>
+const UserData = ({movies})=> {
+  let rows
+  if(movies) {
+    rows = movies.map((movie,i)=>{
+      console.log(movie)
+      return (<tr key={i} >
+        <td>{movie.Title}</td>
         <td>{movie.price}</td>
-        <td>{movie.date}</td>
-        <td>{movie.time}</td>
-        </tr>
-      })}
+        <td>{new Date(movie.playDate).toLocaleDateString()}</td>
+        <td>{new Date(movie.playDate).toLocaleTimeString()}</td>
+      </tr>)
+    })
+  }
+  return (
+    <tbody>
+      {rows}
     </tbody>
-    </div>
-)
+  )
+}
 
 export default UserData

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Redirect } from 'react-router-dom'
+import { Alert } from 'reactstrap'
 
 const axios = require('axios')
 
@@ -69,16 +70,22 @@ class Signup extends Component {
         // console.log(result.data.token)
         if (result.data.status) {
           localStorage.setItem('x-auth-token', result.data.token)
-          document.getElementById('alert').textContent = 'Success'
-          this.props.changeUserState(true)
-          // TODO: signup success, Redirect him
+          document.getElementById('alert').style.visibility = 'hidden'
+          document.getElementById('alert').textContent = ''
+          console.log(result)
+          this.props.changeUserState(true, result.data.user)
         }
         // if user exist , show something
         if (!result.data.status && result.data.data.error.message.includes('username')) {
+          document.getElementById('alert').style.visibility = 'visible'
           document.getElementById('alert').textContent = 'Username is Duplicated'
         }
         if (!result.data.status && result.data.data.error.message.includes('email')) {
+          document.getElementById('alert').style.visibility = 'visible'
           document.getElementById('alert').textContent = 'Email is Duplicated'
+        } else {
+          document.getElementById('alert').style.visibility = 'hidden'
+          document.getElementById('alert').textContent = ''
         }
       })
       .catch(err => {
@@ -143,9 +150,11 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        <div id="alert"></div>
+          <Alert style={{visibility: 'hidden', padding: '8px', width: '500px', margin: 'auto'}} color="danger" id="alert">
+            
+          </Alert>
 
-        <input className='mt-4' style={button} type="submit"/>
+        <input className='mt-4' style={button} type="submit" value='Signup'/>
         </form>
       </div>
     )
