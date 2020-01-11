@@ -28,6 +28,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
   let [precessType, setType] = useState('')
   let [CurrentMovie, setMovie] = useState({});
   let [deleteComponent, showDelete] = useState(false);
+  let [original, changeOriginal] = useState(false)
   
   return (
     <div>
@@ -73,6 +74,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 <FontAwesomeIcon color='white' icon={faEdit}/></button>
 
                 <button onClick={()=> {
+                  changeOriginal(!original)
                   setType('delete')
                   showAddUpdate(false)
                   showDelete(!deleteComponent)
@@ -87,10 +89,17 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
       movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
       {deleteComponent?
-          <Card style={{width: '50%', margin: 'auto', marginTop: '20px'}} body inverse color="danger">
+          <Card style={{width: '50%', margin: '0 auto'}} body inverse color="danger">
+            {/* {document.getElementById('card').style.backgroundColor = 'rgb(24, 24, 31)'}
+            {document.getElementById('card').style.opacity = '.2'} */}
             <CardTitle>Do you want to delete {CurrentMovie.Title} ? </CardTitle>
             <div style={{display: 'block-inline', margin: 'auto'}}>
-              <Button onClick={()=> showDelete(false)} style={{margin: '10px'}}>Cancel</Button>
+              <Button onClick={()=> { 
+                showDelete(false)
+              }
+              }
+              style={{margin: '10px'}}>
+              Cancel</Button>
               <Button onClick={()=> { handleDelete(CurrentMovie._id) }} color="secondary">Delete</Button>
             </div>
           </Card>

@@ -45,6 +45,7 @@ const Navbarz = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   let [redirect, setRedirect] = useState(null);
 
+
   const toggle = () => setIsOpen(!isOpen);
   let handleSearch = (videoTitle) => {
     props.movies.map((movie, i)=> {
@@ -60,7 +61,8 @@ const Navbarz = (props) => {
       {redirect? <Redirect to={redirect}/>: ''}
         <Navbar expand="md">
           <NavbarBrand tag={Link} to="/" className='logo' style={logo}>Avatar</NavbarBrand>
-          {/* <NavbarToggler onClick={toggle} /> */}
+          <NavbarToggler onClick={toggle} />
+          {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>

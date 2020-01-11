@@ -60,12 +60,12 @@ class UserController extends React.Component{
                 </tbody>
                 </Table>
                 {this.state.delete?
-                        <Card style={{width: '50%', margin: 'auto'}} body inverse color="danger">
-                           <CardTitle>do you want to delete {this.state.deleteUser}  </CardTitle>
-                           <div style={{display: 'block-inline', margin: 'auto'}}>
-                           <Button  style={{margin: '10px'}}>Cancel</Button><Button  color="secondary">Delete</Button>
-                            </div> 
-                        </Card>: null}
+                  <Card style={{width: '50%', margin: 'auto', marginTop: '20px'}} body inverse color="danger">
+                    <CardTitle>Do you want to delete {this.state.deleteUser} ? </CardTitle>
+                    <div style={{display: 'block-inline', margin: 'auto'}}>
+                    <Button style={{margin: '10px'}}>Cancel</Button><Button color="secondary">Delete</Button>
+                    </div> 
+                  </Card>: null}
             </div>
         )
     }

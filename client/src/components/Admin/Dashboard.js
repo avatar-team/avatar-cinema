@@ -44,7 +44,7 @@ render(){
         <Route path={`${this.props.match.path}`} exact component={()=> {
           return <div>
           {this.state.isAdminLoggedIn?
-            <Card style={{backgroundColor: 'rgb(24, 24, 31)', width: '1850px', margin: '0 auto', padding: '100px'}}>
+            <Card id='card' style={{backgroundColor: 'rgb(24, 24, 31)', width: '1850px', margin: '0 auto', padding: '100px'}}>
               <Row>
                 <Col md="2">
                   <div className='m-auto w-100'>
