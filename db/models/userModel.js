@@ -163,30 +163,17 @@ const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
  */
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
     _findMovies(movieObjectId, (error, movie) => {
-            if (error) {
-                callback(error, null)
+        if (error) {
+            callback(error, null)
+        }
+        updateUser(userObjectId, { $push: { favoriteMovies: movie[0] } }, (err, result) => {
+            if (err) {
+                callback(err, null)
+            } else {
+                callback(null, result)
             }
-
-
-            //here if the movie aleardy exits in the user fivarts movies it well not be added// how??
-            updateUser(userObjectId, { $push: { favoriteMovies: movie[0] } }, (err, result) => {
-                if (err) {
-                    callback(err, null)
-                } else {
-                    callback(null, result)
-                }
-            })
-
-
-
-
-
         })
-        // const checkMovieIfExists = (userObjectId, movieObjectId) => {
-        //     User.find({ _id: userObjectId }).then(user => {
-        //         user.
-        //     })
-        // }
+    })
 }
 
 /**
