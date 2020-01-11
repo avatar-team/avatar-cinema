@@ -73,7 +73,7 @@ exports.pushMoviebBought = (req, res, next) => {
 
 exports.insertFavoriteMovie = (req, res, next) => {
     const { userId, movieId } = req.body;
-    userModel.pushFavoriteMovies(userId, movieId, (err, user) => {
+    userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
         if (err) {
             res.status(404).json({
                 status: false,

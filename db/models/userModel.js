@@ -180,7 +180,7 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
  * @param {*} movieObjectId the Object Id of the movie to be deleted 
  * @param {*} callback Error-First Callback Function
  */
-const pullFavoriteMovie = (userObjectId, movieObjectId, callback) => {
+const pullFavoriteMovie = (userObjectId, movieObjectId, callback = () => {}) => {
     updateUser({ _id: userObjectId }, { $pull: { favoriteMovies: { _id: movieObjectId } } }, callback);
 }
 
