@@ -5,6 +5,13 @@ const router = express.Router();
 
 router.route('/')
     .get(authController.protect, userController.getUser);
+
+
+router.route("/favorite")
+    .post(userController.insertFavoriteMovie) //hundle this functions
+    .delete(userController.pullFavorite)
+
+
 router.route('/:id')
     .get(userController.findUser)
     .delete(userController.deleteUser);
@@ -17,8 +24,5 @@ router.route('/reservation')
     .post(userController.insertReservation)
     //insert into reservation collation AND decrese availbale chairs AND add this movie to the movieboughrs of that user
     //@return 
-router.route("/favorite")
-    .post(userController.insertFavoriteMovie) //hundle this functions
-    .delete(userController.pullFavorite)
 
 module.exports = router;

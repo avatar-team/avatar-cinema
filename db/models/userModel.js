@@ -164,12 +164,21 @@ const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
  * @param {*} callback Error-First Callback function  
  */
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
+//goes here 
     _findMovies(movieObjectId, (error, movie) => {
+
             if (error) {
                 callback(error, null)
             }
-            updateUser(userObjectId, { $push: { favoriteMovies: movie } })
-        }, callback)
+            updateUser(userObjectId, { $push: { favoriteMovies: movie[0] } },(err,result)=>{
+                if(err){
+                    callback(err,null)
+                }else{
+                    callback(null,result)
+                }
+
+            })
+    })
         // updateUser(userObjectId, { $push { moviesBought: } })
 }
 

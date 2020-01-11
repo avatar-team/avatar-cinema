@@ -107,17 +107,36 @@ class App extends React.Component{
     })
   }
 
-
-  addFavoriteMovie(movieId, userId) {
-    //TODO you will receive a movie id, you should take the userId from the user state
-    //and send the data to this route '/api/user/movie save this film 
+  isFavorite(movieId) {
+    if(this.state.user.favoriteMovies){
+      this.state.user.favoriteMovies.map((movie)=> {
+        if(movie._id === movieId) return true;
+      })
+    }
+    return false;
   }
 
-  isFavorite(movieId) {
-    this.user.favoriteMovies.map((movie)=> {
-      if(movie._id === movieId) return true;
-    })
-    return false;
+  changeFavoriteState(state, movieId, userId) {
+    //TODO you will receive a movie id, you should take the userId from the user state
+    //and send the data to this route '/api/user/favorite save this film 
+    console.log(state, movieId, userId)
+      if(state == 'add') {
+        axios.post('/api/user/favorite', {movieId: movieId, userId: userId})
+        .then(res=> {
+          console.log(res)
+        })
+        .catch(err => {
+          console.log(err)
+        })
+      }else if(state == "delete") {
+        axios.delete(`/api/user/favorite/${userId}/${movieId}`)
+        .then(res=> {
+          console.log(res)
+        })
+        .catch(err => {
+
+        })
+      }
   }
 
 
@@ -151,11 +170,13 @@ class App extends React.Component{
         <Switch>
           <Route path="/" exact component={(data)=> {
             // console.log(data)
-            return <MainPage addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
-            isFavorite={()=> this.isFavorite()} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
+            return <MainPage user={this.state.user} changeFavoriteState={(state, movieId, userId)=> this.changeFavoriteState(state, movieId, userId)}
+            isFavorite={(movieId)=> this.isFavorite(movieId)} isUserLoggedIn={this.state.isUserLoggedIn} movies={this.state.movies}/>
           }}/>
-          <Route isFavorite={()=> this.isFavorite()} path="/movieInfo/:index" component={(data)=> {
-            return <MovieInfo match={data.match} handleReservation={(reservationData)=> this.handleReservation(reservationData)} addFavoriteMovie={(movieId, userId)=> this.addFavoriteMovie(movieId, userId)} 
+          <Route path="/movieInfo/:index" component={(data)=> {
+            return <MovieInfo changeFavoriteState={(state, movieId, userId)=> this.changeFavoriteState(state, movieId, userId)} 
+            isFavorite={(movieId)=> this.isFavorite(movieId)} match={data.match} 
+            handleReservation={(reservationData)=> this.handleReservation(reservationData)} 
             isUserLoggedIn={this.state.isUserLoggedIn} userData={this.state.user}
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
