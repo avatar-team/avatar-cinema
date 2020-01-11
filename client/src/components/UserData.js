@@ -5,7 +5,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 
-const UserData = ({movies})=> {
+const UserData = ({movies, type})=> {
   let rows
   if(movies) {
     rows = movies.map((movie,i)=>{

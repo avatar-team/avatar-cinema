@@ -6,18 +6,20 @@ import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
 
 const transparent = {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent'
-  }
+  backgroundColor: 'transparent',
+  borderColor: 'transparent'
+}
+
+const table = {
+  borderCollapse: 'collapse',
+  padding: '10px',
+  backgroundColor: '#313131',
+  width: '90%'
+}
   
-  const table = {
-    borderCollapse: 'collapse',
-    padding: '10px'
-  }
-  
-  const td = {
-    padding: '12px'
-  }
+const td = {
+  padding: '12px'
+}
 
   
 class UserController extends React.Component{
@@ -34,13 +36,13 @@ class UserController extends React.Component{
        
         return(
             <div>
-                <Table style={table} dark className="w-75 text-center m-auto" >
+                <Table style={table} dark className="text-center m-auto" >
                 <thead>
                     <tr>
-                        <th>Username</th>
-                        <th>First name</th>
-                        <th>Last name</th>
-                        <th>Email</th>
+                        <th style={{fontSize: '14pt'}}>Username</th>
+                        <th style={{fontSize: '14pt'}}>First name</th>
+                        <th style={{fontSize: '14pt'}}>Last name</th>
+                        <th style={{fontSize: '14pt'}}>Email</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -58,12 +60,12 @@ class UserController extends React.Component{
                 </tbody>
                 </Table>
                 {this.state.delete?
-                        <Card style={{width: '50%', margin: 'auto'}} body inverse color="danger">
-                           <CardTitle>do you want to delete {this.state.deleteUser}  </CardTitle>
-                           <div style={{display: 'block-inline', margin: 'auto'}}>
-                           <Button  style={{margin: '10px'}}>Cancel</Button><Button  color="secondary">Delete</Button>
-                            </div> 
-                        </Card>: null}
+                  <Card style={{width: '50%', margin: 'auto', marginTop: '20px'}} body inverse color="danger">
+                    <CardTitle>Do you want to delete {this.state.deleteUser} ? </CardTitle>
+                    <div style={{display: 'block-inline', margin: 'auto'}}>
+                    <Button style={{margin: '10px'}}>Cancel</Button><Button color="secondary">Delete</Button>
+                    </div> 
+                  </Card>: null}
             </div>
         )
     }
