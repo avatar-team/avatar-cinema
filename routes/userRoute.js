@@ -18,7 +18,9 @@ router.route('/reservation')
     //insert into reservation collation AND decrese availbale chairs AND add this movie to the movieboughrs of that user
     //@return 
 router.route("/favorite")
-    .post(userController.insertFavoriteMovie) //hundle this functions
+    .post(userController.insertFavoriteMovie); //hundle this functions
+
+router.route("/favorite/:userId/:movieId")
     .delete(userController.pullFavorite)
 
 module.exports = router;
