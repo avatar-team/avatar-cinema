@@ -5,6 +5,13 @@ const router = express.Router();
 
 router.route('/')
     .get(authController.protect, userController.getUser);
+
+
+router.route("/favorite")
+    .post(userController.insertFavoriteMovie) //hundle this functions
+    .delete(userController.pullFavorite)
+
+
 router.route('/:id')
     .get(userController.findUser)
     .delete(userController.deleteUser);

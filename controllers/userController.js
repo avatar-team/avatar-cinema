@@ -75,7 +75,7 @@ exports.insertFavoriteMovie = (req, res, next) => {
     const { userId, movieId } = req.body;
     userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
         if (err) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: "Error in Pushing the Movie into the User Movie boughts",
                 error: err

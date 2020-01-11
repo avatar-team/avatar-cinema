@@ -20,6 +20,7 @@ const UserData = ({movies})=> {
   }
   return (
     <tbody>
+      {console.log(rows)}
       {rows}
     </tbody>
   )

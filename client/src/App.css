@@ -1,5 +1,5 @@
 body {
-  /* overflow-x: hidden; */
+  overflow-x: hidden;
   scroll-behavior: smooth;
   background-color: rgb(24, 24, 31);
 }
