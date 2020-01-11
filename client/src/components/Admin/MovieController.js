@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button, Card, CardTitle } from 'reactstrap'
 import AddUpdateMovie from './addUpdateMovie';
-import Test2 from '../Test2.js'
+import Delete from './Delete.js'
 
 const transparent = {
   backgroundColor: 'transparent',
@@ -49,7 +49,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
               style={{padding: '8px', borderColor: 'transparent', backgroundColor: '#ca3e47', color: 'white', borderRadius: '1rem'}}
               onClick={()=> {
               setType('add')
-              showAddUpdate(!addUpdate)
+              showAddUpdate(true)
               showDelete(false)
               }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie
               </label></th>
@@ -71,7 +71,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 for="login-popup"
                 onClick={()=> {
                   setType('update')
-                  showAddUpdate(!addUpdate)
+                  showAddUpdate(true)
                   setMovie(movie)
                   showDelete(false)
                 }}
@@ -83,7 +83,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 onClick={()=> {
                   setType('delete')
                   showAddUpdate(false)
-                  showDelete(!deleteComponent)
+                  showDelete(true)
                   setMovie(movie)
                 }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></label></td>
               </tr>
@@ -95,7 +95,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
       movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
       {deleteComponent? 
-        <Test2  currentMovie={CurrentMovie.Title} showDelete={showDelete} handleDelete={handleDelete} id={CurrentMovie._id} />
+        <Delete  currentMovie={CurrentMovie.Title} showDelete={showDelete} handleDelete={handleDelete} id={CurrentMovie._id} />
       : ''}
     </div>
   );

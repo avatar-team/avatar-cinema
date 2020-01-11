@@ -73,6 +73,10 @@ class AdminLogin extends Component {
     })
   }
 
+  componentDidMount() {
+    this.props.bringUsersData()
+  }
+
   render() {
     console.log(this.state)
     return (
