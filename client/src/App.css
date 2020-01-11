@@ -1,5 +1,5 @@
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   scroll-behavior: smooth;
   background-color: rgb(24, 24, 31);
 }
@@ -81,10 +81,66 @@ body {
 .tabItem {
   cursor: pointer;
   transition: 0.3 all ease-in-out;
+  color: white
 }
 
 .tabItem :hover {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.tabItem :active {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.tabItem :visited {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.active {
   background-color: #ca3e47;
 }
 
 /* Tab - Main Page */
+
+.commercial-ticket {
+  margin: 300px auto;
+  background-color: #edede7;
+  height: 360px;
+  width: 680px;
+  padding: 30px;
+  background-image: radial-gradient(circle at center, rgb(24, 24, 31) 3px, transparent 4px), radial-gradient(circle at center, rgb(24, 24, 31) 3px, transparent 4px);
+  background-size: 14px 12px;
+  background-position: center -6px, center calc(100% + 6px);
+  background-repeat: repeat-x;
+}
+
+.commercial-ticket h3 {
+  font-size: 14pt;
+  
+}
+
+.logo-ticket {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 24pt;
+  color: #ca3e47;
+
+}
+
+.present {
+  font-size: 14pt;
+  color: #ca3e47
+}
+
+.temp {
+  color: black;
+}
+
+.titles {
+  font-size: 14pt;
+}

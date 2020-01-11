@@ -6,10 +6,7 @@ const main = {
   textAlign: 'center',
   borderRadius: '1.2rem',
   padding: '10px',
-  fontFamily:'Trebuchet MS',
-  color: 'white',
-  fontSize: '14pt',
-  marginTop: '90px'
+  fontFamily:'Trebuchet MS'
 }
 
 const input = {
@@ -25,7 +22,7 @@ const input = {
 
 
 const button = {
-  backgroundColor: '#ca3e47', /* Green */
+  backgroundColor: '#4CAF50', /* Green */
   borderRadius: '8px',
   borderColor: 'transparent',
   color: 'white',
@@ -38,11 +35,11 @@ const button = {
   padding: '8px 28px'
 }
 
-class Login extends Component {
+class AdminLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: '',
+      username: '',
       password: ''
     }
   }
@@ -54,18 +51,15 @@ class Login extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
-    var token = localStorage.getItem('x-auth-token')
-    if (!this.state.username || !this.state.password) {
-      // TODO: show something Red!
-    }
-    axios.post('/login', this.state)
+    console.log(this.state)
+    axios.post('/api/admin/login', this.state)
     .then(result => {
       // TODO: we need to redirect him
-      window.localStorage.setItem('x-auth-token', result.data.token)
-      console.log('I am in')
-      localStorage.setItem('x-auth-token', result.data.token)
-      this.props.changeUserState(true)
-      this.props.history.replace('/')
+      if(result.data.status) {
+        console.log('I am in')
+        this.props.changeAdminState(true)
+        this.props.history.replace('/admin')
+      }
     })
     .catch(err => {
       // TODO: show something
@@ -77,21 +71,19 @@ class Login extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div style={main}>
-          <h2 className='mb-4'>Welcome to Signin Page</h2>
+          <h2>Welcome to Signin Page</h2>
 
-          Username: <br />
+          username: <br />
           <input
-          className='my-3'
           style={input}
           type="text"
-          name="userName"
-          value={this.state.userName}
+          name="username"
+          value={this.state.username}
           onChange={(e) => {this.onChange(e)}}/>
           <br />
 
           Password: <br />
           <input
-          className='my-3'
           style={input}
           type="password"
           name="password"
@@ -111,4 +103,4 @@ class Login extends Component {
 }
 
 
-export default Login;
+export default AdminLogin;
