@@ -67,7 +67,8 @@ class Signup extends Component {
         if (result.data.status) {
           localStorage.setItem('x-auth-token', result.data.token)
           document.getElementById('alert').textContent = 'Success'
-          this.props.changeUserState(true)
+          console.log(result)
+          this.props.changeUserState(true, result.data.user)
           // TODO: signup success, Redirect him
         }
         // if user exist , show something

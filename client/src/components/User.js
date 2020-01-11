@@ -8,6 +8,7 @@ import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
 import { Redirect } from 'react-router-dom';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
 
 const transparent = {
@@ -44,7 +45,7 @@ class User extends React.Component {
         super(props)
 
         this.state = {
-            counter : 0 
+            showPurched : true
         }
       
       };
@@ -58,7 +59,7 @@ class User extends React.Component {
                     <Row>
                         <Col md="4" className="border border-primary">
                         <Card>
-                             <CardImg top width="100%" src={data[0].Poster} alt="Card image cap" />
+                             <CardImg top width="100%" src="http://pluspng.com/img-png/user-png-icon-male-user-icon-512.png" alt="Card image cap" />
                             <CardBody>
                                 <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
                                 <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
@@ -70,12 +71,12 @@ class User extends React.Component {
 
                          <Nav tabs  className="border">
                              <NavItem>
-                                 <NavLink  onClick={()=>{this.setState({counter:0})}}>
+                                 <NavLink  onClick={()=>{this.setState({showPurched: true})}}>
                                  purchased moives
                                  </NavLink>   
                              </NavItem>
                              <NavItem>
-                                 <NavLink onClick={()=>{this.setState({counter:1})}}>
+                                 <NavLink onClick={()=>{this.setState({showPurched: false})}}>
                                 favorite moives
                                  </NavLink>
                              </NavItem>
@@ -87,8 +88,8 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {( this.state.counter == 0)? <UserData movies={ purchasedMoives} /> : null }
-                             {( this.state.counter == 1)? <UserData movies={ favoriteMoives} /> : null }
+                             {/* {( this.state.showPurched == true)? <UserData movies={ this.props.user.moviesBought} /> : null }
+                             {( this.state.showPurched == false)? <UserData movies={ this.props.user.favoriteMoives} /> : null } */}
                          </Table>
                          
                         </Col>

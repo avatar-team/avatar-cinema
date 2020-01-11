@@ -30,7 +30,7 @@ const MovieCard = ({movie, index}) => (
                 <CardSubtitle className="mt-4"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
                 <CardSubtitle className="mt-4"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
                 <CardSubtitle className="mt-4"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
-                <CardSubtitle className="mt-4"> <span className='spans'> Available Chairs: </span> {movie.chairs} </CardSubtitle>
+                <CardSubtitle className="mt-4"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
                 <Link to={`/movieInfo/${index}`}><button className="mt-5 cardBtn">Movie Info</button></Link>
               </CardBody>
             </Col>

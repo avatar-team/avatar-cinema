@@ -57,11 +57,12 @@ class Login extends Component {
     }
     axios.post('/login', this.state)
     .then(result => {
+      console.log(result)
       // TODO: we need to redirect him
       window.localStorage.setItem('x-auth-token', result.data.token)
       console.log('I am in')
       localStorage.setItem('x-auth-token', result.data.token)
-      this.props.changeUserState(true)
+      this.props.changeUserState(true, result.data.user)
       this.props.history.replace('/')
     })
     .catch(err => {
