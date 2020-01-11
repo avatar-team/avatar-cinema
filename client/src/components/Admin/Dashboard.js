@@ -60,9 +60,9 @@ render(){
               <Row>
                 <Col md="2" className="text-center">
                   <div className='m-auto w-100'>
-                    <h2 className='pb-2' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Controller</h2>
-                    <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
-                    <Button onClick={()=>this.setState({movieShow : true })}>movie</Button>  
+                    <h2 className='pb-2 text-left' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Controller</h2>
+                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' onClick={()=>this.setState({movieShow : false })}>Users</Button>
+                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} onClick={()=>this.setState({movieShow : true })}>Movies</Button>  
                   </div>
                 </Col>
                 <Col md="10">
@@ -92,23 +92,3 @@ render(){
 
 export default Dashboard;
 
-
-const userData = [{
-  userName :"weeeha",
-  firstName :"moahemd",
-  lastName : "fared",
-  userEmail:"weeehbla@gmail.com"
-},
-{
-  userName :"weasdeeha",
-  firstName :"moahemd",
-  lastName : "salah",
-  userEmail:"weeeasdhbla@gmail.com"
-},
-{
-  userName :"asd",
-  firstName :"ah,ed",
-  lastName : "fared",
-  userEmail:"weeasdehbla@gmail.com"
-}
-]

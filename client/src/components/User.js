@@ -56,7 +56,8 @@ class User extends React.Component {
                     <Row>
                         <Col md="4">
                         <Card style={{backgroundColor: 'rgb(24, 24, 31)'}}>
-                            <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' alt="Card image cap" />
+                            <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' 
+                            alt="Card image cap" />
                             <CardBody>
                                 <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
                                 <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
@@ -85,8 +86,8 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {( this.state.counter == 0)? <UserData movies={purchasedMoives} type={'P'} /> : null }
-                             {( this.state.counter == 1)? <UserData movies={favoriteMoives} type={'F'}/> : null }
+                             {this.state.showPurched? <UserData movies={this.props.user.moviesBought}/> : null }
+                             {this.state.showPurched? <UserData movies={this.props.user.favoriteMoives}/>: null }
                          </Table>
                          
                         </Col>
