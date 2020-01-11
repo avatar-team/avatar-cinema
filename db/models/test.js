@@ -7,9 +7,9 @@ const dotenv = require('dotenv')
 const adminFunction = require('./adminModel')
 dotenv.config({ path: "../../convig.env" })
 mongoose.Promise = global.Promise;
+const User = mongoose.model('User')
 app.use(express.json())
 
-const User = mongoose.model('User')
 
 mongoose.connect('mongodb://localhost/Avatar', {
     useCreateIndex: true,
@@ -25,23 +25,17 @@ mongoose.connect('mongodb://localhost/Avatar', {
 
 
 app.get('/', (req, res) => {
-
+    console.log()
+    checkMovieIfExists(req.body.userId, req.body.movieId)
+    res.send("asd")
 })
+
 
 
 app.listen(8000, () => {
 
 
 })
-
-// 5e18813b5fdce621accc1ba8
-
-
-
-
-
-
-
 
 
 
