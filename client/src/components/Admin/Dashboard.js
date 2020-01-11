@@ -78,7 +78,6 @@ render(){
                     <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} onClick={()=>this.setState({movieShow : true })}>Movies</Button>  
                     <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' 
                     onClick={()=> {
-                      this.bringUsersData()
                       this.setState({movieShow : false })
                     }}>Users</Button>
                   </div>
