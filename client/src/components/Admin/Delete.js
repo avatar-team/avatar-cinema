@@ -3,7 +3,7 @@ import { Button, Card, CardTitle } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
-const Test2 = (props) => {
+const Delete = (props) => {
     return (
         <div class="popup-container">
             <input type="checkbox" id="login-popup" />
@@ -26,5 +26,5 @@ const Test2 = (props) => {
     )
 }
 
-export default Test2;
+export default Delete;
 

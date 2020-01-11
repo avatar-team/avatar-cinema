@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { doc } from 'prettier';
-import '../Test2.scss';
+import './Test2.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
@@ -43,7 +43,7 @@ class AddUpdateMovie extends Component {
               <label for="login-popup" class="transparent-label"></label>
                   <div class="popup-inner">
                       <div class="popup-title">
-                          <h6>Add Movie</h6>
+                          <h6>{isUpdate? "update Movie": 'Add Movie'}</h6>
                           <label style={{backgroundColor: 'transparent'}} for="login-popup" class="popup-close-btn"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
                       </div>
                       <div class="popup-content">

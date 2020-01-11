@@ -80,7 +80,7 @@ render(){
         }}/>
 
         <Route path={`${this.props.match.path}/login`} component={(data)=> {
-          return <AdminLogin isAdminLoggedIn={this.state.isAdminLoggedIn} changeAdminState={(state)=> this.changeAdminState(state)} history={data.history}/>
+          return <AdminLogin bringUsersData={()=> this.bringUsersData()} isAdminLoggedIn={this.state.isAdminLoggedIn} changeAdminState={(state)=> this.changeAdminState(state)} history={data.history}/>
         }}/>
 
       </Switch>
