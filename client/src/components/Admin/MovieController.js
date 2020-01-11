@@ -4,7 +4,8 @@ import data from '../dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button, Card, CardTitle } from 'reactstrap'
-import AddUpdateMovie from './addUpdateMovie'
+import AddUpdateMovie from './addUpdateMovie';
+import Test2 from '../Test2.js'
 
 const transparent = {
   backgroundColor: 'transparent',
@@ -43,14 +44,15 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
             <th style={{fontSize: '14pt'}}>Price</th>
             <th style={{fontSize: '14pt'}}>Chairs</th>
             <th className="text-center">
-              <button 
+              <label
+              for="login-popup"
               style={{padding: '8px', borderColor: 'transparent', backgroundColor: '#ca3e47', color: 'white', borderRadius: '1rem'}}
               onClick={()=> {
               setType('add')
               showAddUpdate(!addUpdate)
               showDelete(false)
               }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie
-              </button></th>
+              </label></th>
           </tr>
         </thead>
 
@@ -64,23 +66,26 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
 
                 <td>{movie.price}$</td>  
                 <td>{movie.availableChairs} / {movie.chairs}</td>
-                <td className="text-center"><button
-                 onClick={()=> {
+                <td className="text-center">
+                <label
+                for="login-popup"
+                onClick={()=> {
                   setType('update')
                   showAddUpdate(!addUpdate)
                   setMovie(movie)
                   showDelete(false)
-                  }}
-                  style={transparent}>
-                <FontAwesomeIcon color='white' icon={faEdit}/></button>
+                }}
+                style={transparent}>
+                <FontAwesomeIcon color='white' icon={faEdit}/></label>
 
-                <button onClick={()=> {
-                  changeOriginal(!original)
+                <label 
+                for="login-popup"
+                onClick={()=> {
                   setType('delete')
                   showAddUpdate(false)
                   showDelete(!deleteComponent)
                   setMovie(movie)
-                }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
+                }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></label></td>
               </tr>
           )
         }):null}
@@ -89,21 +94,8 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
       {addUpdate? <AddUpdateMovie processType={precessType} 
       movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
-      {deleteComponent?
-          <Card style={{width: '50%', margin: '0 auto'}} body inverse color="danger">
-            {/* {document.getElementById('card').style.backgroundColor = 'rgb(24, 24, 31)'}
-            {document.getElementById('card').style.opacity = '.2'} */}
-            <CardTitle>Do you want to delete {CurrentMovie.Title} ? </CardTitle>
-            <div style={{display: 'block-inline', margin: 'auto'}}>
-              <Button onClick={()=> { 
-                showDelete(false)
-              }
-              }
-              style={{margin: '10px'}}>
-              Cancel</Button>
-              <Button onClick={()=> { handleDelete(CurrentMovie._id) }} color="secondary">Delete</Button>
-            </div>
-          </Card>
+      {deleteComponent? 
+        <Test2  currentMovie={CurrentMovie.Title} showDelete={showDelete} handleDelete={handleDelete} id={CurrentMovie._id} />
       : ''}
     </div>
   );
