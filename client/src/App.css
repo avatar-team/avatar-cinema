@@ -39,6 +39,11 @@ body {
 .imdb {
   font-size: 12pt;
 }
+
+.trailer {
+  margin-top: 250px;
+  margin-bottom: 250px;
+}
 /* Movie Card */
 
 /* Signup & Login */
@@ -152,3 +157,21 @@ body {
 }
 
 /*  */
+
+textarea:hover, 
+input:hover, 
+textarea:active, 
+input:active, 
+textarea:focus, 
+input:focus,
+button:focus,
+button:active,
+button:hover,
+label:focus,
+.btn:active,
+.btn.active
+{
+    outline:0px !important;
+    -webkit-appearance:none;
+    box-shadow: none !important;
+}

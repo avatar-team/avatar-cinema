@@ -119,7 +119,7 @@ class MovieInfo extends React.Component {
         </Row>
         :
         <div>this Movie is not available</div>
-      }{this.state.ticket.price? <Ticket ticket={this.state.ticket}/>:''}
+      }{this.state.clicked ? <Ticket ticket={this.state.ticket}/>:''}
       </div>
     )
 
