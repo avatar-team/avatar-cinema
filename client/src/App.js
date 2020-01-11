@@ -164,7 +164,7 @@ class App extends React.Component{
             handleDelete={(deletedMovie)=> this.handleDelete(deletedMovie)} />
           }}/>
           <Route path="/user" exact component={() => {
-            return <User user={this.state.user}/>
+            return <User isUserLoggedIn={this.state.isUserLoggedIn} user={this.state.user}/>
           }}/>
           <Route path="/signup" exact component={()=> {
             return <Signup changeUserState={(state, userData)=> this.changeUserState(state, userData)} 

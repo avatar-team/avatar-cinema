@@ -25,7 +25,8 @@ class MovieInfo extends React.Component {
     }
   }
   collect() {
-    console.log(this.props.userData)
+    console.log(this.props)
+    if(!this.props.isUserLoggedIn) return alert('you need to login first')
     let data = {
       firstName : this.props.userData.firstName,
       lastName : this.props.userData.lastName,

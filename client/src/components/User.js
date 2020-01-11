@@ -7,6 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 
 const transparent = {
@@ -52,6 +53,7 @@ class User extends React.Component {
           return(
              
             <div >
+                {!this.props.isUserLoggedIn? <Redirect to="/"/>:''}
                 <Container className="mb-3">
                     <Row>
                         <Col md="4" className="border border-primary">
