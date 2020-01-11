@@ -33,7 +33,7 @@ const Admin = new mongoose.model("Admin", adminSchema);
 
 /**
  * @function insertAdmin is used to add an admin to the database 
- * @param {*} adminObject 
+ * @param {*} adminObject the admin object to be add to the database 
  * @param {*} callback Error-First Callback function
  */
 const insertAdmin = (adminObject, callback) => {

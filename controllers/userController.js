@@ -117,6 +117,7 @@ exports.insertReservation = (req, res, next) => {
         })
     })
 }
+
 exports.pullFavorite = (req, res, next) => {
     const { userId, movieId } = req.body;
     userModel.pullFavoriteMovie(userId, movieId, (err, user) => {
