@@ -100,7 +100,6 @@ exports.insertReservation = (req, res, next) => {
                 error: err
             })
         }
-        console.log(result)
         userModel.pushMoviesBought(reservation.userId, reservation.movieId, (err, movie) => {
             if (err) {
                 return res.status(500).json({

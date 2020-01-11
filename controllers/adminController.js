@@ -1,7 +1,7 @@
 const Admin = require('../db/models/adminModel')
 const User = require('../db/models/userModel')
 const bcrypt = require('bcryptjs')
-
+const jwt = require('jsonwebtoken');
 
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME_ADMIN });
 
