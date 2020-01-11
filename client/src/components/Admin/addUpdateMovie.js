@@ -62,7 +62,7 @@ class AddUpdateMovie extends Component {
                                 </li>
                                 <li>
                                   <Label>Date: </Label>
-                                  <Input min="2020-1-11" required id="date" name="date" type="date"/>
+                                  <Input max={new Date()} min="2020-1-11" required id="date" name="date" type="date"/>
                                 </li>
                                 <li>
                                   <Label>Time: </Label>
