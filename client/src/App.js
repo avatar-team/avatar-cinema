@@ -108,13 +108,16 @@ class App extends React.Component{
   }
 
   isFavorite(movieId) {
-    let favorite = this.state.user.favoriteMovies
-    if( favorite != undefined){
-      for(var i = 0; i < favorite.length; i++) {
-        if(favorite[i]._id === movieId) return true;
+    if(this.state.user != undefined) {
+      let favorite = this.state.user.favoriteMovies
+      if( favorite != undefined){
+        for(var i = 0; i < favorite.length; i++) {
+          if(favorite[i]._id === movieId) return true;
+        }
       }
+      return false;
+
     }
-    return false;
   }
 
   changeFavoriteState(state, movieId, userId) {
@@ -124,7 +127,7 @@ class App extends React.Component{
       if(state == 'add') {
         axios.post('/api/user/favorite', {movieId: movieId, userId: userId})
         .then(res=> {
-          console.log(res)
+          this.getUser()
         })
         .catch(err => {
           console.log(err)
@@ -139,9 +142,9 @@ class App extends React.Component{
         })
       }
   }
+  
 
-
-  componentDidMount() {
+  getUser() {
     let token = localStorage.getItem('x-auth-token')
     axios.get('/api/user/',{
       headers: {
@@ -158,6 +161,10 @@ class App extends React.Component{
     }).catch(err=> {
       console.log(err)
     })
+  }
+
+  componentDidMount() {
+    this.getUser()
     this.getMovies();
   }
 
@@ -166,7 +173,7 @@ class App extends React.Component{
     return (
       <BrowserRouter>
         {console.log(this.state.user)}
-        <NavBar changeUserState={(state)=> this.changeUserState(state)} isUserLoggedIn={this.state.isUserLoggedIn} 
+        <NavBar changeUserState={(state, userData)=> this.changeUserState(state, userData)} isUserLoggedIn={this.state.isUserLoggedIn} 
         movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>
           <Route path="/" exact component={(data)=> {
@@ -178,7 +185,7 @@ class App extends React.Component{
             return <MovieInfo changeFavoriteState={(state, movieId, userId)=> this.changeFavoriteState(state, movieId, userId)} 
             isFavorite={(movieId)=> this.isFavorite(movieId)} match={data.match} 
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} 
-            isUserLoggedIn={this.state.isUserLoggedIn} userData={this.state.user}
+            isUserLoggedIn={this.state.isUserLoggedIn} user={this.state.user}
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
           <Route path="/admin" component={(data)=> {

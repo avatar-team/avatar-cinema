@@ -14,6 +14,11 @@ import {Link} from 'react-router-dom';
 
 const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
   let [favorite, setFavorite] = useState(isFavorite(movie._id));
+  let handleFavorite = ()=> {
+    if(user == undefined) return alert('you need to sign in to use this feature')
+    changeFavoriteState(favorite? 'delete': 'add', movie._id, user._id )
+    setFavorite(!favorite)
+  }
   return (
     <div className="m-3 w-50">
         {console.log(favorite, isFavorite(movie._id))}
@@ -32,10 +37,7 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
                   <CardSubtitle className="mt-4"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
                   <CardSubtitle className="mt-4"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
                   <CardSubtitle className="mt-4"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
-                  <Button onClick={()=> {
-                    changeFavoriteState(favorite? 'delete': 'add', movie._id, user._id )
-                    setFavorite(!favorite)
-                  }}>add to favorite</Button>
+                  <Button onClick={()=> handleFavorite()}>add to favorite</Button>
                   
                   <CardSubtitle className="mt-4"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
                   <Link to={`/movieInfo/${index}`}><button className="mt-5 cardBtn">Movie Info</button></Link>

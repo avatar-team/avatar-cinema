@@ -84,7 +84,7 @@ const Navbarz = (props) => {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink onClick={()=> {
-                  props.changeUserState(false)
+                  props.changeUserState(false, {})
                   localStorage.setItem('x-auth-token', '')
                 }} tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>
