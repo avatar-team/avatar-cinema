@@ -86,8 +86,7 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {this.state.showPurched? <UserData movies={this.props.user.moviesBought}/> : null }
-                             {this.state.showPurched? <UserData movies={this.props.user.favoriteMoives}/>: null }
+                             {this.state.showPurched? <UserData movies={this.props.user.moviesBought}/> : <UserData movies={this.props.user.favoriteMovies}/> }
                          </Table>
                          
                         </Col>

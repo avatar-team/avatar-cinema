@@ -76,10 +76,10 @@ const Navbarz = (props) => {
             <NavbarText>
 
             <InputGroup style={search}>
-              <InputGroupAddon addonType="prepend"><Button onClick={()=> {
+              <InputGroupAddon addonType="prepend"><Button  className='bg-transparent border-0' onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon color='black' icon={faSearch}/></Button></InputGroupAddon>
-              <Input id="search" />
+              }}><FontAwesomeIcon style={{color: '#ca3e47', fontWeight: 'bold', marginRight: '-50px'}} icon={faSearch}/></Button></InputGroupAddon>
+              <Input style={{borderBottom: '2px solid #ca3e47', borderLeft: '0', borderRight: '0', borderTop: '0'}} className='bg-transparent ' id="search" />
             </InputGroup>
             
             </NavbarText>
@@ -87,7 +87,7 @@ const Navbarz = (props) => {
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink onClick={()=> {
-                  props.changeUserState(false)
+                  props.changeUserState(false, {})
                   localStorage.setItem('x-auth-token', '')
                 }} tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>

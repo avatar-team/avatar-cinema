@@ -2,10 +2,25 @@ const userModel = require('../db/models/userModel.js')
 const reservationModel = require('../db/models/reservationModel.js')
 exports.deleteUser = (req, res) => {
     userModel.findUser({ _id: req.params.id }, (err, data) => {
-        if (err) res.status(404).send(err);
+        if (err) {
+            return res.status(404).json({
+                status: false,
+                message: "Cant fine a user with that Id",
+                error: err
+            })
+        }
         userModel.deleteUser(data._id, (err, result) => {
-            if (err) res.send('Error while deleting');
-            res.json({ deleted: true });
+            if (err) {
+                return res.status(400).json({
+                    status: false,
+                    message: "error deleting the user ",
+                    error: err
+                })
+            }
+            res.status(200).json({
+                status: true,
+                message: "OK"
+            })
         })
     })
 }
@@ -75,7 +90,7 @@ exports.insertFavoriteMovie = (req, res, next) => {
     const { userId, movieId } = req.body;
     userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
         if (err) {
-            res.status(404).json({
+            return res.status(404).json({
                 status: false,
                 message: "Error in Pushing the Movie into the User Movie boughts",
                 error: err
@@ -118,7 +133,7 @@ exports.insertReservation = (req, res, next) => {
 }
 
 exports.pullFavorite = (req, res, next) => {
-    const { userId, movieId } = req.body;
+    const { userId, movieId } = req.params;
     userModel.pullFavoriteMovie(userId, movieId, (err, user) => {
         if (err) {
             return res.status(500).json({
