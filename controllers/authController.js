@@ -24,9 +24,7 @@ exports.signup = (req, res) => {
         res.json({
             status: true,
             token,
-            data: {
-                user: result
-            }
+            user: result
         })
     });
 }

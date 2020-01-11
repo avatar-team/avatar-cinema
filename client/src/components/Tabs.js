@@ -25,6 +25,10 @@ class Daysbar extends React.Component {
     else return new Date(currentDate.getFullYear(), currentDate.getMonth(), currentDate.getDate() + day).getMonth() + 1
   }
 
+  componentDidMount() {
+    this.props.pageShow(this.endDate(0))
+  }
+
   render() {
     return(
       <Nav tabs style={temp} className="border">

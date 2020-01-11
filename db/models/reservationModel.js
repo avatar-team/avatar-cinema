@@ -20,12 +20,12 @@ const reservationSchema = new Schema({
         type: String,
         trim: true
     },
-    movieId: {
+    userId: {
         type: String,
         required: true,
         trim: true
     },
-    userId: {
+    movieId: {
         type: String,
         required: true,
         trim: true
@@ -60,13 +60,24 @@ const insertReservation = (reservation, callback) => {
         } else if (movie[0].availableChairs <= 0) {
             callback("No More Available Chairs For this Movie", null);
         } else {
-            _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } });
-            _userFunction.pushMoviesBought(reservation.userId, reservation.movieId);
-            Reservation.create(reservation)
-                .then(reservation => callback(null, reservation))
-                .catch(err => callback(err, null));
+            _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } }, (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    _userFunction.pushMoviesBought(reservation.userId, { _id: reservation.movieId }, (err, data) => {
+                        if (err) {
+                            return console.log(err)
+                        }
+                    });
+                }
+            });
+
         }
+
     })
+    Reservation.create(reservation)
+        .then(reservation => callback(null, reservation))
+        .catch(err => callback(err, null));
 };
 
 
