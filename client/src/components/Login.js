@@ -67,6 +67,9 @@ class Login extends Component {
     })
     .catch(err => {
       // TODO: show something
+      if(err) {
+        alert('write a valide data')
+      }
     })
   }
 

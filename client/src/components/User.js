@@ -88,8 +88,8 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {/* {( this.state.showPurched == true)? <UserData movies={ this.props.user.moviesBought} /> : null }
-                             {( this.state.showPurched == false)? <UserData movies={ this.props.user.favoriteMoives} /> : null } */}
+                             {( this.state.showPurched == true)? <UserData movies={ this.props.user.moviesBought} /> : null }
+                             {( this.state.showPurched == false)? <UserData movies={ this.props.user.favoriteMoives} /> : null }
                          </Table>
                          
                         </Col>

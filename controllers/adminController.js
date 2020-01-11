@@ -2,6 +2,7 @@ const Admin = require('../db/models/adminModel')
 const User = require('../db/models/userModel')
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken');
+const {promisify} = require('util')
 
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME_ADMIN });
 
@@ -38,11 +39,12 @@ exports.hundleSginin = (req, res) => {
 }
 
 exports.hundleMainDashboard = (req, res) => {
+    console.log('in dashboard', req.body.user)
     User.findUser({}, (err, result) => {
         if (result) {
             res.status(200).json({
                 status: true,
-                data: result
+                users: result
             })
         } else {
             res.status(404).json({
@@ -76,7 +78,7 @@ exports.protectAdmin = (req, res, next) => {
      * 
      */
     promisify(jwt.verify)(token, process.env.JWT_SECRET).then(decodedPayLoad => {
-        Admin.findAdmin(decodedPayLoad.id).then(theAdmin => {
+        Admin.findAdmin({_id: decodedPayLoad.id}, (err, theAdmin)=> {
             if (!theAdmin) {
                 return res.status(401).json({
                     status: false,
@@ -87,11 +89,6 @@ exports.protectAdmin = (req, res, next) => {
                 req.body.user = theAdmin;
                 next();
             }
-        })
-    }).catch(err => {
-        return res.status(401).json({
-            status: false,
-            error: err
         })
     })
 }

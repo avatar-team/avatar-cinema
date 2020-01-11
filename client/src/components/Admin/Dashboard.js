@@ -20,16 +20,27 @@ constructor(props) {
   };
 };
 
-// componentDidMount() {
+bringUsersData() {
+  let token = localStorage.getItem('admin-auth-token')
+  console.log(token)
+  axios.get("/api/admin", {
+    headers: {
+      'Authorization': 'Bearer ' + token
+    }
+  }).then(res =>{
+    console.log(res)
+    this.setState({
+      users : [...res.data.users],
+      isAdminLoggedIn: true
   
-//   axios.get("/api/users").then(res =>{
+    },()=> console.log(this.state.isAdminLoggedIn))} )
+    .catch(err => console.log(err))
+}
 
-//     this.setState({
-//       users : [...res.data]
 
-//     })} ).catch(err => console.log(err))
-  
-// }
+componentDidMount() {
+  this.bringUsersData()
+}
 
 changeAdminState(state) {
   this.setState({
@@ -43,6 +54,7 @@ render(){
       <Switch>
         <Route path={`${this.props.match.path}`} exact component={()=> {
           return <div>
+            {console.log(this.state.isAdminLoggedIn)}
           {this.state.isAdminLoggedIn?<Row>
             <Col md="2" className="text-center">
               <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
@@ -51,7 +63,7 @@ render(){
             <Col md="10">
               { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
               handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
-              handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
+              handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={this.state.users}/>
             }
             </Col>
           </Row>:
@@ -60,7 +72,7 @@ render(){
         }}/>
 
         <Route path={`${this.props.match.path}/login`} component={(data)=> {
-          return <AdminLogin changeAdminState={(state)=> this.changeAdminState(state)} history={data.history}/>
+          return <AdminLogin isAdminLoggedIn={this.state.isAdminLoggedIn} changeAdminState={(state)=> this.changeAdminState(state)} history={data.history}/>
         }}/>
 
       </Switch>
