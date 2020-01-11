@@ -2,11 +2,25 @@ const userModel = require('../db/models/userModel.js')
 const reservationModel = require('../db/models/reservationModel.js')
 exports.deleteUser = (req, res) => {
     userModel.findUser({ _id: req.params.id }, (err, data) => {
-        console.log(data)
-        if (err) res.status(404).send(err);
-        userModel.deleteUser(data[0]._id, (err, result) => {
-            if (err) res.send('Error while deleting');
-            res.json({ deleted: true });
+        if (err) {
+            return res.status(404).json({
+                status: false,
+                message: "Cant fine a user with that Id",
+                error: err
+            })
+        }
+        userModel.deleteUser(data._id, (err, result) => {
+            if (err) {
+                return res.status(400).json({
+                    status: false,
+                    message: "error deleting the user ",
+                    error: err
+                })
+            }
+            res.status(200).json({
+                status: true,
+                message: "OK"
+            })
         })
     })
 }
