@@ -56,13 +56,17 @@ class AdminLogin extends Component {
     .then(result => {
       // TODO: we need to redirect him
       if(result.data.status) {
-        console.log('I am in')
+        console.log(result.data)
+        localStorage.setItem('admin-auth-token', result.data.token)
         this.props.changeAdminState(true)
         this.props.history.replace('/admin')
       }
     })
     .catch(err => {
       // TODO: show something
+      if(err) {
+        alert('write a valide data')
+      }
     })
   }
 
@@ -70,6 +74,7 @@ class AdminLogin extends Component {
     console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
+        {this.props.isAdminLoggedIn? <Redirect to="/admin"/>: 
         <div style={main}>
           <h2>Welcome to Signin Page</h2>
 
@@ -96,6 +101,7 @@ class AdminLogin extends Component {
           style={button}
           type="submit"/>
         </div>
+        }
       </form>
     
     )

@@ -9,6 +9,7 @@ import UserData from './UserData'
 import { Table } from 'reactstrap';
 
 import { Redirect } from 'react-router-dom';
+import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
 
   
@@ -41,7 +42,7 @@ class User extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            counter : 0
+            showPurched : true
         }
       };
 
@@ -55,7 +56,8 @@ class User extends React.Component {
                     <Row>
                         <Col md="4">
                         <Card style={{backgroundColor: 'rgb(24, 24, 31)'}}>
-                            <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' alt="Card image cap" />
+                            <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' 
+                            alt="Card image cap" />
                             <CardBody>
                                 <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
                                 <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
@@ -67,12 +69,12 @@ class User extends React.Component {
 
                          <Nav>
                              <NavItem className='tabItem' >
-                                 <NavLink activeClassName='tabItem' onClick={()=>this.setState({ counter:0 })}>
+                                 <NavLink activeClassName='tabItem' onClick={()=>this.setState({showPurched: true})}>
                                     Purchased moives
                                  </NavLink>   
                              </NavItem>
                              <NavItem className='tabItem' >
-                                 <NavLink onClick={()=>this.setState({counter:1})}>
+                                 <NavLink onClick={()=>this.setState({showPurched: false})}>
                                     Favorite moives
                                  </NavLink>
                              </NavItem>
@@ -84,8 +86,8 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {( this.state.counter == 0)? <UserData movies={purchasedMoives} type={'P'} /> : null }
-                             {( this.state.counter == 1)? <UserData movies={favoriteMoives} type={'F'}/> : null }
+                             {this.state.showPurched? <UserData movies={this.props.user.moviesBought}/> : null }
+                             {this.state.showPurched? <UserData movies={this.props.user.favoriteMoives}/>: null }
                          </Table>
                          
                         </Col>

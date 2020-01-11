@@ -34,25 +34,28 @@ class MainPage extends React.Component{
  
   
   render(){
+    let check = {};
+    let trailers = []
+    this.state.moviesforDay.forEach((movie, i)=> {
+      if(check[movie.movie.Title] == undefined) {
+        check[movie.movie.Title] = movie
+        trailers.push(<Movietrailer key={movie.i} movie={movie.movie} />)
+      }
+    })
     return (
       <div style={{backgroundColor: 'rgb(24, 24, 31)'}}>
       <SlideShow/>
       <Row>
         <Col md="8">
           <Daysbar pageShow={(date = new Date().getDate()) => {
-            // console.log('tab clicked')
-            // console.log(date)
              this.check(date)
           }}/>
           {this.state.moviesforDay.map((movie)=> {
-            console.log(movie)
             return <MovieCard key={movie.i} movie={movie.movie} index={movie.i}/>
           })}
         </Col>
         <Col md="4">
-            {this.state.moviesforDay.map((movie, i)=> {
-              return <Movietrailer key={movie.i} movie={movie.movie} />
-            })}
+            {trailers}
         </Col>
       </Row>
     </div>
