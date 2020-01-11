@@ -16,7 +16,7 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
   let [favorite, setFavorite] = useState(isFavorite(movie._id));
   return (
     <div className="m-3 w-50">
-        {console.log(favorite)}
+        {console.log(favorite, isFavorite(movie._id))}
         <Row>
         <Col>
           <Card className='my-3' style={{width:"1200px", height:"563px", backgroundColor: 'rgb(24, 24, 31)', color: 'white'}}>

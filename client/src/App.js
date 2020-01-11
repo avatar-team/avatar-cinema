@@ -108,10 +108,11 @@ class App extends React.Component{
   }
 
   isFavorite(movieId) {
-    if(this.state.user.favoriteMovies){
-      this.state.user.favoriteMovies.map((movie)=> {
-        if(movie._id === movieId) return true;
-      })
+    let favorite = this.state.user.favoriteMovies
+    if( favorite != undefined){
+      for(var i = 0; i < favorite.length; i++) {
+        if(favorite[i]._id === movieId) return true;
+      }
     }
     return false;
   }
