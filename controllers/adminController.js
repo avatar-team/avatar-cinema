@@ -18,7 +18,7 @@ exports.hundleSginin = (req, res) => {
                         message: "UNAUTHORIZED ACCESS, Password is Wrong"
                     })
                 }
-            }).catch(err=>{
+            }).catch(err => {
                 console.error(err)
             })
         } else {
