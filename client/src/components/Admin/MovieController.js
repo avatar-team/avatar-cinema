@@ -30,8 +30,9 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
   let [deleteComponent, showDelete] = useState(false);
   let [original, changeOriginal] = useState(false)
   
+  
   return (
-    <div>
+    <div className='movieController'>
 
       <Table style={table} dark className="text-center m-auto">
         <thead>

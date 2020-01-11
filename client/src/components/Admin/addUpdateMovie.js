@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { doc } from 'prettier';
 
 class AddUpdateMovie extends Component {
 
@@ -33,8 +34,7 @@ class AddUpdateMovie extends Component {
   render() {
     let isUpdate = this.props.processType == 'update'? true: false;
     return (
-      <div style={{width: '50%', margin: 'auto'}}>
-        {console.log(this.props.movie)}
+      <div style={{width: '50%', margin: 'auto', color: 'white'}}>
         <Form>
           <FormGroup>
             <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
