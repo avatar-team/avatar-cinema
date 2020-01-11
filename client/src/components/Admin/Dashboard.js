@@ -51,6 +51,7 @@ changeAdminState(state) {
 render(){
   return(
     <BrowserRouter>
+    <div>
       <Switch>
         <Route path={`${this.props.match.path}`} exact component={()=> {
           return <div>
@@ -83,6 +84,7 @@ render(){
         }}/>
 
       </Switch>
+    </div>
     </BrowserRouter>
   )
 }

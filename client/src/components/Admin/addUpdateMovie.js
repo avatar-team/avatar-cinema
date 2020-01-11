@@ -1,5 +1,9 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
+import { doc } from 'prettier';
+import '../Test2.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 class AddUpdateMovie extends Component {
 
@@ -33,24 +37,46 @@ class AddUpdateMovie extends Component {
   render() {
     let isUpdate = this.props.processType == 'update'? true: false;
     return (
-      <div style={{width: '50%', margin: 'auto'}}>
-        {console.log(this.props.movie)}
-        <Form>
-          <FormGroup>
-            <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
-            <Input required disabled={isUpdate} id="title" name="Title" />
-            <Label>Price: </Label>
-            <Input required id="price" name="price" type="number"/>
-            <Label>Chairs: </Label>
-            <Input required id="chairs" name="chairs" type="number"/>
-            <Label>Date: </Label>
-            <Input required id="date" name="date" type="date"/>
-            <Label>Time: </Label>
-            <Input required id="time" name="time" type="time"/>
-            <Button onClick={()=> this.handleSubmit(this.props.movie)}>{this.props.processType}</Button>
-          </FormGroup>
-        </Form>
-      </div>
+      <div class="popup-container">
+        <input type="checkbox" id="login-popup" />
+          <div class="popup">
+              <label for="login-popup" class="transparent-label"></label>
+                  <div class="popup-inner">
+                      <div class="popup-title">
+                          <h6>Add Movie</h6>
+                          <label style={{backgroundColor: 'transparent'}} for="login-popup" class="popup-close-btn"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
+                      </div>
+                      <div class="popup-content">
+                          <form>
+                              <ul>
+                                <li>
+                                  <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
+                                  <Input required disabled={isUpdate} id="title" name="Title" />
+                                </li>
+                                <li>
+                                  <Label>Price: </Label>
+                                  <Input required id="price" name="price" type="number"/>                                </li>
+                                <li>
+                                  <Label>Chairs: </Label>
+                                  <Input required id="chairs" name="chairs" type="number"/>
+                                </li>
+                                <li>
+                                  <Label>Date: </Label>
+                                  <Input required id="date" name="date" type="date"/>
+                                </li>
+                                <li>
+                                  <Label>Time: </Label>
+                                  <Input required id="time" name="time" type="time"/>
+                                </li>
+                                <li>
+                                  <Button style={{backgroundColor: '#ca3e47'}} className='mt-3' onClick={()=> this.handleSubmit(this.props.movie)}>Add Movie</Button>
+                                </li>
+                              </ul>
+                          </form>
+                      </div>
+                  </div>
+              </div>
+          </div>
     );
   }
 } 
