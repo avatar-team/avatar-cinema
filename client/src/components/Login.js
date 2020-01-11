@@ -83,7 +83,7 @@ class Login extends Component {
         <div style={main}>
           <h2 className='mb-4'>Welcome to Signin Page</h2>
 
-          Username: <br />
+          Username <br />
           <input
           className='my-3'
           style={input}
@@ -93,7 +93,7 @@ class Login extends Component {
           onChange={(e) => {this.onChange(e)}}/>
           <br />
 
-          Password: <br />
+          Password <br />
           <input
           className='my-3'
           style={input}
@@ -106,7 +106,8 @@ class Login extends Component {
 
           <input
           style={button}
-          type="submit"/>
+          type="submit"
+          value='Login'/>
         </div>
       </form>
     

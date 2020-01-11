@@ -20,7 +20,6 @@ exports.deleteMovie = (req, res) => {
 exports.updateMovie = (req, res) => {
     var id = req.params.id;
     movieDb.updateMovie({ _id: id }, req.body, (err, updated) => {
-        console.log(updated)
         updated ? res.json(updated) : res.json(err)
     })
 
@@ -36,7 +35,6 @@ exports.addMovie = (req, res) => {
                 if (!response.Response) console.log(response.Error)
                 let movieInfo = response.data;
                 var movieData = {...data, ...movieInfo }
-                console.log(movieData)
                 movieDb.insertMovie(movieData, (err, result) => {
                     if (result) {
                         console.log("data saved")

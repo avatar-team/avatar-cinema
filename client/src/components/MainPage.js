@@ -51,7 +51,8 @@ class MainPage extends React.Component{
              this.check(date)
           }}/>
           {this.state.moviesforDay.map((movie)=> {
-            return <MovieCard key={movie.i} movie={movie.movie} index={movie.i}/>
+            return <MovieCard changeFavoriteState={(state, movieId, userId) => this.props.changeFavoriteState(state, movieId, userId)} user={this.props.user}
+            isFavorite={(movieId)=> this.props.isFavorite(movieId)} key={movie.i} movie={movie.movie} index={movie.i} isUserLoggedIn={this.props.isUserLoggedIn}/>
           })}
         </Col>
         <Col md="4">

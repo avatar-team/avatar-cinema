@@ -1,3 +1,4 @@
+import '../App.css'
 import React, { useState } from 'react';
 import {
   Collapse,
@@ -73,18 +74,20 @@ const Navbarz = (props) => {
               </NavItem>
             </Nav>
             <NavbarText>
+
             <InputGroup style={search}>
               <InputGroupAddon addonType="prepend"><Button onClick={()=> {
                 handleSearch(document.getElementById('search').value)
               }}><FontAwesomeIcon color='black' icon={faSearch}/></Button></InputGroupAddon>
               <Input id="search" />
             </InputGroup>
+            
             </NavbarText>
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
               <NavItem>
                 <NavLink onClick={()=> {
-                  props.changeUserState(false)
+                  props.changeUserState(false, {})
                   localStorage.setItem('x-auth-token', '')
                 }} tag={Link} style={items} to="/">Log Out</NavLink>
               </NavItem>
@@ -95,10 +98,10 @@ const Navbarz = (props) => {
             :
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><Button color="primary">Signup</Button></NavLink>
+                <NavLink className='mt-1 mx-2' tag={Link} to="/signup"><button className='signup'>Signup</button></NavLink>
               </NavItem>
               <NavItem className="ml-auto">
-                <NavLink className='mt-1 mr-4' tag={Link} to="/login"> <Button outline color="primary">Login</Button></NavLink>
+                <NavLink className='mt-1 mr-4' tag={Link} to="/login"> <button className='login'>Login</button></NavLink>
               </NavItem>
               
             </Nav>}
