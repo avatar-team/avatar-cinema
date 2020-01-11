@@ -1,5 +1,5 @@
 body {
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
   scroll-behavior: smooth;
   background-color: rgb(24, 24, 31);
 }
@@ -81,9 +81,28 @@ body {
 .tabItem {
   cursor: pointer;
   transition: 0.3 all ease-in-out;
+  color: white
 }
 
 .tabItem :hover {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.tabItem :active {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.tabItem :visited {
+  text-decoration: none;
+  color: white;
+  background-color: #ca3e47;
+}
+
+.active {
   background-color: #ca3e47;
 }
 

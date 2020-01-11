@@ -34,7 +34,8 @@ const items = {
 
 const logo = {
   fontSize: '28pt',
-  padding: '0 45px 0 25px'
+  padding: '0 45px 0 25px',
+  color: '#ca3e47'
   // fontFamily: 'Gill Sans Gill Sans MT Calibri Trebuchet MS sans-serif'
 }
 
@@ -43,6 +44,7 @@ const logo = {
 const Navbarz = (props) => {
   const [isOpen, setIsOpen] = useState(false);
   let [redirect, setRedirect] = useState(null);
+
 
   const toggle = () => setIsOpen(!isOpen);
   let handleSearch = (videoTitle) => {
@@ -59,7 +61,8 @@ const Navbarz = (props) => {
       {redirect? <Redirect to={redirect}/>: ''}
         <Navbar expand="md">
           <NavbarBrand tag={Link} to="/" className='logo' style={logo}>Avatar</NavbarBrand>
-          {/* <NavbarToggler onClick={toggle} /> */}
+          <NavbarToggler onClick={toggle} />
+          {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
@@ -73,7 +76,7 @@ const Navbarz = (props) => {
             <InputGroup style={search}>
               <InputGroupAddon addonType="prepend"><Button onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon icon={faSearch}/></Button></InputGroupAddon>
+              }}><FontAwesomeIcon color='black' icon={faSearch}/></Button></InputGroupAddon>
               <Input id="search" />
             </InputGroup>
             </NavbarText>

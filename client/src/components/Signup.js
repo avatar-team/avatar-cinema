@@ -7,7 +7,10 @@ const main = {
   textAlign: 'center',
   borderRadius: '1.2rem',
   padding: '10px',
-  fontFamily:'Trebuchet MS'
+  fontFamily:'Trebuchet MS',
+  color: 'white',
+  fontSize: '14pt',
+  marginTop: '90px'
 }
 
 const input = {
@@ -23,7 +26,7 @@ const input = {
 
 
 const button = {
-  backgroundColor: '#4CAF50', /* Green */
+  backgroundColor: '#ca3e47', /* Green */
   borderRadius: '8px',
   borderColor: 'transparent',
   color: 'white',
@@ -67,7 +70,8 @@ class Signup extends Component {
         if (result.data.status) {
           localStorage.setItem('x-auth-token', result.data.token)
           document.getElementById('alert').textContent = 'Success'
-          this.props.changeUserState(true)
+          console.log(result)
+          this.props.changeUserState(true, result.data.user)
           // TODO: signup success, Redirect him
         }
         // if user exist , show something
@@ -87,11 +91,12 @@ class Signup extends Component {
   render() {
     if(this.props.isUserLoggedIn) return <Redirect/>
     return (
-      <div style={main}>
+      <div style={main} >
       <form onSubmit={this.handleSubmit.bind(this)}>
-        <h2>Welcome to Signup Page</h2>
-        Username: <br />
+        <h2 className='mb-4'>Welcome to Signup Page</h2>
+        Username <br />
         <input
+        className='my-3'
         style={input}
         type="text"
         name="userName"
@@ -99,8 +104,9 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        Password: <br />
+        Password <br />
         <input
+        className='my-3'
         style={input}
         type="password"
         name="password"
@@ -108,8 +114,9 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        First Name: <br />
+        First Name <br />
         <input
+        className='my-3'
         style={input}
         type="text"
         name="firstName"
@@ -117,8 +124,9 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        Last Name: <br />
+        Last Name <br />
         <input
+        className='my-3'
         style={input}
         type="text"
         name="lastName"
@@ -126,8 +134,9 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-        Email: <br />
+        Email <br />
         <input
+        className='my-3'
         style={input}
         type="text"
         name="userEmail"
@@ -137,7 +146,7 @@ class Signup extends Component {
 
         <div id="alert"></div>
 
-        <input style={button} type="submit"/>
+        <input className='mt-4' style={button} type="submit"/>
         </form>
       </div>
     )

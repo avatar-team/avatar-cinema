@@ -6,7 +6,10 @@ const main = {
   textAlign: 'center',
   borderRadius: '1.2rem',
   padding: '10px',
-  fontFamily:'Trebuchet MS'
+  fontFamily:'Trebuchet MS',
+  color: 'white',
+  fontSize: '14pt',
+  marginTop: '90px'
 }
 
 const input = {
@@ -22,7 +25,7 @@ const input = {
 
 
 const button = {
-  backgroundColor: '#4CAF50', /* Green */
+  backgroundColor: '#ca3e47', /* Green */
   borderRadius: '8px',
   borderColor: 'transparent',
   color: 'white',
@@ -57,15 +60,19 @@ class Login extends Component {
     }
     axios.post('/login', this.state)
     .then(result => {
+      console.log(result)
       // TODO: we need to redirect him
       window.localStorage.setItem('x-auth-token', result.data.token)
       console.log('I am in')
       localStorage.setItem('x-auth-token', result.data.token)
-      this.props.changeUserState(true)
+      this.props.changeUserState(true, result.data.user)
       this.props.history.replace('/')
     })
     .catch(err => {
       // TODO: show something
+      if(err) {
+        alert('write a valide data')
+      }
     })
   }
 
@@ -74,10 +81,11 @@ class Login extends Component {
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div style={main}>
-          <h2>Welcome to Signin Page</h2>
+          <h2 className='mb-4'>Welcome to Signin Page</h2>
 
           Username: <br />
           <input
+          className='my-3'
           style={input}
           type="text"
           name="userName"
@@ -87,6 +95,7 @@ class Login extends Component {
 
           Password: <br />
           <input
+          className='my-3'
           style={input}
           type="password"
           name="password"
