@@ -118,8 +118,7 @@ exports.insertReservation = (req, res, next) => {
 }
 
 exports.pullFavorite = (req, res, next) => {
-    console.log('hiaaaa', req)
-    const { userId, movieId } = req.body;
+    const { userId, movieId } = req.params;
     userModel.pullFavoriteMovie(userId, movieId, (err, user) => {
         if (err) {
             return res.status(500).json({

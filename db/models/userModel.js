@@ -71,8 +71,8 @@ const User = new mongoose.model("User", userSchema);
 
 /**
  * @function insertUser insert a user into the Database
- * @param {*} user the user expected to be saved
- * @param {*} callback Error-First Callback Function
+ * @param user the user expected to be saved
+ * @param callback Error-First Callback Function
  * @note the user should be a object with keys and values exactly as the schema Respectively
  */
 const insertUser = (user, callback) => {
@@ -120,8 +120,8 @@ const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}
  * this @function findUser is used to find a user/users based on a @param objectCriteria -- an object containing the KEY-VALUE criteria to search with
  * it can be anything Object id, firstName , LastName ,etc..
  * @note its recommended to use Object id to return One Single user
- * @param {*} objectCriteria in used to search the database based in a spicific criteria
- * @param {*} callback Error-First Callback function   
+ * @param objectCriteria in used to search the database based in a spicific criteria
+ * @param callback Error-First Callback function   
  */
 const findUser = (objectCriteria = {}, callback) => {
     User.find(objectCriteria)
@@ -131,8 +131,8 @@ const findUser = (objectCriteria = {}, callback) => {
 
 /** 
  * @function deleteUser is used to delete a specific user based on @param userObjectId 
- * @param {*} userObjectId object id of the user to be deleted
- * @param {*} callback Error-First Callback function  
+ * @param userObjectId object id of the user to be deleted
+ * @param callback Error-First Callback function  
  */
 const deleteUser = (userObjectId, callback = (err, result) => {}) => {
     User.findByIdAndRemove(userObjectId)
@@ -140,28 +140,26 @@ const deleteUser = (userObjectId, callback = (err, result) => {}) => {
         .catch(err => callback(err, null))
 }
 
-
 /**  
  * @function pushMoviesBought is used to push new movie to the @code MoviesBoughts property 
- * @param {*} userObjectId object id of the user to push the movie into
- * @param {*} movieObjectId the movie id 
- * @param {*} callback Error-First Callback function  
+ * @param userObjectId object id of the user to push the movie into
+ * @param movieObjectId the movie id 
+ * @param callback Error-First Callback function  
  */
 const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
     _findMovies(movieObjectId, (error, movie) => {
-            if (error) {
-                callback(error, null)
-            }
-            updateUser(userObjectId, { $push: { moviesBought: movie } })
-        }, callback)
-        // updateUser(userObjectId, { $push { moviesBought: } })
+        if (error) {
+            callback(error, null)
+        }
+        updateUser(userObjectId, { $push: { moviesBought: movie } })
+    }, callback)
 }
 
 /**  
  * @function pushFavoriteMovies is used to push new movie to the @code FavoriteMovies property 
- * @param {*} userObjectId object id of the user to push the movie into
- * @param {*} movieObjectId the movie id 
- * @param {*} callback Error-First Callback function  
+ * @param userObjectId object id of the user to push the movie into
+ * @param movieObjectId the movie id 
+ * @param callback Error-First Callback function  
  */
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
 //goes here 
@@ -183,17 +181,37 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
 }
 
 
+            //here if the movie aleardy exits in the user fivarts movies it well not be added// how??
+            updateUser(userObjectId, { $push: { favoriteMovies: movie[0] } }, (err, result) => {
+                if (err) {
+                    callback(err, null)
+                } else {
+                    callback(null, result)
+                }
+            })
+
+
+
+
+
+        })
+        // const checkMovieIfExists = (userObjectId, movieObjectId) => {
+        //     User.find({ _id: userObjectId }).then(user => {
+        //         user.
+        //     })
+        // }
+}
+
 /**
  * @function pullFavoriteMovie this function is used to remove a movie from a user's favorate movies array
- * @param {*} userObjectId Objectid of the user to pull the movie from 
- * @param {*} movieObjectId the Object Id of the movie to be deleted 
- * @param {*} callback Error-First Callback Function
+ * @param userObjectId Objectid of the user to pull the movie from 
+ * @param movieObjectId the Object Id of the movie to be deleted 
+ * @param callback Error-First Callback Function
  */
 const pullFavoriteMovie = (userObjectId, movieObjectId, callback = () => {}) => {
     updateUser({ _id: userObjectId }, { $pull: { favoriteMovies: { _id: movieObjectId } } }, callback);
 }
 
-//User.findByIdAndUpdate({ _id: "5e18813b5fdce621accc1ba8" }, { $pull: { moviesBought: { _id: "" } } }).then(e => { console.log(e) })
 module.exports.insertUser = insertUser;
 module.exports.updateUser = updateUser;
 module.exports.findUser = findUser;
