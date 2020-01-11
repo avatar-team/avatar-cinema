@@ -40,7 +40,7 @@ const insertAdmin = (adminObject, callback) => {
     findAdmin({ username: adminObject.username }, (err, result) => {
         if (err) {
             callback(err, null)
-        } else if (!result.length) {
+        } else if (!result) {
             Admin.create(adminObject)
                 .then(admin => callback(null, admin))
                 .catch(err => callback(err, null))
@@ -58,7 +58,7 @@ const insertAdmin = (adminObject, callback) => {
  * @param {*} objectCriteria criteria that is used to search the database 
  * @param {*} callback Error-First Callback function 
  */
-const findAdmin = (objectCriteria = {}, callback = (err, data)=> { }) => {
+const findAdmin = (objectCriteria = {}, callback = (err, data) => {}) => {
     Admin.findOne(objectCriteria)
         .then(admin => callback(null, admin))
         .catch(err => callback(err, null))

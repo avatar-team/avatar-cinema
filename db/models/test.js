@@ -5,13 +5,13 @@ const userFunctions = require('./userModel');
 const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 const adminFunction = require('./adminModel')
-dotenv.config({ path: "../../convig.env" })
+dotenv.config({ path: "../../config.env" })
 mongoose.Promise = global.Promise;
-const User = mongoose.model('User')
+const Admin = mongoose.model('Admin')
 app.use(express.json())
 
 
-mongoose.connect('mongodb://localhost/Avatar', {
+mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority", {
     useCreateIndex: true,
     useNewUrlParser: true,
     useFindAndModify: false
@@ -24,17 +24,11 @@ mongoose.connect('mongodb://localhost/Avatar', {
 });
 
 
-app.get('/', (req, res) => {
-    console.log()
-    checkMovieIfExists(req.body.userId, req.body.movieId)
-    res.send("asd")
-})
-
-
 
 app.listen(8000, () => {
-
-
+    adminFunction.insertAdmin({ username: "Avatar", password: "group5" }, (err, data) => {
+        console.log(err, data)
+    })
 })
 
 
@@ -190,7 +184,9 @@ app.listen(8000, () => {
 
 
 
-// app.listen(8000)	app.post('/signup', authController.signup)
+// app.listen(8000,()=>{
+
+// })
 
 
 // const movieDb = require('./movieModel');
