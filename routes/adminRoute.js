@@ -3,7 +3,7 @@ const router = express.Router();
 const adminController = require('../controllers/adminController')
 
 router.route("/")
-    .get(adminController.hundleMainDashboard)
+    .get(adminController.protectAdmin, adminController.hundleMainDashboard)
 
 router.route("/login")
     .post(adminController.hundleSginin)

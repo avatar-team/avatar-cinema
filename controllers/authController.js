@@ -6,7 +6,7 @@ const mongoose = require('mongoose');
 const User = mongoose.model("User")
 
 
-const signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
+const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
 
 exports.signup = (req, res) => {
     console.log(req.body)
@@ -20,7 +20,7 @@ exports.signup = (req, res) => {
                 }
             })
         }
-        const token = signToken(result._id);
+        const token = _signToken(result._id);
         res.json({
             status: true,
             token,
@@ -50,7 +50,7 @@ exports.login = (req, res) => {
                         error: "Incorrect Password or Username"
                     })
                 } else if (bool && user) {
-                    const token = signToken(user._id);
+                    const token = _signToken(user._id);
                     res.status(200).json({
                         status: true,
                         user,
