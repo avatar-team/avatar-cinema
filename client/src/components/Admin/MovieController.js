@@ -8,17 +8,19 @@ import AddUpdateMovie from './addUpdateMovie'
 
 const transparent = {
   backgroundColor: 'transparent',
-  borderColor: 'transparent'
+  borderColor: 'transparent',
+  paddingRight: '8px',
+  paddingLeft: '8px',
+  textAlign: 'center'
 }
 
 const table = {
   borderCollapse: 'collapse',
-  padding: '10px'
+  padding: '10px',
+  backgroundColor: '#313131',
+  width: '90%'
 }
 
-const td = {
-  padding: '12px'
-}
 
 const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
 
@@ -30,19 +32,23 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
   return (
     <div>
 
-      <Table style={table} dark className="w-75 text-center m-auto">
+      <Table style={table} dark className="text-center m-auto">
         <thead>
           <tr>
-            <th>Movie Title</th>
-            <th>Time</th>
-            <th>Date</th>
-            <th>Price</th>
-            <th>Chairs</th>
-            <th className="text-center"><Button onClick={()=> {
+            <th style={{fontSize: '14pt'}}>Movie Title</th>
+            <th style={{fontSize: '14pt'}}>Time</th>
+            <th style={{fontSize: '14pt'}}>Date</th>
+            <th style={{fontSize: '14pt'}}>Price</th>
+            <th style={{fontSize: '14pt'}}>Chairs</th>
+            <th className="text-center">
+              <button 
+              style={{padding: '8px', borderColor: 'transparent', backgroundColor: '#ca3e47', color: 'white', borderRadius: '1rem'}}
+              onClick={()=> {
               setType('add')
               showAddUpdate(!addUpdate)
               showDelete(false)
-            }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie</Button></th>
+              }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie
+              </button></th>
           </tr>
         </thead>
 
@@ -56,13 +62,17 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
 
                 <td>{movie.price}$</td>  
                 <td>{movie.availableChairs} / {movie.chairs}</td>
-                <td className="text-right"><button onClick={()=> {
+                <td className="text-center"><button
+                 onClick={()=> {
                   setType('update')
                   showAddUpdate(!addUpdate)
                   setMovie(movie)
                   showDelete(false)
-                }} style={transparent}><FontAwesomeIcon color='white' icon={faEdit}/></button></td>
-                <td><button onClick={()=> {
+                  }}
+                  style={transparent}>
+                <FontAwesomeIcon color='white' icon={faEdit}/></button>
+
+                <button onClick={()=> {
                   setType('delete')
                   showAddUpdate(false)
                   showDelete(!deleteComponent)
@@ -77,12 +87,11 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
       movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
       {deleteComponent?
-          <Card style={{width: '50%', margin: 'auto'}} body inverse color="danger">
-            <CardTitle>do you want to delete {CurrentMovie.Title} </CardTitle>
+          <Card style={{width: '50%', margin: 'auto', marginTop: '20px'}} body inverse color="danger">
+            <CardTitle>Do you want to delete {CurrentMovie.Title} ? </CardTitle>
             <div style={{display: 'block-inline', margin: 'auto'}}>
-              <Button onClick={()=> showDelete(false)} style={{margin: '10px'}}>Cancel</Button><Button onClick={()=> {
-                handleDelete(CurrentMovie._id)
-              }} color="secondary">Delete</Button>
+              <Button onClick={()=> showDelete(false)} style={{margin: '10px'}}>Cancel</Button>
+              <Button onClick={()=> { handleDelete(CurrentMovie._id) }} color="secondary">Delete</Button>
             </div>
           </Card>
       : ''}

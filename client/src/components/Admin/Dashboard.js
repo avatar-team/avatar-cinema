@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import MovieController from './MovieController'
 import UserController from './UserConttroller'
-import {  Row, Col ,Container ,Button} from 'reactstrap';
+import {  Row, Col ,Container , Button, Card, Table} from 'reactstrap';
 import axios from 'axios';
 import {BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
 import AdminLogin from './adminLogin.js'
@@ -43,18 +43,29 @@ render(){
       <Switch>
         <Route path={`${this.props.match.path}`} exact component={()=> {
           return <div>
-          {this.state.isAdminLoggedIn?<Row>
-            <Col md="2" className="text-center">
-              <Button onClick={()=>this.setState({movieShow : false })}>user</Button>
-              <Button onClick={()=>this.setState({movieShow : true })}>movie</Button>  
-            </Col>
-            <Col md="10">
-              { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
-              handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
-              handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
-            }
-            </Col>
-          </Row>:
+          {this.state.isAdminLoggedIn?
+            <Card style={{backgroundColor: 'rgb(24, 24, 31)', width: '1850px', margin: '0 auto', padding: '100px'}}>
+              <Row>
+                <Col md="2">
+                  <div className='m-auto w-100'>
+
+                    <h2 className='pb-2' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Controller</h2>
+                    <button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' onClick={()=>this.setState({movieShow : false })}>Users</button><br></br>
+                    <button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} onClick={()=>this.setState({movieShow : true })}>Movies</button>
+
+                  </div>
+                </Col>
+                <Col md="10" style={{}}>
+                  <div>
+                  { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
+                    handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
+                    handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={userData}/>
+                  }
+                  </div>
+                </Col>
+              </Row>
+            </Card>
+          :
           <Redirect to={`${this.props.match.url}/login`} />}
           </div>
         }}/>
