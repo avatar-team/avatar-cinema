@@ -83,15 +83,12 @@ class App extends React.Component{
     })
   }
 
-  handleDelete(movieId) {
+  handleDelete(movieId, i) {
+    console.log(i)
     axios.delete(`/api/movies/${movieId}`)
     .then(res => {
       this.setState(prevState => {
-        var index;
-        prevState.movies.forEach((movie, i)=> {
-          if(movie._id == movieId) index = i;
-        })
-        prevState.movies.splice(index, 1)
+        prevState.movies.splice(i, 1)
         return({
           movies: [...prevState.movies]
         })
@@ -189,9 +186,9 @@ class App extends React.Component{
             handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
           }}/>
           <Route path="/admin" component={(data)=> {
-            return <Dashboard match={data.match} movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
+            return <Dashboard history={data.history} match={data.match} movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}
             handleAdd={(addedMovie)=> this.handleAdd(addedMovie)}
-            handleDelete={(deletedMovie)=> this.handleDelete(deletedMovie)} />
+            handleDelete={(deletedMovie, i)=> this.handleDelete(deletedMovie, i)} />
           }}/>
           <Route path="/user" exact component={() => {
             return <User isUserLoggedIn={this.state.isUserLoggedIn} user={this.state.user}/>

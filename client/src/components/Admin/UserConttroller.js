@@ -4,6 +4,7 @@ import { Button, Card, CardTitle } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import Delete from './Delete.js'
+import axios from 'axios';
 
 
 const transparent = {
@@ -32,8 +33,14 @@ class UserController extends React.Component{
     }
   }
 
-  handleDelete() {
-    console.log('hi')
+  handleDelete(id, i) {
+    axios.delete(`api/user/${id}`)
+    .then(res=> {
+      this.props.handleDelete(i)
+    })
+    .catch(err=> {
+      console.log(err)
+    })
   }
 
   showDelete(state) {
@@ -62,16 +69,20 @@ class UserController extends React.Component{
                           <td>{user.firstName}</td>
                           <td>{user.lastName}</td>
                           <td>{user.userEmail}</td>
-                          <td><button style={transparent} onClick={()=>{  this.setState({delete :true , deleteUser : user })
-                            }}><FontAwesomeIcon color='red' icon={faTrashAlt}/></button></td>
+                          <td><label htmlFor="login-popup" style={transparent} onClick={()=>{ 
+                              user.index = i
+                              this.setState({delete :true , deleteUser : user})
+                            }}><FontAwesomeIcon color='red' icon={faTrashAlt}/></label></td>
                       </tr>
                         
                     }): null}   
               </tbody>
               </Table>
+              {console.log(this.state.delete)}
               {this.state.delete?
               <Delete currentMovie={this.state.deleteUser.firstName + " " + this.state.deleteUser.lastName} 
-              showDelete={(state)=>this.showDelete(state)} handleDelete={(userId)=>this.handleDelete(userId)} id={this.state.deleteUser._id}/>
+              showDelete={(state)=>this.showDelete(state)} handleDelete={(userId, i)=>this.handleDelete(userId, i)} 
+              index={this.state.deleteUser.index} id={this.state.deleteUser._id}/>
                 : null}
           </div>
       )

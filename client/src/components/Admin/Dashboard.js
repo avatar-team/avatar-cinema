@@ -33,8 +33,11 @@ bringUsersData() {
       users : [...res.data.users],
       isAdminLoggedIn: true
   
-    },()=> console.log(this.state.isAdminLoggedIn))} )
-    .catch(err => console.log(err))
+    })} )
+    .catch(err => {
+      console.log(err)
+      this.props.history.replace('/admin/login')
+    })
 }
 
 
@@ -45,6 +48,16 @@ componentDidMount() {
 changeAdminState(state) {
   this.setState({
     isAdminLoggedIn: state
+  })
+}
+
+handleDelete(index) {
+  console.log(index)
+  this.setState(prevState=> {
+    prevState.users.splice(index, 1)
+    return {
+      users: prevState.users
+    }
   })
 }
 
@@ -61,21 +74,24 @@ render(){
               <Row>
                 <Col md="2" className="text-center">
                   <div className='m-auto w-100'>
-                    <h2 className='pb-2 text-left' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Controller</h2>
-                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' onClick={()=>this.setState({movieShow : false })}>Users</Button>
+                    <h2 className='pb-2 text-left' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Dashboard</h2>
                     <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} onClick={()=>this.setState({movieShow : true })}>Movies</Button>  
+                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' 
+                    onClick={()=> {
+                      this.bringUsersData()
+                      this.setState({movieShow : false })
+                    }}>Users</Button>
                   </div>
                 </Col>
                 <Col md="10">
                   <div>
                     { this.state.movieShow ? <MovieController  movies={this.props.movies} handleUpdate={(updatedMovie, movieData)=> this.props.handleUpdate(updatedMovie, movieData)}
                     handleAdd={(addedMovie)=> this.props.handleAdd(addedMovie)}
-                    handleDelete={(deletedMovie)=> this.props.handleDelete(deletedMovie)}/> : <UserController users={this.state.users}/>}
+                    handleDelete={(deletedMovie, i)=> this.props.handleDelete(deletedMovie, i)}/> : <UserController handleDelete={(i)=> this.handleDelete(i)} users={this.state.users}/>}
                   </div>
                 </Col>
               </Row>
-            </Card>:
-          <Redirect to={`${this.props.match.url}/login`} />}
+            </Card>:null}
           </div>
         }}/>
 

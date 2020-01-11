@@ -51,18 +51,18 @@ class AddUpdateMovie extends Component {
                               <ul>
                                 <li>
                                   <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
-                                  <Input required disabled={isUpdate} id="title" name="Title" />
+                                  <Input disabled={isUpdate} id="title" name="Title" />
                                 </li>
                                 <li>
                                   <Label>Price: </Label>
-                                  <Input required id="price" name="price" type="number"/>                                </li>
+                                  <Input required="required" id="price" name="price" type="number"/>                                </li>
                                 <li>
                                   <Label>Chairs: </Label>
                                   <Input required id="chairs" name="chairs" type="number"/>
                                 </li>
                                 <li>
                                   <Label>Date: </Label>
-                                  <Input required id="date" name="date" type="date"/>
+                                  <Input min="2020-1-11" required id="date" name="date" type="date"/>
                                 </li>
                                 <li>
                                   <Label>Time: </Label>
