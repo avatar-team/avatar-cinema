@@ -7,6 +7,7 @@ import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
+import { Redirect } from 'react-router-dom';
 
 
 const transparent = {
@@ -52,16 +53,16 @@ class User extends React.Component {
           return(
              
             <div >
+                {!this.props.isUserLoggedIn? <Redirect to="/"/>:''}
                 <Container className="mb-3">
                     <Row>
                         <Col md="4" className="border border-primary">
                         <Card>
                              <CardImg top width="100%" src={data[0].Poster} alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>User title</CardTitle>
-                                <CardSubtitle>Card subtitle</CardSubtitle>
-                                <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
-                                <Button>Button</Button>
+                                <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
+                                <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
+                                <CardText>email: {this.props.user.userEmail}</CardText>
                              </CardBody>
                           </Card>
                         </Col>
