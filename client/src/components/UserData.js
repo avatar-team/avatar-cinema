@@ -5,8 +5,11 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 
-const UserData = ({movies})=>(
-  
+let header = '';
+const UserData = ({movies, type})=>(
+  <div>
+ 
+   
     <tbody>
       {movies.map((movie,i)=>{
         return  <tr key={i} >
@@ -17,7 +20,7 @@ const UserData = ({movies})=>(
         </tr>
       })}
     </tbody>
-
+    </div>
 )
 
 export default UserData

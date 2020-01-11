@@ -1,4 +1,4 @@
-
+import '../App.css'
 import React from 'react';
 import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col ,Card, CardImg,CardBody,
     CardTitle, CardSubtitle ,Container } from 'reactstrap';
@@ -7,58 +7,55 @@ import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
+
 import { Redirect } from 'react-router-dom';
 
 
-const transparent = {
-    backgroundColor: 'transparent',
-    borderColor: 'transparent'
-  }
   
-  const table = {
-    borderCollapse: 'collapse',
-    padding: '10px'
-  }
+const table = {
+  borderCollapse: 'collapse',
+  padding: '10px',
+  backgroundColor: '#313131'
+}
   
-  const td = {
-    padding: '12px'
-  }
+const td = {
+  padding: '12px'
+}
 
-  const purchasedMoives =[ {
-    movie : "joker",
-    price: 12,
-    time : "SDfsdf",
-    date : "SDfsdf"
+const purchasedMoives = [ {
+  movie : "joker",
+  price: 12,
+  time : "SDfsdf",
+  date : "SDfsdf"
 }]
 
 const favoriteMoives = [{
-    movie : "x-men",
-    price: 213,
-    time : "SDf",
-    date : "DSF"
+  movie : "x-men",
+  price: 213,
+  time : "SDf",
+  date : "DSF"
 }]
 
 
 class User extends React.Component {
     constructor(props) {
-        super(props)
-
+        super(props);
         this.state = {
-            counter : 0 
+            counter : 0
         }
-      
       };
 
       render(){
           return(
-             
-            <div >
+            <div style={{color: 'white', backgroundColor: 'rgb(24, 24, 31)', marginTop: '50px'}}>
+                {console.log(this.props)}
+
                 {!this.props.isUserLoggedIn? <Redirect to="/"/>:''}
                 <Container className="mb-3">
                     <Row>
-                        <Col md="4" className="border border-primary">
-                        <Card>
-                             <CardImg top width="100%" src={data[0].Poster} alt="Card image cap" />
+                        <Col md="4">
+                        <Card style={{backgroundColor: 'rgb(24, 24, 31)'}}>
+                            <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' alt="Card image cap" />
                             <CardBody>
                                 <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
                                 <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
@@ -66,17 +63,17 @@ class User extends React.Component {
                              </CardBody>
                           </Card>
                         </Col>
-                        <Col md="8" className="border border-primary ">
+                        <Col md="8">
 
-                         <Nav tabs  className="border">
-                             <NavItem>
-                                 <NavLink  onClick={()=>{this.setState({counter:0})}}>
-                                 purchased moives
+                         <Nav>
+                             <NavItem className='tabItem' >
+                                 <NavLink activeClassName='tabItem' onClick={()=>this.setState({ counter:0 })}>
+                                    Purchased moives
                                  </NavLink>   
                              </NavItem>
-                             <NavItem>
-                                 <NavLink onClick={()=>{this.setState({counter:1})}}>
-                                favorite moives
+                             <NavItem className='tabItem' >
+                                 <NavLink onClick={()=>this.setState({counter:1})}>
+                                    Favorite moives
                                  </NavLink>
                              </NavItem>
                          </Nav>
@@ -87,8 +84,8 @@ class User extends React.Component {
                                  <th>Date</th>
                                  <th>Time</th>
                              </tr>
-                             {( this.state.counter == 0)? <UserData movies={ purchasedMoives} /> : null }
-                             {( this.state.counter == 1)? <UserData movies={ favoriteMoives} /> : null }
+                             {( this.state.counter == 0)? <UserData movies={purchasedMoives} type={'P'} /> : null }
+                             {( this.state.counter == 1)? <UserData movies={favoriteMoives} type={'F'}/> : null }
                          </Table>
                          
                         </Col>
