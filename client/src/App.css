@@ -22,6 +22,7 @@ body {
 .cardBody {
   font-size: 13pt;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+  padding: 0.25rem !important;
 }
 
 .cardBtn {
