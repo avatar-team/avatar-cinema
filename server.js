@@ -1,10 +1,8 @@
 const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
-const path = require("path");
 const mongoose = require("mongoose");
 const reservationDb = require('./db/models/reservationModel'); //might have to move them in the movieController
-const adminDb = require('./db/models/adminModel');
 const authController = require('./controllers/authController')
 const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
@@ -45,9 +43,4 @@ const requestReservation = (req, res) => {
 // // app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/signup', authController.signup)
 app.post('/login', authController.login)
-
-
-
-
-
 app.listen(8000);

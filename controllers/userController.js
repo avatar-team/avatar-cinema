@@ -73,7 +73,7 @@ exports.pushMoviebBought = (req, res, next) => {
 
 exports.insertFavoriteMovie = (req, res, next) => {
     const { userId, movieId } = req.body;
-    userModel.pushFavoriteMovies(userId, movieId, (err, user) => {
+    userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
         if (err) {
             res.status(404).json({
                 status: false,
@@ -114,9 +114,9 @@ exports.insertReservation = (req, res, next) => {
             message: "OK",
             reservation: result
         })
-
     })
 }
+
 exports.pullFavorite = (req, res, next) => {
     const { userId, movieId } = req.body;
     userModel.pullFavoriteMovie(userId, movieId, (err, user) => {

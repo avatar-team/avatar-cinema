@@ -20,7 +20,7 @@ class MainPage extends React.Component{
     this.props.movies.map((movie, i)=>{
       const day  =  new Date(movie.playDate).getDate()
       if(day === date ){
-        array.push(movie)
+        array.push({movie, i})
       }  
     }) 
     this.setState({
@@ -44,15 +44,14 @@ class MainPage extends React.Component{
             // console.log(date)
              this.check(date)
           }}/>
-          {this.state.moviesforDay.map((movie, i)=> {
+          {this.state.moviesforDay.map((movie)=> {
             console.log(movie)
-            return <MovieCard key={i} movie={movie} index={i}/>
+            return <MovieCard key={movie.i} movie={movie.movie} index={movie.i}/>
           })}
         </Col>
         <Col md="4">
             {this.state.moviesforDay.map((movie, i)=> {
-              console.log(movie)
-              return <Movietrailer key={i} movie={movie} />
+              return <Movietrailer key={movie.i} movie={movie.movie} />
             })}
         </Col>
       </Row>

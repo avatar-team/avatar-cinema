@@ -2,12 +2,14 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 const _findMovies = require('./movieModel').findMovies;
 const _updateMovie = require('./movieModel').updateMovie;
+const _userFunction = require('./userModel')
 const validator = require('validator')
-    //*******************************************//
-    // all the functions exported from this module is in Error-First-Style// 
-    //*******************************************//
-    // mongoose library is REQUIRED//
-    //*******************************************//
+
+//*******************************************//
+// all the functions exported from this module is in Error-First-Style// 
+//*******************************************//
+// mongoose library is REQUIRED//
+//*******************************************//
 
 const reservationSchema = new Schema({
     firstName: {
@@ -18,16 +20,30 @@ const reservationSchema = new Schema({
         type: String,
         trim: true
     },
+    userId: {
+        type: String,
+        required: true,
+        trim: true
+    },
     movieId: {
         type: String,
         required: true,
         trim: true
     },
-    userId: {
-        type: String,
-        required: true,
-        trim: true
-    }
+    playDate: {
+        type: Date
+    },
+    price: {
+        type: Number,
+        min: 0,
+        validate: {
+            validator: function(value) {
+                return value > 0;
+            },
+            message: 'Price need to be > 0'
+        }
+    },
+    title: String
 });
 const Reservation = new mongoose.model("Reservation", reservationSchema);
 
@@ -41,15 +57,27 @@ const insertReservation = (reservation, callback) => {
     _findMovies({ _id: reservation.movieId }, (error, movie) => {
         if (error) {
             callback(error, null);
-        } else if (movie.availableChairs <= 0) {
+        } else if (movie[0].availableChairs <= 0) {
             callback("No More Available Chairs For this Movie", null);
         } else {
-            _updateMovie(movie._id.toString(), { $inc: { availableChairs: -1 } });
-            Reservation.create(reservation)
-                .then(reservation => callback(null, reservation))
-                .catch(err => callback(err, null));
+            _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } }, (err, data) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    _userFunction.pushMoviesBought(reservation.userId, { _id: reservation.movieId }, (err, data) => {
+                        if (err) {
+                            return console.log(err)
+                        }
+                    });
+                }
+            });
+
         }
+
     })
+    Reservation.create(reservation)
+        .then(reservation => callback(null, reservation))
+        .catch(err => callback(err, null));
 };
 
 

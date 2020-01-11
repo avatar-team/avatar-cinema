@@ -7,7 +7,10 @@ import Tab from 'react-bootstrap/Tab';
 import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
-import { NavLink as RRNavLink } from 'react-router-dom'
+
+import { Redirect } from 'react-router-dom';
+
+
   
 const table = {
   borderCollapse: 'collapse',
@@ -46,15 +49,17 @@ class User extends React.Component {
           return(
             <div style={{color: 'white', backgroundColor: 'rgb(24, 24, 31)', marginTop: '50px'}}>
                 {console.log(this.props)}
+
+                {!this.props.isUserLoggedIn? <Redirect to="/"/>:''}
                 <Container className="mb-3">
                     <Row>
                         <Col md="4">
                         <Card style={{backgroundColor: 'rgb(24, 24, 31)'}}>
                             <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>User Name</CardTitle>
-                                <CardSubtitle>Card subtitle</CardSubtitle>
-                                <CardText>Some quick example text to build on the card title and make up the bulk of the card's content.</CardText>
+                                <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
+                                <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
+                                <CardText>email: {this.props.user.userEmail}</CardText>
                              </CardBody>
                           </Card>
                         </Col>

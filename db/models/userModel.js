@@ -5,11 +5,11 @@ const _movieSchema = require('./movieModel')._movieSchema;
 const _findMovies = require('./movieModel').findMovies;
 const bcrypt = require('bcryptjs')
 
-    //*******************************************//
-    // all the functions exported from this module is in Error-First-Style// 
-    //*******************************************//
-    // mongoose library is REQUIRED//
-    //*******************************************//
+//*******************************************//
+// all the functions exported from this module is in Error-First-Style// 
+//*******************************************//
+// mongoose library is REQUIRED//
+//*******************************************//
 
 
 
@@ -180,7 +180,7 @@ const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
  * @param {*} movieObjectId the Object Id of the movie to be deleted 
  * @param {*} callback Error-First Callback Function
  */
-const pullFavoriteMovie = (userObjectId, movieObjectId, callback) => {
+const pullFavoriteMovie = (userObjectId, movieObjectId, callback = () => {}) => {
     updateUser({ _id: userObjectId }, { $pull: { favoriteMovies: { _id: movieObjectId } } }, callback);
 }
 
