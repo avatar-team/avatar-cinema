@@ -39,7 +39,6 @@ exports.hundleSginin = (req, res) => {
 }
 
 exports.hundleMainDashboard = (req, res) => {
-    console.log('in dashboard', req.body.user)
     User.findUser({}, (err, result) => {
         if (result) {
             res.status(200).json({
