@@ -14,6 +14,7 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
   let [favorite, setFavorite] = useState(isFavorite(movie._id));
   console.log(favorite)
   let handleFavorite = ()=> {
+
     changeFavoriteState(favorite? 'delete': 'add', movie._id, user._id )
     setFavorite(!favorite)
   }
