@@ -33,18 +33,6 @@ class App extends React.Component{
       this.setState({
         movies: [...this.state.movies, ...res.data]
       })
-      // if(Array.isArray(res.data)) {
-      //   this.setState({
-      //     movies: [...res.data]
-      //   })
-      // }else {
-      //   this.setState(prevState => {
-      //     prevState.movies.push(res.data)
-      //     return({
-      //       movies: [...prevState.movies]
-      //     })
-      //   })
-      // }
     })
     .catch(err => {
       console.log(err)
@@ -139,7 +127,6 @@ class App extends React.Component{
         })
       }
   }
-  
 
   getUser() {
     let token = localStorage.getItem('x-auth-token')
@@ -181,9 +168,7 @@ class App extends React.Component{
           <Route path="/movieInfo/:index" component={(data)=> {
             return <MovieInfo changeFavoriteState={(state, movieId, userId)=> this.changeFavoriteState(state, movieId, userId)} 
             isFavorite={(movieId)=> this.isFavorite(movieId)} match={data.match} 
-            handleReservation={(reservationData)=> this.handleReservation(reservationData)} 
-            isUserLoggedIn={this.state.isUserLoggedIn} user={this.state.user}
-            handleReservation={(reservationData)=> this.handleReservation(reservationData)} movies={this.state.movies}/>
+            isUserLoggedIn={this.state.isUserLoggedIn} user={this.state.user} movies={this.state.movies}/>
           }}/>
           <Route path="/admin" component={(data)=> {
             return <Dashboard history={data.history} match={data.match} movies={this.state.movies} handleUpdate={(updatedMovie, movieData)=> this.handleUpdate(updatedMovie, movieData)}

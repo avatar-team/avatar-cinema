@@ -22,7 +22,16 @@ class AddUpdateMovie extends Component {
     console.log(price.value.length, chairs.value.length, date.value.length)
     result.price = price.value.length > 0? price.value: movie.price;
     result.chairs = chairs.value.length > 0? chairs.value: movie.chairs;
-    result.playDate = date.value.length > 0? new Date(date.value + "  " + time.value): new Date(movie.playDate);
+
+    
+    if(date.value.length <= 0) {
+      date.value = new Date(movie.playDate).toLocaleDateString()
+    }else if(time.value.length < 0) {
+      time.value = new Date(movie.playDate).toLocaleTimeString()
+    }
+    console.log(date.value, time.value)
+    result.playDate = new Date(date.value + " " + time.value)
+      
     result.availability = true;
     if(this.props.processType == 'add') {
       result.Title = title.value;
@@ -37,41 +46,42 @@ class AddUpdateMovie extends Component {
   render() {
     let isUpdate = this.props.processType == 'update'? true: false;
     return (
-      <div class="popup-container">
+      <div className="popup-container">
         <input type="checkbox" id="login-popup" />
-          <div class="popup">
-              <label for="login-popup" class="transparent-label"></label>
-                  <div class="popup-inner">
-                      <div class="popup-title">
+          <div className="popup">
+              <label htmlFor="login-popup" className="transparent-label"></label>
+                  <div className="popup-inner">
+                      <div className="popup-title">
                           <h6>{isUpdate? "update Movie": 'Add Movie'}</h6>
-                          <label style={{backgroundColor: 'transparent'}} for="login-popup" class="popup-close-btn"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
+                          <label style={{backgroundColor: 'transparent'}} htmlFor="login-popup" className="popup-close-btn"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
                       </div>
-                      <div class="popup-content">
-                          <form>
-                              <ul>
-                                <li>
+                      <div className="popup-content">
+                          <form onSubmit={()=> this.handleSubmit(this.props.movie)}>
+                              <div>
+                                <div>
                                   <Label>Movie Title: {isUpdate? this.props.movie.Title: ''}</Label>
                                   <Input disabled={isUpdate} id="title" name="Title" />
-                                </li>
-                                <li>
+                                </div>
+                                <div>
                                   <Label>Price: </Label>
-                                  <Input required="required" id="price" name="price" type="number"/>                                </li>
-                                <li>
+                                  <Input id="price" name="price" type="number"/>                                
+                                </div>
+                                <div>
                                   <Label>Chairs: </Label>
-                                  <Input required id="chairs" name="chairs" type="number"/>
-                                </li>
-                                <li>
+                                  <Input id="chairs" name="chairs" type="number"/>
+                                </div>
+                                <div>
                                   <Label>Date: </Label>
-                                  <Input max={new Date()} min="2020-1-11" required id="date" name="date" type="date"/>
-                                </li>
-                                <li>
+                                  <Input required max="1-15-2020" min="1-11-2020" id="date" name="date" type="date"/>
+                                </div>
+                                <div>
                                   <Label>Time: </Label>
                                   <Input required id="time" name="time" type="time"/>
-                                </li>
-                                <li>
-                                  <Button style={{backgroundColor: '#ca3e47'}} className='mt-3' onClick={()=> this.handleSubmit(this.props.movie)}>Add Movie</Button>
-                                </li>
-                              </ul>
+                                </div>
+                                <div>
+                                  <Button style={{backgroundColor: '#ca3e47'}} className='mt-3' >{isUpdate? "update Movie": 'Add Movie'}</Button>
+                                </div>
+                              </div>
                           </form>
                       </div>
                   </div>
