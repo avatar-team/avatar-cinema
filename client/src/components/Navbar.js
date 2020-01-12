@@ -14,7 +14,7 @@ import {
   Button
 } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
+import { faSearch, faUser, faSignOutAlt, faUserAlt } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
 
 
@@ -31,6 +31,15 @@ const items = {
   paddingRight: '45px',
   fontSize: '14pt',
   color: 'white'
+}
+
+const logout = {
+  border: '2px solid #ca3e47',
+  backgroundColor: 'transparent',
+  color: '#ca3e47',
+  padding: '10px 14px',
+  borderRadius: '.4rem',
+  marginRight: '22px'
 }
 
 const logo = {
@@ -51,6 +60,11 @@ const searchIcon = {
   color: '#ca3e47',
   fontWeight: 'bold',
   marginRight: '-50px'
+}
+
+const userPro = {
+  paddingRight: '45px',
+  color: 'white'
 }
 
 
@@ -95,14 +109,14 @@ const Navbarz = (props) => {
             </NavbarText>
             {props.isUserLoggedIn?
             <Nav className="ml-auto" navbar>
+              <NavItem className="ml-auto">
+                <NavLink tag={Link} style={userPro}  to="/user"><FontAwesomeIcon className='mt-2' size='2x' icon={faUserAlt}/></NavLink>
+              </NavItem>
               <NavItem>
                 <NavLink onClick={()=> {
                   props.changeUserState(false, {})
                   localStorage.setItem('x-auth-token', '')
-                }} tag={Link} style={items} to="/">Log Out</NavLink>
-              </NavItem>
-              <NavItem className="ml-auto">
-                <NavLink tag={Link} style={items} to="/user"><FontAwesomeIcon icon={faUser}/></NavLink>
+                }} tag={Link} style={logout}  className='mt-2' to="/"><FontAwesomeIcon icon={faSignOutAlt}/></NavLink>
               </NavItem>
             </Nav>
             :

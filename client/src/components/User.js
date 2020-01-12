@@ -1,14 +1,10 @@
-import '../App.css'
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col ,Card, CardImg,CardBody,
+import { Nav, NavItem, NavLink, CardText, Row, Col ,Card, CardImg,CardBody,
     CardTitle, CardSubtitle ,Container } from 'reactstrap';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
 
 import { Redirect } from 'react-router-dom';
-import { faUserTie } from '@fortawesome/free-solid-svg-icons'
 
 
   
@@ -20,6 +16,12 @@ const table = {
   
 const td = {
   padding: '12px'
+}
+
+const subtitles = {
+    margin: '10px',
+    fontSize: '14pt',
+    textAlign: 'left'
 }
 
 const purchasedMoives = [ {
@@ -58,9 +60,9 @@ class User extends React.Component {
                             <CardImg top width="100%" src='https://www.povertyalliance.org/wp-content/uploads/2019/03/Portrait_Placeholder.png' 
                             alt="Card image cap" />
                             <CardBody>
-                                <CardTitle>Name: {this.props.user.firstName + " " + this.props.user.lastName}</CardTitle>
-                                <CardSubtitle>username: {this.props.user.userName}</CardSubtitle>
-                                <CardText>email: {this.props.user.userEmail}</CardText>
+                                <CardSubtitle className='mt-2' ><span style={subtitles}>Name: </span> {this.props.user.firstName + " " + this.props.user.lastName}</CardSubtitle>
+                                <CardSubtitle className='mt-2' ><span style={subtitles}>Username: </span> {this.props.user.userName}</CardSubtitle>
+                                <CardSubtitle className='mt-2' ><span style={subtitles}>Email: </span> {this.props.user.userEmail}</CardSubtitle>
                              </CardBody>
                           </Card>
                         </Col>
