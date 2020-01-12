@@ -60,7 +60,6 @@ class MovieInfo extends React.Component {
 
 
   handleFavorite() {
-    if(this.props.user._id == undefined) return alert('you need to sign in to use this feature')
     this.props.changeFavoriteState(this.state.favorite? 'delete': 'add', this.state.movie._id, this.props.user._id )
     this.setState({
       favorite: !this.state.favorite
