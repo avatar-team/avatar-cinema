@@ -42,7 +42,7 @@ class MovieInfo extends React.Component {
       title: this.state.movie.Title
     }
     console.log(data)
-    this.props.handleReservation(data)
+    this.handleReservation(data)
   }
 
   handleReservation(reservationData) {
