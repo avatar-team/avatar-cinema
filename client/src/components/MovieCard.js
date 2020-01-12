@@ -33,8 +33,8 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
                   <CardSubtitle className="sub"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
-                  <CardSubtitle className="sub"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
-                  <CardSubtitle className="sub"> <span className='spans'> Date: </span> {movie.playDate} </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Time: </span> {new Date(movie.playDate).toLocaleTimeString()} </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Date: </span> {new Date(movie.playDate).toLocaleDateString()} </CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
 

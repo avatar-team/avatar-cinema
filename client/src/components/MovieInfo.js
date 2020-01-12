@@ -42,23 +42,25 @@ class MovieInfo extends React.Component {
       title: this.state.movie.Title
     }
     console.log(data)
-    this.props.handleReservation(data)
+    this.handleReservation(data)
   }
 
   handleReservation(reservationData) {
     axios.post(`/api/user/reservation`, reservationData)
     .then((res)=> {
       if(res.data.status) {
-        console.log(res.data)
+        console.log(res.data.reservation)
         this.setState({
           ticket: res.data.reservation
         })
       }
     })
+    // return {successs: true}
   }
 
 
   handleFavorite() {
+    if(this.props.user._id == undefined) return alert('you need to sign in to use this feature')
     this.props.changeFavoriteState(this.state.favorite? 'delete': 'add', this.state.movie._id, this.props.user._id )
     this.setState({
       favorite: !this.state.favorite
