@@ -9,11 +9,9 @@ const User = mongoose.model("User")
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
 
 exports.signup = (req, res) => {
-    console.log(req.body)
     userFunctions.insertUser(req.body, (err, result) => {
         if (err) {
-            return res.json({
-
+            res.json({
                 status: false,
                 data: {
                     error: err
@@ -34,22 +32,22 @@ exports.login = (req, res) => {
     const { userName, password } = req.body;
     //checks if the username and the password in provided in the body
     if (!userName || !password) {
-        return res.status(400).json({
+        res.json({
             status: false,
-            error: "MOST PROVIDE BOTH USERNAME AND PASSWORD"
+            error: "MUST PROVIDE BOTH USERNAME AND PASSWORD"
         })
     }
     User.findOne({ userName }).select('+password').then(user => {
         if (user) {
             brcypt.compare(password, user.password).then(bool => {
                 if (!bool || !user) {
-                    return res.status(401).json({
+                    res.json({
                         status: false,
                         error: "Incorrect Password or Username"
                     })
                 } else if (bool && user) {
                     const token = _signToken(user._id);
-                    res.status(200).json({
+                    res.json({
                         status: true,
                         user,
                         token
@@ -57,7 +55,7 @@ exports.login = (req, res) => {
                 }
             })
         } else {
-            return res.status(401).json({
+            return res.json({
                 status: false,
                 error: "Incorrect Password or Username"
             })

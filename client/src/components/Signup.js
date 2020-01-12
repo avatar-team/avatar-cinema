@@ -65,27 +65,38 @@ class Signup extends Component {
 
   handleSubmit(e) {
     e.preventDefault()
+    if (!this.state.userName || !this.state.password || !this.state.userEmail) {
+      document.getElementById('alert').style.visibility = 'visible'
+      document.getElementById('alert').textContent = 'Fill The Fields'
+      return
+    }
     axios.post('/signup', this.state)
       .then(result => {
-        // console.log(result.data.token)
         if (result.data.status) {
           localStorage.setItem('x-auth-token', result.data.token)
           document.getElementById('alert').style.visibility = 'hidden'
           document.getElementById('alert').textContent = ''
           console.log(result)
           this.props.changeUserState(true, result.data.user)
+          return 
         }
         // if user exist , show something
-        if (!result.data.status && result.data.data.error.message.includes('username')) {
-          document.getElementById('alert').style.visibility = 'visible'
-          document.getElementById('alert').textContent = 'Username is Duplicated'
-        }
-        if (!result.data.status && result.data.data.error.message.includes('email')) {
-          document.getElementById('alert').style.visibility = 'visible'
-          document.getElementById('alert').textContent = 'Email is Duplicated'
-        } else {
-          document.getElementById('alert').style.visibility = 'hidden'
-          document.getElementById('alert').textContent = ''
+        if ( !result.data.status ) {
+          if (result.data.data.error.message.includes('Fill the Fields')) {
+            document.getElementById('alert').style.visibility = 'visible'
+            document.getElementById('alert').textContent = 'Fill The Fields'
+            return;
+          }
+          if (result.data.data.error.message.includes('username')) {
+            document.getElementById('alert').style.visibility = 'visible'
+            document.getElementById('alert').textContent = 'Username is Duplicated';
+            return;
+          }
+          if (result.data.data.error.message.includes('email')) {
+            document.getElementById('alert').style.visibility = 'visible'
+            document.getElementById('alert').textContent = 'Email is Duplicated'
+            return
+          }
         }
       })
       .catch(err => {
@@ -150,15 +161,12 @@ class Signup extends Component {
         onChange={(e) => {this.onChange(e)}}/>
         <br />
 
-          <Alert style={{visibility: 'hidden', padding: '8px', width: '500px', margin: 'auto'}} color="danger" id="alert">
-            
-          </Alert>
+        <input className='mt-3' style={button} type="submit" value='Signup'/>
 
-        <input className='mt-4' style={button} type="submit" value='Signup'/>
+          <Alert style={{visibility: 'hidden', padding: '8px', width: '500px', margin: 'auto', marginTop: '12px'}} color="danger" id="alert"></Alert>
         </form>
       </div>
     )
   }
 }
-
 export default Signup;
