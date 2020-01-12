@@ -61,8 +61,7 @@ const insertReservation = (reservation, callback) => {
             callback("No More Available Chairs For this Movie", null);
         } else {
             _updateMovie(movie[0]._id.toString(), { $inc: { availableChairs: -1 } }, (err, data) => {
-                if (err) {
-                } else {
+                if (err) {} else {
                     _userFunction.pushMoviesBought(reservation.userId, { _id: reservation.movieId }, (err, data) => {
                         if (err) {
                             return console.log(err)

@@ -3,7 +3,22 @@ const User = require('../db/models/userModel');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const { promisify } = require('util');
+
+
+/**
+ * @function _signToken creates a Token based on the @param id and based on the time given and return that token 
+ * @param id is the objectId that well be used to create the token
+ * @returns Token as a String 
+ */
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME_ADMIN });
+
+
+/**
+ * @function hundleSginin here the handler function receives the admin info as an Object and checks the password and the username of the admin
+ * if the password and username is correct it well allow the admin to sign in and generate a token for the admin for a 10m to keep him logged-in
+ * @param req 
+ * @param res 
+ */
 exports.hundleSginin = (req, res) => {
     admin = req.body;
     Admin.findAdmin({ username: admin.username }, (err, result) => {
@@ -35,6 +50,12 @@ exports.hundleSginin = (req, res) => {
         }
     })
 }
+
+/**
+ * @function hundleMainDashboard returns all the users in the database, to be shown on the admin dashboard 
+ * @param req 
+ * @param res 
+ */
 exports.hundleMainDashboard = (req, res) => {
     User.findUser({}, (err, result) => {
         if (result) {
@@ -50,6 +71,12 @@ exports.hundleMainDashboard = (req, res) => {
         }
     });
 }
+
+/**
+ * @function protectAdmin is a middleware that is used to check the token of the admin and is used tp protect the route of the admin dashboard
+ * @param req 
+ * @param res 
+ */
 exports.protectAdmin = (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {

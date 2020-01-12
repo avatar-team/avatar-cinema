@@ -14,8 +14,7 @@ const protectAdmin = require('../controllers/adminController').protectAdmin
  */
 router.route("/")
     .get(movieController.get4Days)
-    .post(protectAdmin, movieController.addMovie);
-
+    .post(movieController.addMovie);
 
 /**
  * @route DELETE /api/movies/:id
