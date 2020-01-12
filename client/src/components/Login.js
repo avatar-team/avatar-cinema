@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
 import { Alert } from 'reactstrap'
 const axios = require('axios')
 
@@ -40,6 +39,13 @@ const button = {
   padding: '8px 28px'
 }
 
+const alertDiv = {
+  visibility: 'hidden',
+  padding: '10px',
+  width: '400px',
+  margin: '12px auto'
+}
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -71,7 +77,6 @@ class Login extends Component {
           return;
         }
       } else if (result.data.status) {
-        // TODO: we need to redirect him
         window.localStorage.setItem('x-auth-token', result.data.token)
         localStorage.setItem('x-auth-token', result.data.token)
         this.props.changeUserState(true, result.data.user)
@@ -85,7 +90,6 @@ class Login extends Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div style={main}>
@@ -117,11 +121,9 @@ class Login extends Component {
           type="submit"
           value='Login'/>
 
-          <Alert style={{visibility: 'hidden', padding: '10px', width: '400px', margin: '12px auto'}} color="danger" id="alert"></Alert>
+          <Alert style={alertDiv} color="danger" id="alert"></Alert>
         </div>
-
       </form>
-    
     )
   }
 }

@@ -1,9 +1,5 @@
 import React from 'react';
-import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col ,Card, CardImg,CardBody,
-    CardTitle, CardSubtitle ,Container } from 'reactstrap';
-import Tabs from 'react-bootstrap/Tabs';
-import Tab from 'react-bootstrap/Tab';
-import data from './dummyData.js';
+
 
 const UserData = ({movies})=> {
   let rows

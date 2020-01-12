@@ -1,8 +1,7 @@
 import React , {useState} from 'react'
 import { Table } from 'reactstrap';
-import { Button, Card, CardTitle } from 'reactstrap'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons'
 import Delete from './Delete.js'
 import axios from 'axios';
 

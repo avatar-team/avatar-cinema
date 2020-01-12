@@ -1,6 +1,5 @@
 import '../App.css'
 import React, {useState} from 'react'
-import data from './dummyData.js';
 import {
     Card, CardImg, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
@@ -8,6 +7,13 @@ import {
 import {Link} from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faHeart } from '@fortawesome/free-solid-svg-icons'
+
+const movieCard = {
+  width:"1200px", 
+  height:"563px",
+  backgroundColor: 'rgb(24, 24, 31)',
+  color: 'white'
+}
   
 
 const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
@@ -23,7 +29,7 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
         {console.log(movie)}
         <Row>
         <Col>
-          <Card className='my-3' style={{width:"1200px", height:"563px", backgroundColor: 'rgb(24, 24, 31)', color: 'white'}}>
+          <Card className='my-3' style={movieCard}>
             <Row>
               <Col md="4">
                 <CardImg src={movie.Poster}/>
@@ -34,8 +40,8 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
                   <CardSubtitle className="sub"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
-                  <CardSubtitle className="sub"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
-                  <CardSubtitle className="sub"> <span className='spans'> Date: </span> {movie.playDate} </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Time: </span> {new Date(movie.playDate).toLocaleTimeString()} </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Date: </span> {new Date(movie.playDate).toLocaleDateString()} </CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
                   <CardSubtitle className="sub"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
 
