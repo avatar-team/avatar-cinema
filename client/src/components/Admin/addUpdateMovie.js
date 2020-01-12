@@ -79,7 +79,7 @@ class AddUpdateMovie extends Component {
                                   <Input required id="time" name="time" type="time"/>
                                 </div>
                                 <div>
-                                  <Button style={{backgroundColor: '#ca3e47'}} className='mt-3' >{isUpdate? "update Movie": 'Add Movie'}</Button>
+                                  <Button style={{backgroundColor: '#ca3e47', marginTop: '30px', padding: '14px'}} className='w-100  border-0' >{isUpdate? "Update": 'Add'}</Button>
                                 </div>
                               </div>
                           </form>
