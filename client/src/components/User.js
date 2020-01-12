@@ -4,7 +4,6 @@ import { TabContent, TabPane, Nav, NavItem, NavLink, Button, CardText, Row, Col 
     CardTitle, CardSubtitle ,Container } from 'reactstrap';
 import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
-import data from './dummyData.js';
 import UserData from './UserData'
 import { Table } from 'reactstrap';
 
