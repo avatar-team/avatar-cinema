@@ -43,20 +43,30 @@ class App extends React.Component{
 
   //Admin handle functions
   handleAdd(movieData) {
+    let token = localStorage.getItem('admin-auth-token')
     axios.post('/api/movies', movieData)
     .then(res => {
+      alert(res)
       console.log(res)
       this.setState((prevState)=> {
+        prevState.movies.push(res.data[0])
         return ({
-          movies: [...prevState.movies, ...res.data]
+          movies: [...prevState.movies]
         })
-      }, ()=> console.log(this.state.movies))
+      }, ()=> alert('hi'))
+    }).catch(err => {
+      console.log(err)
     })
   }
 
   handleUpdate(movieId, newData) {
+    let token = localStorage.getItem('admin-auth-token')
     console.log(newData)
-    axios.patch(`/api/movies/${movieId}`, newData)
+    axios.patch(`/api/movies/${movieId}`, newData, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(res => {
       console.log(res)
       this.setState(prevState => {
@@ -72,8 +82,13 @@ class App extends React.Component{
   }
 
   handleDelete(movieId, i) {
+    let token = localStorage.getItem('admin-auth-token')
     console.log(i)
-    axios.delete(`/api/movies/${movieId}`)
+    axios.delete(`/api/movies/${movieId}`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(res => {
       this.setState(prevState => {
         prevState.movies.splice(i, 1)
