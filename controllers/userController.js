@@ -65,27 +65,6 @@ exports.pushMoviebBought = (req, res, next) => {
     })
 }
 
-// exports.getAllBoughtMovies = (req, res, next) => {
-//     const userId = req.param.id;
-//     userModel.findUser({ _id: userId }, (err, user) => {
-//         res.status(200).json({
-//             status: true,
-//             message: "OK",
-//             data: user[0].moviesBought
-//         })
-//     })
-// }
-// exports.getAllFavoriteMovies = (req, res, next) => {
-//     const userId = req.param.id;
-//     userModel.findUser({ _id: userId }, (err, user) => {
-//         res.status(200).json({
-//             status: true,
-//             message: "OK",
-//             data: user[0].favoriteMovies
-//         })
-//     })
-// }
-
 exports.insertFavoriteMovie = (req, res, next) => {
     const { userId, movieId } = req.body;
     userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
