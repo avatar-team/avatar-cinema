@@ -75,8 +75,8 @@ const Navbarz = (props) => {
             <InputGroup style={search}>
               <InputGroupAddon addonType="prepend"><Button  className='bg-transparent border-0' onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon style={{color: '#ca3e47', fontWeight: 'bold', marginRight: '-50px', textAlign: 'right'}} icon={faSearch}/></Button></InputGroupAddon>
-              <Input style={{borderBottom: '2px solid #ca3e47', borderLeft: '0', borderRight: '0', borderTop: '0'}} className='bg-transparent ' id="search" />
+              }}><FontAwesomeIcon style={{color: '#ca3e47', fontWeight: 'bold', marginRight: '-50px'}} icon={faSearch}/></Button></InputGroupAddon>
+              <Input style={{borderBottom: '2px solid #ca3e47', borderLeft: '0', borderRight: '0', borderTop: '0', color: 'white'}} className='bg-transparent ' id="search" />
             </InputGroup>
             
             </NavbarText>

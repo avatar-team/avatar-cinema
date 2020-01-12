@@ -62,6 +62,7 @@ class AdminLogin extends Component {
         console.log(result.data)
         localStorage.setItem('admin-auth-token', result.data.token)
         this.props.changeAdminState(true)
+        this.props.bringUsersData()
         return <Redirect to="/admin"/>
       }
     })
@@ -74,7 +75,7 @@ class AdminLogin extends Component {
   }
 
   // componentDidMount() {
-  //   this.props.bringUsersData()
+    // this.props.bringUsersData()
   // }
 
   render() {
