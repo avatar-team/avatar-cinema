@@ -61,12 +61,12 @@ exports.hundleMainDashboard = (req, res) => {
         if (result) {
             res.status(200).json({
                 status: true,
-                user: result
+                users: result
             })
         } else {
             res.status(404).json({
                 status: false,
-                user: err
+                data: err
             })
         }
     });
