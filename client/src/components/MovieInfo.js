@@ -104,7 +104,7 @@ class MovieInfo extends React.Component {
                       disabled={!this.state.movie.availableChairs? true: false}>
                       Reserve Now!</label>
 
-                      <Button style={{color: this.state.favorite ? 'red': 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
+                      <Button style={{color: this.state.favorite ? this.props.isUserLoggedIn ? 'red': alert('Login Mothafucker') : 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
                   </CardBody>
                 </Col>
               </Row>
