@@ -14,11 +14,3 @@ This well run the clinet Server
 ### `npm run Server`
 
 Launches the Main Server.
-
-### `Notes`
-this green Field Project, _*supervised by RBK Tunisia_*
-is the result of the collaborative work of Four Students 
-*Abobker Elaghel - Product Owner
-*Essam Harus - SCRUM Master
-*Ali Jalal
-*Mohamed FaredFour Students
