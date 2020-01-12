@@ -20,8 +20,9 @@ app.use("/api/movies", movieRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 
+
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority", {
+mongoose.connect(process.env.DATABASE_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -44,4 +45,6 @@ const requestReservation = (req, res) => {
 // // app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/signup', authController.signup)
 app.post('/login', authController.login)
-app.listen(8000);
+app.listen(8000, () => {
+    console.log(process.env.DATABASE_URL)
+});
