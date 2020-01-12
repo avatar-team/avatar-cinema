@@ -31,7 +31,7 @@ class MovieInfo extends React.Component {
   }
   collect() {
     console.log(this.props)
-    if(!this.props.isUserLoggedIn) return alert('you need to login first')
+    // if(!this.props.isUserLoggedIn) return alert('you need to login first')
     let data = {
       firstName : this.props.user.firstName,
       lastName : this.props.user.lastName,
@@ -119,7 +119,7 @@ class MovieInfo extends React.Component {
         </Row>
         :
         <div>this Movie is not available</div>
-      }{this.state.clicked ? <Ticket ticket={this.state.ticket}/>:''}
+      }{this.state.clicked ? this.props.user._id == undefined ? alert('Login First Please') : <Ticket ticket={this.state.ticket}/> : ''}
       </div>
     )
 
