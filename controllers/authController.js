@@ -64,6 +64,7 @@ exports.login = (req, res) => {
         }
     })
 }
+
 exports.protect = (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {

@@ -6,7 +6,10 @@ const main = {
   textAlign: 'center',
   borderRadius: '1.2rem',
   padding: '10px',
-  fontFamily:'Trebuchet MS'
+  fontFamily:'Trebuchet MS',
+  color: 'white',
+  fontSize: '14pt',
+  marginTop: '90px'
 }
 
 const input = {
@@ -22,7 +25,7 @@ const input = {
 
 
 const button = {
-  backgroundColor: '#4CAF50', /* Green */
+  backgroundColor: '#ca3e47',
   borderRadius: '8px',
   borderColor: 'transparent',
   color: 'white',
@@ -59,7 +62,8 @@ class AdminLogin extends Component {
         console.log(result.data)
         localStorage.setItem('admin-auth-token', result.data.token)
         this.props.changeAdminState(true)
-        this.props.history.replace('/admin')
+        this.props.bringUsersData()
+        return <Redirect to="/admin"/>
       }
     })
     .catch(err => {
@@ -70,16 +74,21 @@ class AdminLogin extends Component {
     })
   }
 
+  // componentDidMount() {
+    // this.props.bringUsersData()
+  // }
+
   render() {
-    console.log(this.state)
+    console.log(this.props.history)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         {this.props.isAdminLoggedIn? <Redirect to="/admin"/>: 
         <div style={main}>
-          <h2>Welcome to Signin Page</h2>
+          <h2 className='mb-4'>Welcome to Signin Page</h2>
 
           username: <br />
           <input
+          className='my-3'
           style={input}
           type="text"
           name="username"
@@ -89,6 +98,7 @@ class AdminLogin extends Component {
 
           Password: <br />
           <input
+          className='my-3'
           style={input}
           type="password"
           name="password"
@@ -99,6 +109,7 @@ class AdminLogin extends Component {
 
           <input
           style={button}
+          value='Login'
           type="submit"/>
         </div>
         }

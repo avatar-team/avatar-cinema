@@ -7,7 +7,10 @@ import {
 } from 'reactstrap';
 import Movietrailer from '../components/Movietrailer.js';
 import Ticket from './Ticket.js';
-import axios from 'axios'
+import axios from 'axios';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
+  
 
 const div = {
   width: '1610px',
@@ -22,7 +25,8 @@ class MovieInfo extends React.Component {
     this.state = {
       movie: this.props.movies[props.match.params.index],
       ticket: {},
-      favorite: false
+      favorite: false,
+      clicked: false
     }
   }
   collect() {
@@ -38,20 +42,19 @@ class MovieInfo extends React.Component {
       title: this.state.movie.Title
     }
     console.log(data)
-    this.handleReservation(data)
+    this.props.handleReservation(data)
   }
 
   handleReservation(reservationData) {
     axios.post(`/api/user/reservation`, reservationData)
     .then((res)=> {
       if(res.data.status) {
-        console.log(res.data.reservation)
+        console.log(res.data)
         this.setState({
           ticket: res.data.reservation
         })
       }
     })
-    // return {successs: true}
   }
 
 
@@ -91,8 +94,18 @@ class MovieInfo extends React.Component {
                       <CardSubtitle className="my-4"> <span className='spans'>available Chairs: </span>{this.state.movie.availableChairs}/{this.state.movie.chairs} </CardSubtitle>
                       <CardSubtitle className="my-4"> <span className='spans'>Time: </span>{new Date(this.state.movie.playDate).toLocaleTimeString()} </CardSubtitle>
                       <CardSubtitle className="my-4"> <span className='spans'>Date: </span>{new Date(this.state.movie.playDate).toLocaleDateString()} </CardSubtitle>
-                      <Button onClick={()=> this.handleFavorite()}>add to favorite</Button>
-                      <Button onClick={()=> this.collect()} className="mt-4 cardBtn" disabled={!this.state.movie.availableChairs? true: false}>Reserve Now!</Button>
+                      
+                      <label for="login-popup" onClick={()=> {
+                        this.collect()
+                        this.setState({
+                          clicked: true
+                        })
+                      }}
+                      className="mt-5 cardBtn text-white" 
+                      disabled={!this.state.movie.availableChairs? true: false}>
+                      Reserve Now!</label>
+
+                      <Button style={{color: this.state.favorite ? 'red': 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
                   </CardBody>
                 </Col>
               </Row>
@@ -105,7 +118,7 @@ class MovieInfo extends React.Component {
         </Row>
         :
         <div>this Movie is not available</div>
-      }{this.state.ticket.price? <Ticket ticket={this.state.ticket}/>:''}
+      }{this.state.clicked ? <Ticket ticket={this.state.ticket}/>:''}
       </div>
     )
 

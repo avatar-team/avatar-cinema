@@ -1,3 +1,4 @@
+import '../App.css'
 import React, {useState} from 'react'
 import data from './dummyData.js';
 import {
@@ -5,17 +6,15 @@ import {
     CardTitle, CardSubtitle, Button, Row, Col
 } from 'reactstrap';
 import {Link} from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faHeart } from '@fortawesome/free-solid-svg-icons'
   
-// const div = {
-//     width: '1200px',
-//     height: '1200px',
-//     marginTop: '20px'
-// }
 
 const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
   let [favorite, setFavorite] = useState(isFavorite(movie._id));
+  console.log(favorite)
   let handleFavorite = ()=> {
-    if(user == undefined) return alert('you need to sign in to use this feature')
+    if(user._id == undefined) return alert('you need to sign in to use this feature')
     changeFavoriteState(favorite? 'delete': 'add', movie._id, user._id )
     setFavorite(!favorite)
   }
@@ -32,15 +31,15 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
               <Col md="8">
                 <CardBody className="cardBody">
                   <CardTitle className="title">{movie.Title} <span className="imdb"> ... {movie.imdbRating} </span></CardTitle>
-                  <CardSubtitle className="my-4"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
-                  <CardSubtitle className="my-4"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
-                  <CardSubtitle className="mt-4"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
-                  <CardSubtitle className="mt-4"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
-                  <CardSubtitle className="mt-4"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
-                  <Button onClick={()=> handleFavorite()}>add to favorite</Button>
-                  
-                  <CardSubtitle className="mt-4"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
-                  <Link to={`/movieInfo/${index}`}><button className="mt-5 cardBtn">Movie Info</button></Link>
+                  <CardSubtitle className="sub"> <span className='spans'> Plot: </span> {movie.Plot}</CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Genre: </span> {movie.Genre}</CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Price: </span> {movie.price}$</CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Time: </span> 08:00 </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Runtime: </span> {movie.Runtime} </CardSubtitle>
+                  <CardSubtitle className="sub"> <span className='spans'> Available Chairs: </span> {movie.availableChairs} </CardSubtitle>
+
+                  <Link to={`/movieInfo/${index}`}><button className="mt-5 cardBtn text-white">Movie Info</button></Link>
+                  <Button style={{color: favorite ? 'red': 'white'}} className='mx-5 bg-transparent border-0' onClick={()=> handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
                 </CardBody>
               </Col>
             </Row>

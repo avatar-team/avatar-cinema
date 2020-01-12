@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 import { Button, Card, CardTitle } from 'reactstrap'
 import AddUpdateMovie from './addUpdateMovie';
-import Test2 from '../Test2.js'
+import Delete from './Delete.js'
 
 const transparent = {
   backgroundColor: 'transparent',
@@ -29,7 +29,6 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
   let [precessType, setType] = useState('')
   let [CurrentMovie, setMovie] = useState({});
   let [deleteComponent, showDelete] = useState(false);
-  let [original, changeOriginal] = useState(false)
   
   
   return (
@@ -45,11 +44,11 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
             <th style={{fontSize: '14pt'}}>Chairs</th>
             <th className="text-center">
               <label
-              for="login-popup"
+              htmlFor="login-popup"
               style={{padding: '8px', borderColor: 'transparent', backgroundColor: '#ca3e47', color: 'white', borderRadius: '1rem'}}
               onClick={()=> {
               setType('add')
-              showAddUpdate(!addUpdate)
+              showAddUpdate(true)
               showDelete(false)
               }} color="light"> <FontAwesomeIcon icon={faPlus}/>  Add Movie
               </label></th>
@@ -68,10 +67,11 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 <td>{movie.availableChairs} / {movie.chairs}</td>
                 <td className="text-center">
                 <label
-                for="login-popup"
+                htmlFor="login-popup"
                 onClick={()=> {
+                  movie.index = i
                   setType('update')
-                  showAddUpdate(!addUpdate)
+                  showAddUpdate(true)
                   setMovie(movie)
                   showDelete(false)
                 }}
@@ -79,11 +79,12 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
                 <FontAwesomeIcon color='white' icon={faEdit}/></label>
 
                 <label 
-                for="login-popup"
+                htmlFor="login-popup"
                 onClick={()=> {
+                  movie.index = i
                   setType('delete')
                   showAddUpdate(false)
-                  showDelete(!deleteComponent)
+                  showDelete(true)
                   setMovie(movie)
                 }} style={transparent}><FontAwesomeIcon color='red' icon={faTrashAlt}/></label></td>
               </tr>
@@ -95,7 +96,7 @@ const MovieControll = ({movies, handleAdd, handleUpdate, handleDelete}) => {
       movie={CurrentMovie} handleUpdate={(updatedMovie, movieData)=> handleUpdate(updatedMovie, movieData)}
       handleAdd={(addedMovie)=> handleAdd(addedMovie)} />: ''}
       {deleteComponent? 
-        <Test2  currentMovie={CurrentMovie.Title} showDelete={showDelete} handleDelete={handleDelete} id={CurrentMovie._id} />
+        <Delete  currentMovie={CurrentMovie.Title} showDelete={showDelete} handleDelete={(movieId, i)=> handleDelete(movieId, i)} index={CurrentMovie.index} id={CurrentMovie._id} />
       : ''}
     </div>
   );

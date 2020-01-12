@@ -25,7 +25,7 @@ const input = {
 
 
 const button = {
-  backgroundColor: '#ca3e47', /* Green */
+  backgroundColor: '#ca3e47',
   borderRadius: '8px',
   borderColor: 'transparent',
   color: 'white',
