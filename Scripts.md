@@ -14,3 +14,5 @@ This well run the clinet Server
 ### `npm run Server`
 
 Launches the Main Server.
+
+#  PLEASE READ THE DOC FILE IN THE READ ME FOULDER

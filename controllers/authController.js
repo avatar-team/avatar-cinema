@@ -5,8 +5,13 @@ const brcypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const User = mongoose.model("User")
 
-
+/**
+ * @function _signToken creates a Token based on the @param id and based on the time given and return that token 
+ * @param id is the objectId that well be used to create the token
+ * @returns Token as a String 
+ */
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
+
 
 exports.signup = (req, res) => {
     userFunctions.insertUser(req.body, (err, result) => {
@@ -62,6 +67,7 @@ exports.login = (req, res) => {
         }
     })
 }
+
 exports.protect = (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
