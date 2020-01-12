@@ -2,16 +2,13 @@ import React from 'react';
 import './App.css';
 import {BrowserRouter, Link, Switch, Route, Redirect} from 'react-router-dom';
 import axios from 'axios';
-import movies from './components/dummyData';
 import MainPage from './components/MainPage';
 import NavBar from './components/Navbar';
 import MovieInfo from './components/MovieInfo'
-import Test from './components/test'
 import Dashboard from './components/Admin/Dashboard'
 import User from './components/User';
 import Signup from './components/Signup.js';
 import Login from './components/Login.js'
-import AdminLogin from './components/Admin/adminLogin';
 
 class App extends React.Component{
   constructor() {
@@ -29,13 +26,11 @@ class App extends React.Component{
   getMovies() {
     axios.get('/API/movies')
     .then((res)=> {
-      console.log(res.data)
       this.setState({
         movies: [...this.state.movies, ...res.data]
       })
     })
     .catch(err => {
-      console.log(err)
     })
   }
 
@@ -45,20 +40,17 @@ class App extends React.Component{
   handleAdd(movieData) {
     axios.post('/api/movies', movieData)
     .then(res => {
-      console.log(res)
       this.setState((prevState)=> {
         return ({
           movies: [...prevState.movies, ...res.data]
         })
-      }, ()=> console.log(this.state.movies))
+      }, ()=> {})
     })
   }
 
   handleUpdate(movieId, newData) {
-    console.log(newData)
     axios.patch(`/api/movies/${movieId}`, newData)
     .then(res => {
-      console.log(res)
       this.setState(prevState => {
         var newMovies = prevState.movies.map((movie, i)=> {
           if(movie._id == movieId) return res.data;
@@ -72,7 +64,6 @@ class App extends React.Component{
   }
 
   handleDelete(movieId, i) {
-    console.log(i)
     axios.delete(`/api/movies/${movieId}`)
     .then(res => {
       this.setState(prevState => {
@@ -85,7 +76,6 @@ class App extends React.Component{
   }
 
   changeUserState(state, userData) {
-    console.log(state)
     this.setState({
       isUserLoggedIn: state,
       user: userData
@@ -108,19 +98,16 @@ class App extends React.Component{
   changeFavoriteState(state, movieId, userId) {
     //TODO you will receive a movie id, you should take the userId from the user state
     //and send the data to this route '/api/user/favorite save this film 
-    console.log(state, movieId, userId)
       if(state == 'add') {
         axios.post('/api/user/favorite', {movieId: movieId, userId: userId})
         .then(res=> {
           this.getUser()
         })
         .catch(err => {
-          console.log(err)
         })
       }else if(state == "delete") {
         axios.delete(`/api/user/favorite/${userId}/${movieId}`)
         .then(res=> {
-          console.log(res)
         })
         .catch(err => {
 
@@ -135,7 +122,6 @@ class App extends React.Component{
         'Authorization': 'Bearer ' + token
       }
     }).then(res => {
-      console.log(res)
       if(res.data.status) {
         this.setState({
           user: res.data.user,
@@ -143,7 +129,6 @@ class App extends React.Component{
         })
       }
     }).catch(err=> {
-      console.log(err)
     })
   }
 
@@ -156,7 +141,6 @@ class App extends React.Component{
     let helper = videoTitle => this.handleSearch(videoTitle)
     return (
       <BrowserRouter>
-        {console.log(this.state.user)}
         <NavBar changeUserState={(state, userData)=> this.changeUserState(state, userData)} isUserLoggedIn={this.state.isUserLoggedIn} 
         movies={this.state.movies} handleSearch={(videoTitle)=> helper(videoTitle)}/>
         <Switch>

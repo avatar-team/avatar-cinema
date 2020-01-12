@@ -1,7 +1,5 @@
 import React from 'react'
 import { Button, Card, CardTitle } from 'reactstrap'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
 
 const Delete = (props) => {
     console.log(props.index)
