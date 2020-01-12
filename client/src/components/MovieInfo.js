@@ -42,20 +42,19 @@ class MovieInfo extends React.Component {
       title: this.state.movie.Title
     }
     console.log(data)
-    this.handleReservation(data)
+    this.props.handleReservation(data)
   }
 
   handleReservation(reservationData) {
     axios.post(`/api/user/reservation`, reservationData)
     .then((res)=> {
       if(res.data.status) {
-        console.log(res.data.reservation)
+        console.log(res.data)
         this.setState({
           ticket: res.data.reservation
         })
       }
     })
-    // return {successs: true}
   }
 
 
