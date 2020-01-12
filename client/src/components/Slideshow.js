@@ -1,9 +1,5 @@
 import React from 'react'
-import { Slide } from 'react-slideshow-image';
-// import Carousel from 'react-bootstrap/Carousel'
 import Carousel from 'react-bootstrap/Carousel'
-import '../App.css';
-import { format } from 'prettier';
 
 const slideImages = [
   'https://www.hdwallpapers.in/download/bad_boys_for_life_will_smith_martin_lawrence_2020_5k-5120x2880.jpg',
