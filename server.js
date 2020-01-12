@@ -21,10 +21,11 @@ app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost/Avatar', {
+mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority", {
     useCreateIndex: true,
     useNewUrlParser: true,
-    useFindAndModify: false
+    useFindAndModify: false,
+    useUnifiedTopology: true
 }, (err) => {
     if (err) {
         console.log("not connected to database" + err)

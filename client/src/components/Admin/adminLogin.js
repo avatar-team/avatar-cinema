@@ -62,7 +62,8 @@ class AdminLogin extends Component {
         console.log(result.data)
         localStorage.setItem('admin-auth-token', result.data.token)
         this.props.changeAdminState(true)
-        this.props.history.replace('/admin')
+        this.props.bringUsersData()
+        return <Redirect to="/admin"/>
       }
     })
     .catch(err => {
@@ -73,12 +74,12 @@ class AdminLogin extends Component {
     })
   }
 
-  componentDidMount() {
-    this.props.bringUsersData()
-  }
+  // componentDidMount() {
+    // this.props.bringUsersData()
+  // }
 
   render() {
-    console.log(this.state)
+    console.log(this.props.history)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         {this.props.isAdminLoggedIn? <Redirect to="/admin"/>: 
