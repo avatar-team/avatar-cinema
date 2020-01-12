@@ -1,6 +1,4 @@
-import '../App.css';
-import React, {useState} from 'react'
-import data from './dummyData.js';
+import React from 'react'
 import {
     Card, CardImg, CardBody,
     CardTitle, CardSubtitle, Button, Row, Col
@@ -17,9 +15,29 @@ const div = {
   backgroundColor: 'rgb(24, 24, 31)'
 }
 
+const cardInfo = {
+  height:"563px",
+  backgroundColor: 'rgb(24, 24, 31)',
+  color: 'white',
+  marginTop: '140px'
+}
+
+const cardImg = {
+  height:"562px", 
+  paddingRight: '20px',
+  marginRight: '10px',
+  width: '330px'
+}
+
+const trailerCol = {
+  height:"563px",
+  marginTop: '140px',
+  backgroundColor: 'rgb(24, 24, 31)',
+  color: 'white'
+}
+
 class MovieInfo extends React.Component {
   constructor(props){
-    // ({movies, handleReservation, user}) => {
     super(props)
 
     this.state = {
@@ -30,8 +48,6 @@ class MovieInfo extends React.Component {
     }
   }
   collect() {
-    console.log(this.props)
-    if(!this.props.isUserLoggedIn) return alert('you need to login first')
     let data = {
       firstName : this.props.user.firstName,
       lastName : this.props.user.lastName,
@@ -41,15 +57,13 @@ class MovieInfo extends React.Component {
       price: this.state.movie.price,
       title: this.state.movie.Title
     }
-    console.log(data)
-    this.props.handleReservation(data)
+    this.handleReservation(data)
   }
 
   handleReservation(reservationData) {
     axios.post(`/api/user/reservation`, reservationData)
     .then((res)=> {
       if(res.data.status) {
-        console.log(res.data)
         this.setState({
           ticket: res.data.reservation
         })
@@ -80,10 +94,10 @@ class MovieInfo extends React.Component {
       {this.state.movie?
         <Row>
           <Col md='7'>
-            <Card style={{height:"563px", backgroundColor: 'rgb(24, 24, 31)', color: 'white', marginTop: '140px'}}>
+            <Card style={cardInfo}>
               <Row className="no-gutters">
                 <Col md='4'>
-                  <CardImg  style={{height:"562px", paddingRight: '10px'}} src={this.state.movie.Poster} />
+                  <CardImg style={cardImg} src={this.state.movie.Poster} />
                 </Col>
                 <Col md='8'>
                   <CardBody>
@@ -105,20 +119,20 @@ class MovieInfo extends React.Component {
                       disabled={!this.state.movie.availableChairs? true: false}>
                       Reserve Now!</label>
 
-                      <Button style={{color: this.state.favorite ? 'red': 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
+                      <Button style={{color: this.state.favorite ? this.props.isUserLoggedIn ? 'red': alert('Login Mothafucker') : 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>
                   </CardBody>
                 </Col>
               </Row>
             </Card>
           </Col>
-          <Col md='5' className='w-75 p-5 text-center' style={{height:"563px", marginTop: '140px', backgroundColor: 'rgb(24, 24, 31)', color: 'white'}}>
+          <Col md='5' className='w-75 p-5 text-center' style={trailerCol}>
             <h2 className='py-4'>Movie Trailer</h2>
             <Movietrailer movie={this.state.movie}/>
           </Col>
         </Row>
         :
         <div>this Movie is not available</div>
-      }{this.state.clicked ? <Ticket ticket={this.state.ticket}/>:''}
+      }{this.state.clicked ? this.props.user._id == undefined ? alert('Login First Please') : <Ticket ticket={this.state.ticket}/> : ''}
       </div>
     )
 

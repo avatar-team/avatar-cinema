@@ -6,6 +6,21 @@ import axios from 'axios';
 import {BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
 import AdminLogin from './adminLogin.js'
 
+const dashboard = {
+  backgroundColor: 'rgb(24, 24, 31)',
+  width: '1850px',
+  margin: '0 auto',
+  padding: '100px'
+}
+
+const adminBtns = {
+  width: '240px',
+  padding: '6px',
+  fontSize: '13pt',
+  borderColor: 'transparent',
+  color: 'white',
+  backgroundColor: '#ca3e47'
+}
 
 class Dashboard extends React.Component {
 
@@ -70,13 +85,13 @@ render(){
           return <div>
             {console.log(this.state.isAdminLoggedIn)}
           {this.state.isAdminLoggedIn?
-            <Card id='card' style={{backgroundColor: 'rgb(24, 24, 31)', width: '1850px', margin: '0 auto', padding: '100px'}}>
+            <Card id='card' style={dashboard}>
               <Row>
                 <Col md="2" className="text-center">
                   <div className='m-auto w-100'>
                     <h2 className='pb-2 text-left' style={{color: '#ca3e47', borderBottom: '2px solid white'}}>Dashboard</h2>
-                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} onClick={()=>this.setState({movieShow : true })}>Movies</Button>  
-                    <Button style={{width: '240px', padding: '6px', fontSize: '13pt', borderColor: 'transparent', color: 'white' ,backgroundColor: '#ca3e47'}} className='my-3' 
+                    <Button style={adminBtns} onClick={()=>this.setState({movieShow : true })}>Movies</Button>  
+                    <Button style={adminBtns} className='my-3' 
                     onClick={()=> {
                       this.setState({movieShow : false })
                     }}>Users</Button>

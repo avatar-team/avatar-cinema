@@ -1,9 +1,8 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Table } from 'reactstrap';
-import data from '../dummyData.js';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
-import { Button, Card, CardTitle } from 'reactstrap'
+
 import AddUpdateMovie from './addUpdateMovie';
 import Delete from './Delete.js'
 

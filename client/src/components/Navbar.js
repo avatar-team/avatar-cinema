@@ -1,4 +1,3 @@
-import '../App.css'
 import React, { useState } from 'react';
 import {
   Collapse,
@@ -17,14 +16,15 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearch, faUser } from '@fortawesome/free-solid-svg-icons'
 import {Redirect, Link} from 'react-router-dom'
-import User from './User';
+
 
 const search = {
   borderRadius: '0 1.6rem 1.6rem 0',
   width: '450px',
   backgroundColor: 'rgb(24, 24, 31)',
   borderColor: 'transparent',
-  padding: '18px'
+  padding: '18px',
+  marginRight: '110px'
 }
 
 const items = {
@@ -37,7 +37,20 @@ const logo = {
   fontSize: '28pt',
   padding: '0 45px 0 25px',
   color: '#ca3e47'
-  // fontFamily: 'Gill Sans Gill Sans MT Calibri Trebuchet MS sans-serif'
+}
+
+const inputSearch = {
+  borderBottom: '2px solid #ca3e47', 
+  borderLeft: '0', 
+  borderRight: '0', 
+  borderTop: '0', 
+  color: 'white'
+}
+
+const searchIcon = {
+  color: '#ca3e47',
+  fontWeight: 'bold',
+  marginRight: '-50px'
 }
 
 
@@ -69,17 +82,14 @@ const Navbarz = (props) => {
               <NavItem>
                 <NavLink className='mt-1' tag={Link} style={items} to="/">Home</NavLink>
               </NavItem>
-              <NavItem>
-                <NavLink className='mt-1' style={items} href="#">Contact</NavLink>
-              </NavItem>
             </Nav>
             <NavbarText>
 
             <InputGroup style={search}>
-              <InputGroupAddon addonType="prepend"><Button  className='bg-transparent border-0' onClick={()=> {
+              <InputGroupAddon addonType="prepend"><Button  className='bg-transparent border-0 ' onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon style={{color: '#ca3e47', fontWeight: 'bold', marginRight: '-50px'}} icon={faSearch}/></Button></InputGroupAddon>
-              <Input style={{borderBottom: '2px solid #ca3e47', borderLeft: '0', borderRight: '0', borderTop: '0', color: 'white'}} className='bg-transparent ' id="search" />
+              }}><FontAwesomeIcon style={searchIcon} icon={faSearch}/></Button></InputGroupAddon>
+              <Input style={inputSearch} className='bg-transparent ' id="search" />
             </InputGroup>
             
             </NavbarText>
@@ -111,4 +121,3 @@ const Navbarz = (props) => {
   );
 }
 export default Navbarz;
-{/* <input style={search} type="text" placeholder="Search..." /> */}

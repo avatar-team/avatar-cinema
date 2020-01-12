@@ -3,6 +3,7 @@ const movieController = require('../controllers/movieController.js');
 const router = express.Router();
 const protectAdmin = require('../controllers/adminController').protectAdmin
 
+
 /**
  * @route GET /api/movies
  * @description this route get the movies available in the next four days and return them as json document 
@@ -14,7 +15,7 @@ const protectAdmin = require('../controllers/adminController').protectAdmin
  */
 router.route("/")
     .get(movieController.get4Days)
-    .post(movieController.addMovie);
+    .post( movieController.addMovie);
 
 /**
  * @route DELETE /api/movies/:id
@@ -30,5 +31,6 @@ router.route("/")
 router.route("/:id")
     .delete(protectAdmin, movieController.deleteMovie)
     .patch(protectAdmin, movieController.updateMovie)
+
 
 module.exports = router;

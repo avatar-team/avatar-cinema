@@ -8,11 +8,13 @@ const movieRoute = require('./routes/movieRoute')
 const userRoute = require('./routes/userRoute')
 const adminRoute = require('./routes/adminRoute')
 const dotenv = require('dotenv')
+const path = require('path')
 
 dotenv.config({ path: './config.env' })
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
+app.use(express.static(path.join(__dirname, 'build')));
 
 
 
@@ -35,16 +37,14 @@ mongoose.connect(process.env.DATABASE_URL, {
     }
 });
 
-const requestReservation = (req, res) => {
-    const data = req.body
-    reservationDb.insertReservation(data, (err, reservation) => {
-        reservation ? res.json(data) : res.send(err)
-    })
-}
+
 
 // // app.use(express.static(path.join(__dirname, 'client/build')));
 app.post('/signup', authController.signup)
 app.post('/login', authController.login)
-app.listen(8000, () => {
-    console.log(process.env.DATABASE_URL)
-});
+
+app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+
+app.listen(3000);

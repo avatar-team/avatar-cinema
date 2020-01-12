@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
-import { Redirect } from 'react-router-dom'
+import { Alert } from 'reactstrap'
 const axios = require('axios')
+
 
 const main = {
   textAlign: 'center',
@@ -38,6 +39,13 @@ const button = {
   padding: '8px 28px'
 }
 
+const alertDiv = {
+  visibility: 'hidden',
+  padding: '10px',
+  width: '400px',
+  margin: '12px auto'
+}
+
 class Login extends Component {
   constructor(props) {
     super(props);
@@ -55,33 +63,37 @@ class Login extends Component {
   handleSubmit(e) {
     e.preventDefault()
     var token = localStorage.getItem('x-auth-token')
-    if (!this.state.username || !this.state.password) {
-      // TODO: show something Red!
-    }
     axios.post('/login', this.state)
     .then(result => {
-      console.log(result)
-      // TODO: we need to redirect him
-      window.localStorage.setItem('x-auth-token', result.data.token)
-      console.log('I am in')
-      localStorage.setItem('x-auth-token', result.data.token)
-      this.props.changeUserState(true, result.data.user)
-      this.props.history.replace('/')
+      if ( !result.data.status ) {
+        if (result.data.error.includes('MUST PROVIDE')) {
+          document.getElementById('alert').style.visibility = 'visible'
+          document.getElementById('alert').textContent = 'Fill the Fields'
+          return;
+        }
+        if (result.data.error.includes('Incorrect Password')) {
+          document.getElementById('alert').style.visibility = 'visible'
+          document.getElementById('alert').textContent = 'Your Data is incorrect'
+          return;
+        }
+      } else if (result.data.status) {
+        window.localStorage.setItem('x-auth-token', result.data.token)
+        localStorage.setItem('x-auth-token', result.data.token)
+        this.props.changeUserState(true, result.data.user)
+        this.props.history.replace('/')
+      }
+
     })
     .catch(err => {
-      // TODO: show something
-      if(err) {
-        alert('write a valide data')
-      }
+      console.log(err)
     })
   }
 
   render() {
-    console.log(this.state)
     return (
       <form onSubmit={this.handleSubmit.bind(this)}>
         <div style={main}>
-          <h2 className='mb-4'>Welcome to Signin Page</h2>
+          <h2 className='mb-4'>Welcome to Login Page</h2>
 
           Username <br />
           <input
@@ -108,9 +120,10 @@ class Login extends Component {
           style={button}
           type="submit"
           value='Login'/>
+
+          <Alert style={alertDiv} color="danger" id="alert"></Alert>
         </div>
       </form>
-    
     )
   }
 }
