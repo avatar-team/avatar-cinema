@@ -14,7 +14,7 @@ const MovieCard = ({isFavorite, changeFavoriteState, user, movie, index}) => {
   let [favorite, setFavorite] = useState(isFavorite(movie._id));
   console.log(favorite)
   let handleFavorite = ()=> {
-    if(user == undefined) return alert('you need to sign in to use this feature')
+    if(user._id == undefined) return alert('you need to sign in to use this feature')
     changeFavoriteState(favorite? 'delete': 'add', movie._id, user._id )
     setFavorite(!favorite)
   }
