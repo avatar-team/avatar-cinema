@@ -85,8 +85,8 @@ const Movie = new mongoose.model("Movie", movieSchema);
 /**
  * this @function insertMovie is used to add a Movie to the database 
  * it accepts one Movie Object According to the schema OR array of Objects as well 
- * @param movie is the movie object that well be added to the database 
- * @param callback Error-First Callback
+ * @param {object} movie is the movie object that well be added to the database 
+ * @param {fucntion} callback Error-First Callback
  */
 const insertMovie = (movie, callback = (err, result) => {}) => {
     Movie.create(movie)
@@ -101,9 +101,9 @@ const insertMovie = (movie, callback = (err, result) => {}) => {
  * @example update("1231b23bwd", {title:"Spider-Man"}); this is Single item Editing 
  * @example update( "1231b23bwd" ,{title:"Spider-Man",playTime:120, date :movieDate }) this is Multi item Editing 
  * 
- * @param objectId of the movie to be edited
- * @param criteriaObject the object which contain the updated info  @note must be set respectfully to the movieSchema
- * @param callback Error-First Callback
+ * @param {string} objectId of the movie to be edited
+ * @param {object} criteriaObject the object which contain the updated info  @note must be set respectfully to the movieSchema
+ * @param {function} callback Error-First Callback
  */
 const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, criteriaObject)
@@ -113,8 +113,8 @@ const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) =
 
 /**
  * this @function deleteMovie well set The @code availability state of the movie to false, (making it deleted or Not available)
- * @param objectId the object id of the movie to be deleted
- * @param callback Error-First Callback function
+ * @param {string} objectId the object id of the movie to be deleted
+ * @param {function} callback Error-First Callback function
  */
 const deleteMovie = (objectId, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, { availability: false })
@@ -125,7 +125,7 @@ const deleteMovie = (objectId, callback = (err, result) => {}) => {
 /** 
  * this @function getMovies4Days well get the movies availble in the next four days, of the @code availability:TRUE 
  * this @function getMovies4Days only accepts callback function and well pass to that callback the result (array of movies) 
- * @param callback Error-First Callback function
+ * @param {function} callback Error-First Callback function
  */
 const getMovies4Days = callback => {
     let currentDate = new Date(new Date().toLocaleDateString());
@@ -137,7 +137,7 @@ const getMovies4Days = callback => {
 /**
  * this @function getAllAvailableMovies well return all the available movies 
  * this @function getAllAvailableMovies @note only accepts callback function and well pass to that callback the result (array of movies)
- * @param callback Error-First Callback function
+ * @param {function} callback Error-First Callback function
  */
 const getAllAvailableMovies = callback => {
     findMovies({ availability: true }, callback);
@@ -147,8 +147,8 @@ const getAllAvailableMovies = callback => {
  * this @function findMovies well search the database for movies according to the Criteria given in the firstParam
  * and well pass the result to the second param to the @param callback function as followrd by the rules of Err-First Style
  * if the param is not given , it well return all the movies in the database 
- * @param objectCriteria the object that have Criteria of searching
- * @param callback Error-First Callback function
+ * @param {object} objectCriteria the object that have Criteria of searching
+ * @param {fucntion} callback Error-First Callback function
  */
 const findMovies = (objectCriteria = {}, callback) => {
     Movie.find(objectCriteria)

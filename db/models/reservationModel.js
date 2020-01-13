@@ -50,8 +50,8 @@ const Reservation = new mongoose.model("Reservation", reservationSchema);
 /**
  * @function insertReservation is used to add a reservation to the database 
  * it accepts one @param reservation Object According to the schema OR array of Objects as well 
- * @param reservation Object to be added in the database 
- * @param callback Error-First Callback Function 
+ * @param {object} reservation Object to be added in the database 
+ * @param {function} callback Error-First Callback Function 
  */
 const insertReservation = (reservation, callback) => {
     _findMovies({ _id: reservation.movieId }, (error, movie) => {
@@ -88,9 +88,9 @@ const insertReservation = (reservation, callback) => {
  * @example update( "1231b23bwd" , {clientName:"Abobker",movieTitle:"example@example.con"} ) this is Multi item Editing 
  * @param criteriaObject param must be set respectfully to the @code reservationSchema
  * 
- * @param objectId of the Reservation object to be edited
- * @param criteriaObject the object that contains the updated info 
- * @param callback Error-First Style Callback function
+ * @param {string} objectId of the Reservation object to be edited
+ * @param {object} criteriaObject the object that contains the updated info 
+ * @param {function} callback Error-First Style Callback function
  */
 
 const updateReservation = (objectId, criteriaObject, callback = (err, result) => {}) => {
@@ -102,8 +102,8 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
 /**
  * this @function findReservation well search the database for reservations according to the @param objectCriteria given in the firstParam
  * and well pass the result to the secound @param callback function as followed by the rules of Err-First Style
- * @param objectCriteria the object that contains Criteria to be searched with
- * @param callback Error-First Style Callback function
+ * @param {object} objectCriteria the object that contains Criteria to be searched with
+ * @param {fucntion} callback Error-First Style Callback function
  */
 const findReservation = (objectCriteria = {}, callback) => {
     Reservation.find(objectCriteria)
