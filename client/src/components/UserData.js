@@ -1,11 +1,16 @@
 import React from 'react';
 
+/**
+ * @function UserData function accept array of objects iterate over it,
+ * and save the data inside table row
+ * @param {*} movies Array of object
+ * @returns return a table body contains the rows from the params
+ */
 
 const UserData = ({movies})=> {
   let rows
   if(movies) {
     rows = movies.map((movie,i)=>{
-      console.log(movie)
       return (<tr key={i} >
         <td>{movie.Title}</td>
         <td>{movie.price}</td>

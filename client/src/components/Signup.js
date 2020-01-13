@@ -53,12 +53,6 @@ class Signup extends Component {
     }
   }
 
-  // renderRedirect () {
-  //   if (this.state.redirect) {
-  //     return <Redirect to='/login' />
-  //   }
-  // }
-
   onChange(e) {
     this.setState({[e.target.name]: e.target.value})
   }
@@ -80,7 +74,6 @@ class Signup extends Component {
           this.props.changeUserState(true, result.data.user)
           return 
         }
-        // if user exist , show something
         if ( !result.data.status ) {
           if (result.data.data.error.message.includes('Fill the Fields')) {
             document.getElementById('alert').style.visibility = 'visible'
@@ -99,9 +92,7 @@ class Signup extends Component {
           }
         }
       })
-      .catch(err => {
-        console.log(err)
-      })
+      .catch(err => {})
   }
 
 
@@ -163,7 +154,7 @@ class Signup extends Component {
 
         <input className='mt-3' style={button} type="submit" value='Signup'/>
 
-          <Alert style={{visibility: 'hidden', padding: '8px', width: '500px', margin: 'auto', marginTop: '12px'}} color="danger" id="alert"></Alert>
+        <Alert style={{visibility: 'hidden', padding: '8px', width: '500px', margin: 'auto', marginTop: '12px'}} color="danger" id="alert"></Alert>
         </form>
       </div>
     )
