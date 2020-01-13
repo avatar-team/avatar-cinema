@@ -87,6 +87,10 @@ const insertReservation = (reservation, callback) => {
  * @example update("1231b23bwd", {clientName:Abobker}); this is Single item Editing 
  * @example update( "1231b23bwd" , {clientName:"Abobker",movieTitle:"example@example.con"} ) this is Multi item Editing 
  * @param criteriaObject param must be set respectfully to the @code reservationSchema
+ * 
+ * @param objectId of the Reservation object to be edited
+ * @param criteriaObject the object that contains the updated info 
+ * @param callback Error-First Style Callback function
  */
 
 const updateReservation = (objectId, criteriaObject, callback = (err, result) => {}) => {
@@ -97,7 +101,9 @@ const updateReservation = (objectId, criteriaObject, callback = (err, result) =>
 
 /**
  * this @function findReservation well search the database for reservations according to the @param objectCriteria given in the firstParam
- * and well pass the result to the secound @param callback function as followrd by the rules of Err-First Style
+ * and well pass the result to the secound @param callback function as followed by the rules of Err-First Style
+ * @param objectCriteria the object that contains Criteria to be searched with
+ * @param callback Error-First Style Callback function
  */
 const findReservation = (objectCriteria = {}, callback) => {
     Reservation.find(objectCriteria)

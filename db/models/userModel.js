@@ -70,7 +70,8 @@ const User = new mongoose.model("User", userSchema);
 
 
 /**
- * @function insertUser insert a user into the Database
+ * @function insertUser insert a user into the Database, checks of he/she already exits in the database 
+ * if not it well be added
  * @param user the user expected to be saved
  * @param callback Error-First Callback Function
  * @note the user should be a object with keys and values exactly as the schema Respectively
@@ -109,6 +110,9 @@ const insertUser = (user, callback) => {
  * this @function updateUser updates a user Based on the @param criteriaObject
  * @example updateUser("awdw12412e1", {userEmail:"example@example.com"}); this is Single item Editing 
  * @example updateUser( "awdw12412e1" ,{userEmail:"example@example.com",firstName:"sanad" }) this is Multi item Editing
+ * @param userObjectId the user ObjectId to be updated 
+ * @param criteriaObject the updated info of the user 
+ * @param callback Error-First Callback function 
  */
 const updateUser = (userObjectId, criteriaObject, callback = (err, result) => {}) => {
     User.findByIdAndUpdate(userObjectId, criteriaObject)
@@ -162,7 +166,7 @@ const pushMoviesBought = (userObjectId, movieObjectId, callback) => {
  * @param callback Error-First Callback function  
  */
 const pushFavoriteMovies = (userObjectId, movieObjectId, callback) => {
-//goes here 
+    //goes here 
     _findMovies(movieObjectId, (error, movie) => {
         if (error) {
             callback(error, null)
