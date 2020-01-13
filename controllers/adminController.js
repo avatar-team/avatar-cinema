@@ -16,15 +16,20 @@ const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: p
 /**
  * @function hundleSginin here the handler function receives the admin info as an Object and checks the password and the username of the admin
  * if the password and username is correct it well allow the admin to sign in and generate a token for the admin for a 10m to keep him logged-in
- * @param req 
- * @param res 
+ * @param req HTTP request object ,expected to have the admin info in the body 
+ * @param res response Object, (JSEND) if the username and password is correct, it will return the token and admin info 
  */
 exports.hundleSginin = (req, res) => {
+    //info of the admin 
     admin = req.body;
+
+    //finds the admin in the database 
     Admin.findAdmin({ username: admin.username }, (err, result) => {
         if (result) {
+            //compares the password with the one in the database 
             bcrypt.compare(admin.password, result.password).then(bool => {
                 if (bool) {
+                    //if everything checks-out it will return in the response the info of the admin and the token 
                     const token = _signToken(result._id);
                     res.status(200).json({
                         status: true,
@@ -33,6 +38,7 @@ exports.hundleSginin = (req, res) => {
                         admin: result
                     })
                 } else {
+                    //else it well return a erroneous JSEND response  
                     res.status(401).json({
                         status: false,
                         message: "UNAUTHORIZED ACCESS, Password is Wrong"
@@ -53,8 +59,8 @@ exports.hundleSginin = (req, res) => {
 
 /**
  * @function hundleMainDashboard returns all the users in the database, to be shown on the admin dashboard 
- * @param req 
- * @param res 
+ * @param req HTTP request object
+ * @param res response Object (JSEND) all the users in the database 
  */
 exports.hundleMainDashboard = (req, res) => {
     User.findUser({}, (err, result) => {
@@ -74,8 +80,9 @@ exports.hundleMainDashboard = (req, res) => {
 
 /**
  * @function protectAdmin is a middleware that is used to check the token of the admin and is used tp protect the route of the admin dashboard
- * @param req 
- * @param res 
+ * it well not alows access to the route of the token is not valid i.e... that is expired or not as the original generated one
+ * @param req HTTP request object 
+ * @param res response Object
  */
 exports.protectAdmin = (req, res, next) => {
     let token;

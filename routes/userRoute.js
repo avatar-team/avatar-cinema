@@ -7,7 +7,8 @@ const router = express.Router();
 
 /**
  * @route GET /api/user
- * @description get the info of the user, @NOTE here the middleware is responsable to get the correct user, based on his token  
+ * @description get the info of the user, @note here the middleware is responsable to get the correct user, based on his token
+ * @note you can extract the id of the user from the JWT token 
  * @access private
  */
 router.route('/')

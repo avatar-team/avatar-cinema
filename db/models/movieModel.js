@@ -68,7 +68,7 @@ const movieSchema = new Schema({
         type: Date,
         required: [true, 'Moive Play time  is Required']
     },
-    movieTrailer: { //>?
+    movieTrailer: { //added by the api
         type: String,
         default: "",
         required: false,
@@ -97,11 +97,13 @@ const insertMovie = (movie, callback = (err, result) => {}) => {
 /**
  * this @function updateMovie is used to update a certain movie record in the movies collection 
  * it accepts a @param criteriaObject 
- * e.g.. -- (e.g.. mean For Example)
+ * e.g.. -- (e.g.. mean {For Example} )
  * @example update("1231b23bwd", {title:"Spider-Man"}); this is Single item Editing 
  * @example update( "1231b23bwd" ,{title:"Spider-Man",playTime:120, date :movieDate }) this is Multi item Editing 
- * @param criteriaObject  must be set respectfully to the movieSchema
  * 
+ * @param objectId of the movie to be edited
+ * @param criteriaObject the object which contain the updated info  @note must be set respectfully to the movieSchema
+ * @param callback Error-First Callback
  */
 const updateMovie = (objectId, criteriaObject, callback = (err, result) => {}) => {
     Movie.findByIdAndUpdate(objectId, criteriaObject)
@@ -134,7 +136,7 @@ const getMovies4Days = callback => {
 
 /**
  * this @function getAllAvailableMovies well return all the available movies 
- * this @function getAllAvailableMovies only accepts callback function and well pass to that callback the result (array of movies)
+ * this @function getAllAvailableMovies @note only accepts callback function and well pass to that callback the result (array of movies)
  * @param callback Error-First Callback function
  */
 const getAllAvailableMovies = callback => {
