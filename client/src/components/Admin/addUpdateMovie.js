@@ -51,8 +51,8 @@ class AddUpdateMovie extends Component {
               <label htmlFor="login-popup" className="transparent-label"></label>
                   <div className="popup-inner">
                       <div className="popup-title">
-                          <h6>{isUpdate? "Update Movie": 'Add Movie'}</h6>
-                          <label htmlFor="login-popup" className="popup-close-btn bg-transparent"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
+                          <h6>{isUpdate? "update Movie": 'Add Movie'}</h6>
+                          <label style={{backgroundColor: 'transparent'}} htmlFor="login-popup" className="popup-close-btn"><FontAwesomeIcon color='red' size='2x' icon={faWindowClose}/></label>
                       </div>
                       <div className="popup-content">
                           <form onSubmit={()=> this.handleSubmit(this.props.movie)}>
@@ -78,7 +78,7 @@ class AddUpdateMovie extends Component {
                                   <Input required id="time" name="time" type="time"/>
                                 </div>
                                 <div>
-                                  <Button style={{backgroundColor: '#ca3e47', marginTop: '30px', padding: '12px'}} className='w-100  border-0' >{isUpdate? "Update": 'Add'}</Button>
+                                  <Button style={{backgroundColor: '#ca3e47'}} className='mt-3' >{isUpdate? "update Movie": 'Add Movie'}</Button>
                                 </div>
                               </div>
                           </form>

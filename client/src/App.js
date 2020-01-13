@@ -38,19 +38,29 @@ class App extends React.Component{
 
   // Admin handle functions
   handleAdd(movieData) {
+    let token = localStorage.getItem('admin-auth-token')
     axios.post('/api/movies', movieData)
     .then(res => {
       this.setState((prevState)=> {
+        prevState.movies.push(res.data[0])
         return ({
-          movies: [...prevState.movies, ...res.data]
+          movies: [...prevState.movies]
         })
       }, ()=> {})
+
     })
   }
 
   // Function Handling update a movie
   handleUpdate(movieId, newData) {
-    axios.patch(`/api/movies/${movieId}`, newData)
+
+    let token = localStorage.getItem('admin-auth-token')
+    console.log(newData)
+    axios.patch(`/api/movies/${movieId}`, newData, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(res => {
       this.setState(prevState => {
         var newMovies = prevState.movies.map((movie, i)=> {
@@ -66,7 +76,13 @@ class App extends React.Component{
 
   // Function Handling Delete a movie
   handleDelete(movieId, i) {
-    axios.delete(`/api/movies/${movieId}`)
+
+    let token = localStorage.getItem('admin-auth-token')
+    axios.delete(`/api/movies/${movieId}`, {
+      headers: {
+        'Authorization': 'Bearer ' + token
+      }
+    })
     .then(res => {
       this.setState(prevState => {
         prevState.movies.splice(i, 1)
