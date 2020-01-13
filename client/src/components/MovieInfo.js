@@ -110,13 +110,16 @@ class MovieInfo extends React.Component {
                       <CardSubtitle className="my-4"> <span className='spans'>Date: </span>{new Date(this.state.movie.playDate).toLocaleDateString()} </CardSubtitle>
                       
                       <label for="login-popup" onClick={()=> {
+                        if ( !this.state.movie.availableChairs ) {
+                          return alert('Sorry, No available Chairs on this Movie!');
+                        }
                         this.collect()
                         this.setState({
                           clicked: true
                         })
                       }}
                       className="mt-5 cardBtn text-white" 
-                      disabled={!this.state.movie.availableChairs? true: false}>
+                      >
                       Reserve Now!</label>
 
                       <Button style={{color: this.state.favorite ? this.props.isUserLoggedIn ? 'red': alert('Login Mothafucker') : 'white'}} className='mx-4 mt-1 bg-transparent border-0' onClick={()=> this.handleFavorite()}><FontAwesomeIcon size='2x' icon={faHeart}/></Button>

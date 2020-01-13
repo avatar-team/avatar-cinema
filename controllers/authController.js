@@ -12,7 +12,11 @@ const User = mongoose.model("User")
  */
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME });
 
-
+/**
+ * @function signup inserts a user into the database
+ * @param req HTTP request object @note it expected that the user object well be in the body of the req 
+ * @param res response Object (JSEND) containing  the created user Object and the token for that specific user 
+ */
 exports.signup = (req, res) => {
     userFunctions.insertUser(req.body, (err, result) => {
         if (err) {
@@ -23,6 +27,7 @@ exports.signup = (req, res) => {
                 }
             })
         }
+        //here we sign the token for that specific using his objectId  
         const token = _signToken(result._id);
         res.json({
             status: true,
@@ -32,7 +37,11 @@ exports.signup = (req, res) => {
     });
 }
 
-
+/**
+ * @function login checks of the provided  user info is valid, if so, it will  generate a new token, and sign that user in 
+ * @param req HTTP request object 
+ * @param res response Object (JSEND) containing the user and the token  
+ */
 exports.login = (req, res) => {
     const { userName, password } = req.body;
     //checks if the username and the password in provided in the body
@@ -42,23 +51,28 @@ exports.login = (req, res) => {
             error: "MUST PROVIDE BOTH USERNAME AND PASSWORD"
         })
     }
+    //checks the user in the database   
     User.findOne({ userName }).select('+password').then(user => {
+        //if the user is found, then it well compare the password that he entered with the one in the database 
         if (user) {
             brcypt.compare(password, user.password).then(bool => {
-                if (!bool || !user) {
-                    res.json({
-                        status: false,
-                        error: "Incorrect Password or Username"
-                    })
-                } else if (bool && user) {
-                    const token = _signToken(user._id);
-                    res.json({
-                        status: true,
-                        user,
-                        token
-                    })
-                }
-            })
+                    //if the password does not match it well return erroneous JSEND response 
+                    if (!bool || !user) {
+                        res.json({
+                                status: false,
+                                error: "Incorrect Password or Username"
+                            })
+                            //else if the password is correct and everything checks out it well return that user, and the token associated with that specific user
+                    } else if (bool && user) {
+                        const token = _signToken(user._id);
+                        res.json({
+                            status: true,
+                            user,
+                            token
+                        })
+                    }
+                })
+                //if no user is find in that base it well return erroneous JSEND
         } else {
             return res.json({
                 status: false,
@@ -68,6 +82,12 @@ exports.login = (req, res) => {
     })
 }
 
+/**
+ * @function protect is a middleware that is used to check the token of the user and is used to protect the route of the user dashboard
+ * it well not allow access to the route of the token is not valid i.e.. expired or not as the original generated one
+ * @param req HTTP request object 
+ * @param res response Object
+ */
 exports.protect = (req, res, next) => {
     let token;
     if (req.headers.authorization && req.headers.authorization.startsWith('Bearer')) {
@@ -82,9 +102,9 @@ exports.protect = (req, res, next) => {
 
     /** 
      * verification of the token
-     * @function promisify, promisifises the jwt.verfiy, function and then calles it with the @param token and secret word.
-     * and then calles the resualt on the then function so if the the token is valid and the user still exists
-     * than he well be automatclly signed in // if not he well not we diracted to that protected page
+     * @function promisify, promisifises the jwt.verfiy, function and then calls it with the @param token and secret word.
+     * and then calls the result on that function so if the token is valid and the user still exists
+     * than he well be automatically be signed in // if not he well not we directed to that protected page
      * @param token is the token stored in the localstorage of the user
      * @param process.env.JWT_SECRET is the Secrect Word for JWT @note it can be anything 
      * @param decodedPayLoad is the payload result from the algorathem it contain the id od the object and other info about the token 
@@ -99,6 +119,8 @@ exports.protect = (req, res, next) => {
                 })
             } else {
                 //:) access is permitted :) //
+                //it well attach the user to the body of the request of access is permitted 
+                //no it can be used in the next route 
                 req.body.user = theUser;
                 next();
             }
