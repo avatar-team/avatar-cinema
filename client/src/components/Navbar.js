@@ -53,7 +53,9 @@ const inputSearch = {
   borderLeft: '0', 
   borderRight: '0', 
   borderTop: '0', 
-  color: 'white'
+  color: 'white',
+  paddingLeft: '32px',
+  fontSize: '16pt'
 }
 
 const searchIcon = {
@@ -67,6 +69,9 @@ const userPro = {
   color: 'white'
 }
 
+/**
+ * @param props contains movies {Array of Objects} 
+ */
 
 
 const Navbarz = (props) => {
@@ -90,7 +95,6 @@ const Navbarz = (props) => {
         <Navbar expand="md">
           <NavbarBrand tag={Link} to="/" className='logo' style={logo}>Avatar</NavbarBrand>
           <NavbarToggler onClick={toggle} />
-          {/* <NavbarToggler onClick={toggleNavbar} className="mr-2" /> */}
           <Collapse isOpen={isOpen} navbar>
             <Nav className="mr-auto" navbar>
               <NavItem>
@@ -102,7 +106,7 @@ const Navbarz = (props) => {
             <InputGroup style={search}>
               <InputGroupAddon addonType="prepend"><Button  className='bg-transparent border-0 ' onClick={()=> {
                 handleSearch(document.getElementById('search').value)
-              }}><FontAwesomeIcon style={searchIcon} icon={faSearch}/></Button></InputGroupAddon>
+              }}><FontAwesomeIcon style={searchIcon} size='1.5x' icon={faSearch}/></Button></InputGroupAddon>
               <Input style={inputSearch} className='bg-transparent ' id="search" />
             </InputGroup>
             

@@ -57,7 +57,6 @@ class AdminLogin extends Component {
     console.log(this.state)
     axios.post('/api/admin/login', this.state)
     .then(result => {
-      // TODO: we need to redirect him
       if(result.data.status) {
         console.log(result.data)
         localStorage.setItem('admin-auth-token', result.data.token)
@@ -67,16 +66,11 @@ class AdminLogin extends Component {
       }
     })
     .catch(err => {
-      // TODO: show something
       if(err) {
         alert('write a valide data')
       }
     })
   }
-
-  // componentDidMount() {
-    // this.props.bringUsersData()
-  // }
 
   render() {
     console.log(this.props.history)

@@ -10,6 +10,7 @@ const adminRoute = require('./routes/adminRoute')
 const dotenv = require('dotenv')
 const path = require('path')
 
+
 dotenv.config({ path: './config.env' })
 
 app.use(bodyParser.json())
@@ -35,7 +36,6 @@ mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mon
         console.log("connected to database")
     }
 });
-
 
 
 // // app.use(express.static(path.join(__dirname, 'client/build')));

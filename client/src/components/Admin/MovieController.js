@@ -3,7 +3,7 @@ import { Table } from 'reactstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrashAlt, faEdit, faPlus } from '@fortawesome/free-solid-svg-icons'
 
-import AddUpdateMovie from './addUpdateMovie';
+import AddUpdateMovie from './AddUpdateMovie';
 import Delete from './Delete.js'
 
 const transparent = {

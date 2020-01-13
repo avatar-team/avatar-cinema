@@ -1,7 +1,12 @@
 // import './Admin/Test2.scss'
 import React from 'react'
 
-const Ticket = ({ticket}) => (
+/**
+ * @function Ticket Accept object of movie data , assign them to a Ticket and return it
+ * @param ticket Object contains movie data to be assigned to Ticket
+ */
+
+const Ticket = ({ ticket }) => (
   <div class="popup-container" >
     <input type="checkbox" id="login-popup" />
     <div class="popup">
