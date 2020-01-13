@@ -23,8 +23,9 @@ app.use("/api/movies", movieRoute);
 app.use("/api/user", userRoute);
 app.use("/api/admin", adminRoute);
 
+
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mongodb.net/Avatar?retryWrites=true&w=majority", {
+mongoose.connect(process.env.DATABASE_URL, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useFindAndModify: false,
@@ -45,5 +46,6 @@ app.post('/login', authController.login)
 app.get('/*', (req, res) => {
     res.sendFile(path.join(__dirname, 'build', 'index.html'));
   });
+
 
 app.listen(3000);
