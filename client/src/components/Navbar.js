@@ -69,6 +69,9 @@ const userPro = {
   color: 'white'
 }
 
+/**
+ * @param props contains movies {Array of Objects} 
+ */
 
 
 const Navbarz = (props) => {

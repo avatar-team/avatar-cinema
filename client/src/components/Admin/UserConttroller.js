@@ -88,14 +88,4 @@ class UserController extends React.Component{
     }
   }
     
-    export default UserController
-    // <Card style={{width: '50%', margin: 'auto', marginTop: '20px'}} body inverse color="danger">
-    //   <CardTitle>Do you want to delete {this.state.deleteUser.userName} ? </CardTitle>
-    //   <div style={{display: 'block-inline', margin: 'auto'}}>
-    //   <Button style={{margin: '10px'}}>Cancel</Button><Button color="secondary">Delete</Button>
-    //   </div> 
-    // </Card>
-    
-    
-    
-    
+  export default UserController

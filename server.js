@@ -9,6 +9,7 @@ const userRoute = require('./routes/userRoute')
 const adminRoute = require('./routes/adminRoute')
 const dotenv = require('dotenv')
 
+
 dotenv.config({ path: './config.env' })
 
 app.use(bodyParser.json())
@@ -34,6 +35,11 @@ mongoose.connect("mongodb+srv://Avatar:NkW4WfHEgBrE7etM@avatar-cluster-b7are.mon
     }
 });
 
+/**
+ * 
+ * @param {*} req 
+ * @param {*} res 
+ */
 const requestReservation = (req, res) => {
     const data = req.body
     reservationDb.insertReservation(data, (err, reservation) => {

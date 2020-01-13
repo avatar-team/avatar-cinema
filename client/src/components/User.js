@@ -38,6 +38,10 @@ const favoriteMoives = [{
   date : "DSF"
 }]
 
+/**
+ * @function User a class component contains all the User profile with redirect over certain conditions.
+ * @returns container contains Row of colums of the user profile
+ */
 
 class User extends React.Component {
     constructor(props) {

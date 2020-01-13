@@ -6,7 +6,6 @@
 }
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-    // padding: 25px;
 }
 
 // Add, Edit Movie Style
@@ -32,13 +31,11 @@ body {
 		height: 100%;
 		background: rgba(#000,.7);
 		z-index: 10;
-		//display: none;
 		opacity: 0;
 		visibility: hidden;
 		transition: 250ms all;
 		.popup-inner {
             height: 550px;
-
 			box-sizing: border-box;
 			padding: 20px;
 			background: #fff;

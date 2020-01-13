@@ -22,7 +22,7 @@ class App extends React.Component{
   }
 
   
-  //client handle functions
+  // Client handle functions
   getMovies() {
     axios.get('/API/movies')
     .then((res)=> {
@@ -36,7 +36,7 @@ class App extends React.Component{
 
 
 
-  //Admin handle functions
+  // Admin handle functions
   handleAdd(movieData) {
     axios.post('/api/movies', movieData)
     .then(res => {
@@ -48,6 +48,7 @@ class App extends React.Component{
     })
   }
 
+  // Function Handling update a movie
   handleUpdate(movieId, newData) {
     axios.patch(`/api/movies/${movieId}`, newData)
     .then(res => {
@@ -63,6 +64,7 @@ class App extends React.Component{
     })
   }
 
+  // Function Handling Delete a movie
   handleDelete(movieId, i) {
     axios.delete(`/api/movies/${movieId}`)
     .then(res => {
@@ -96,8 +98,6 @@ class App extends React.Component{
   }
 
   changeFavoriteState(state, movieId, userId) {
-    //TODO you will receive a movie id, you should take the userId from the user state
-    //and send the data to this route '/api/user/favorite save this film 
       if(state == 'add') {
         axios.post('/api/user/favorite', {movieId: movieId, userId: userId})
         .then(res=> {
@@ -109,12 +109,11 @@ class App extends React.Component{
         axios.delete(`/api/user/favorite/${userId}/${movieId}`)
         .then(res=> {
         })
-        .catch(err => {
-
-        })
+        .catch(err => {})
       }
   }
 
+  // Function to get users Data from '/api/user'
   getUser() {
     let token = localStorage.getItem('x-auth-token')
     axios.get('/api/user/',{
@@ -128,8 +127,7 @@ class App extends React.Component{
           isUserLoggedIn: true
         })
       }
-    }).catch(err=> {
-    })
+    }).catch(err=> {})
   }
 
   componentDidMount() {

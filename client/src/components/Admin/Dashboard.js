@@ -4,7 +4,7 @@ import UserController from './UserConttroller'
 import {  Row, Col ,Container , Button, Card, Table} from 'reactstrap';
 import axios from 'axios';
 import {BrowserRouter, Route, Switch, Link, Redirect} from 'react-router-dom'
-import AdminLogin from './adminLogin.js'
+import AdminLogin from './AdminLogin.js'
 
 const dashboard = {
   backgroundColor: 'rgb(24, 24, 31)',

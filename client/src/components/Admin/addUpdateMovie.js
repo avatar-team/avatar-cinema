@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import {Button, Form, FormGroup, Label, Input } from 'reactstrap';
-import { doc } from 'prettier';
 import './Test2.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faWindowClose } from '@fortawesome/free-solid-svg-icons'
