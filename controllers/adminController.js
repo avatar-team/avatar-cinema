@@ -7,8 +7,8 @@ const { promisify } = require('util');
 
 /**
  * @function _signToken creates a Token based on the @param id and based on the time given and return that token 
- * @param id is the objectId that well be used to create the token
- * @returns Token as a String 
+ * @param {string} id is the objectId that well be used to create the token
+ * @returns {string} Token as a String 
  */
 const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: process.env.JWT_EXPIRES_TIME_ADMIN });
 
@@ -16,8 +16,8 @@ const _signToken = id => jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: p
 /**
  * @function hundleSginin here the handler function receives the admin info as an Object and checks the password and the username of the admin
  * if the password and username is correct it well allow the admin to sign in and generate a token for the admin for a 10m to keep him logged-in
- * @param req HTTP request object ,expected to have the admin info in the body 
- * @param res response Object, (JSEND) if the username and password is correct, it will return the token and admin info 
+ * @param {object} req HTTP request object ,expected to have the admin info in the body 
+ * @param {object} res response Object, (JSEND) if the username and password is correct, it will return the token and admin info 
  */
 exports.hundleSginin = (req, res) => {
     //info of the admin 
@@ -59,8 +59,8 @@ exports.hundleSginin = (req, res) => {
 
 /**
  * @function hundleMainDashboard returns all the users in the database, to be shown on the admin dashboard 
- * @param req HTTP request object
- * @param res response Object (JSEND) all the users in the database 
+ * @param {object} req HTTP request object
+ * @param {object} res response Object (JSEND) all the users in the database 
  */
 exports.hundleMainDashboard = (req, res) => {
     User.findUser({}, (err, result) => {
@@ -81,8 +81,8 @@ exports.hundleMainDashboard = (req, res) => {
 /**
  * @function protectAdmin is a middleware that is used to check the token of the admin and is used tp protect the route of the admin dashboard
  * it well not alows access to the route of the token is not valid i.e... that is expired or not as the original generated one
- * @param req HTTP request object 
- * @param res response Object
+ * @param {object} req HTTP request object 
+ * @param {object} res response Object
  */
 exports.protectAdmin = (req, res, next) => {
     let token;
@@ -100,9 +100,9 @@ exports.protectAdmin = (req, res, next) => {
      * @function promisify, promisifises the jwt.verfiy, function and then calles it with the @param token and secret word.
      * and then calles the resualt on the then function so if the the token is valid and the user still exists
      * than he well be automatclly signed in // if not he well not we diracted to that protected page
-     * @param token is the token stored in the localstorage of the user
-     * @param process.env.JWT_SECRET is the Secrect Word for JWT @note it can be anything 
-     * @async @param decodedPayLoad is the payload result from the algorathem it contain the id od the object and other info about the token 
+     * @param {string} token is the token stored in the localstorage of the user
+     * @param {string} process.env.JWT_SECRET is the Secrect Word for JWT @note it can be anything 
+     * @async @param {object} decodedPayLoad is the payload result from the algorathem it contain the id od the object and other info about the token 
      * 
      */
     promisify(jwt.verify)(token, process.env.JWT_SECRET).then(decodedPayLoad => {

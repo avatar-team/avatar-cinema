@@ -4,8 +4,8 @@ const movieDb = require('../db/models/movieModel');
 
 /**
  * @function get4Days this function well return all the available movies in the next four days 
- * @param req HTTP request object 
- * @param res response Object (JSEND) containing the array of movie objects   
+ * @param {object} req HTTP request object 
+ * @param {object} res response Object (JSEND) containing the array of movie objects   
  */
 exports.get4Days = (req, res) => {
     movieDb.getMovies4Days((err, movie) => {
@@ -19,8 +19,8 @@ exports.get4Days = (req, res) => {
 
 /**
  * @function deleteMovie delete a specific a movie from the database, @note it does not delete the object it just toggle the availability attribute of the movie object to false 
- * @param req HTTP request object, it expects that the params contains the objectId of the movie 
- * @param res response Object  
+ * @param {object} req HTTP request object, it expects that the params contains the objectId of the movie 
+ * @param {object} res response Object  
  */
 exports.deleteMovie = (req, res) => {
     var id = req.params.id;
@@ -31,8 +31,8 @@ exports.deleteMovie = (req, res) => {
 
 /**
  * @function updateMovie patchs a specific movie in the database, i.e.. update the info of specific movie
- * @param req HTTP request object, it expects that the params contains the objectId of the movie 
- * @param res response Object (JSEND) contians the patched movie 
+ * @param {object} req HTTP request object, it expects that the params contains the objectId of the movie 
+ * @param {object} res response Object (JSEND) contians the patched movie 
  */
 exports.updateMovie = (req, res) => {
     var id = req.params.id;
@@ -44,8 +44,8 @@ exports.updateMovie = (req, res) => {
 
 /**
  * @function addMovie adds a movie to the database 
- * @param req HTTP request object, it expects that the body of the req well have the movie info that well be added
- * @param res response Object (JSEND) contains the found movie after fetching the info from the api
+ * @param {object} req HTTP request object, it expects that the body of the req well have the movie info that well be added
+ * @param {object} res response Object (JSEND) contains the found movie after fetching the info from the api
  */
 exports.addMovie = (req, res) => {
     // extract the title from the body

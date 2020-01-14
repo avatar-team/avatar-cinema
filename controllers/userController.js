@@ -1,5 +1,11 @@
 const userModel = require('../db/models/userModel.js')
 const reservationModel = require('../db/models/reservationModel.js')
+
+/**
+ * @function deleteUser deletes a user fomr the database  
+ * @param {object} req HTTP request object, expect to have param id in the req object
+ * @param {object} res response Object (JSEND) object with the status true 
+ */
 exports.deleteUser = (req, res) => {
     userModel.findUser({ _id: req.params.id }, (err, data) => {
         if (err) {
@@ -24,13 +30,19 @@ exports.deleteUser = (req, res) => {
         })
     })
 }
-exports.findUser = (req, res, next) => {
+
+/**
+ * @function findUser finds a specfic user in the database  
+ * @param {object} req HTTP request object, expect to the user info the body 
+ * @param {object} res response Object (JSEND) the user that match the criteria in the reqest body
+ */
+exports.findUser = (req, res) => {
     userModel.findUser({ _id: req.params.id }, (err, data) => {
         if (err) res.status(404).send(err);
         res.json(data)
     })
 }
-exports.getUser = (req, res, next) => {
+exports.getUser = (req, res) => {
     res.status(200).json({
         status: true,
         user: req.body.user
@@ -46,9 +58,13 @@ exports.getUser = (req, res, next) => {
 //     })
 // }
 
-exports.pushMoviebBought = (req, res, next) => {
-    const userId = req.body.userId;
-    const movieId = req.body.movieId;
+/**
+ * @function pushMoviebBought pushs a specific movie into the Boughts movie array of a specific user
+ * @param {object} req HTTP request object, expect the body to have the movieId and objectId in the body 
+ * @param {object} res response Object (JSEND) 
+ */
+exports.pushMoviebBought = (req, res) => {
+    const { userId, movieId } = req.body;
     userModel.pushMoviesBought(userId, movieId, (err, user) => {
         if (err) {
             res.status(404).json({
@@ -65,7 +81,13 @@ exports.pushMoviebBought = (req, res, next) => {
     })
 }
 
-exports.insertFavoriteMovie = (req, res, next) => {
+
+/**
+ * @function insertFavoriteMovie pushs a specific movie into the Favorites movie array of a specific user
+ * @param {object} req HTTP request object, expect the body to have the movieId and objectId in the body 
+ * @param {object} res response Object (JSEND) 
+ */
+exports.insertFavoriteMovie = (req, res) => {
     const { userId, movieId } = req.body;
     userModel.pushFavoriteMovies(userId, { _id: movieId }, (err, user) => {
         if (err) {
@@ -84,7 +106,12 @@ exports.insertFavoriteMovie = (req, res, next) => {
 }
 
 
-exports.insertReservation = (req, res, next) => {
+/**
+ * @function insertReservation insert a reservation object to the database 
+ * @param {object} req HTTP request object, expect the body to have the reservation in the body 
+ * @param {object} res response Object (JSEND) 
+ */
+exports.insertReservation = (req, res) => {
     const reservation = req.body;
     reservationModel.insertReservation(reservation, (err, result) => {
         if (err) {
@@ -111,7 +138,13 @@ exports.insertReservation = (req, res, next) => {
     })
 }
 
-exports.pullFavorite = (req, res, next) => {
+
+/**
+ * @function pullFavorite removes a movie from the Favorites movie array of a specific user
+ * @param {object} req HTTP request object, expect the body to have the movieId and objectId in the body  
+ * @param {object} res response Object (JSEND) 
+ */
+exports.pullFavorite = (req, res) => {
     const { userId, movieId } = req.params;
     userModel.pullFavoriteMovie(userId, movieId, (err, user) => {
         if (err) {
