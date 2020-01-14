@@ -25,8 +25,8 @@ router.route("/favorite")
 /**
  * @route DELETE /api/user/favorite
  * @description removes a movie from the favorite movies for a specific user 
- * @param userId objectId of the user 
- * @param movieId objectId of the movie 
+ * @param {string} userId objectId of the user 
+ * @param {string} movieId objectId of the movie 
  * @access public 
  */
 router.route("/favorite/:userId/:movieId")
@@ -35,12 +35,12 @@ router.route("/favorite/:userId/:movieId")
 /**
  * @route GET /api/user/:id
  * @description finds a specific user based on his objectId
- * @param id objectId of the user 
+ * @param {string} id objectId of the user 
  * @access public 
  * 
  * @route DELETE /api/user/:id
  * @description deletes a specific user based on his objectId 
- * @param id objectId of the user 
+ * @param {string} id objectId of the user 
  * @access public 
  */
 router.route('/:id')
