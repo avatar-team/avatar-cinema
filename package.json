@@ -40,6 +40,6 @@
     "eslint": "^6.8.0",
     "ndb": "^1.1.5",
     "prettier": "^1.19.1",
-    "validator": "^12.1.0"
+    "validator": "^13.7.0"
   }
 }
