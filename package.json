@@ -24,7 +24,7 @@
     "body-parser": "^1.19.0",
     "bootstrap": "^4.4.1",
     "dotenv": "^8.2.0",
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "framework7": "^5.3.0",
     "jsonwebtoken": "^8.5.1",
     "mdbreact": "^4.24.0",
